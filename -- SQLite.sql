@@ -1,0 +1,2 @@
+-- SQLite
+CREATE TABLE GBK(id INT UNIQUE, naam TEXT, type INT);
