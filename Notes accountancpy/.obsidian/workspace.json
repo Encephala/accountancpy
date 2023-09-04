@@ -4,61 +4,55 @@
     "type": "split",
     "children": [
       {
-        "id": "eb7d4979e2da8b98",
-        "type": "split",
+        "id": "58bad0350e981ea7",
+        "type": "tabs",
+        "dimension": 70.71299638989169,
         "children": [
           {
-            "id": "c7be9805da604688",
-            "type": "tabs",
-            "dimension": 29.74137931034483,
-            "children": [
-              {
-                "id": "5b622a4b53f3016f",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "ToDo.md",
-                    "mode": "source",
-                    "source": false
-                  }
-                }
+            "id": "f164c342a6c02ed0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Thoughts dump.md",
+                "mode": "source",
+                "source": false
               }
-            ]
+            }
           },
           {
-            "id": "58bad0350e981ea7",
-            "type": "tabs",
-            "dimension": 70.25862068965517,
-            "children": [
-              {
-                "id": "f164c342a6c02ed0",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "Thoughts dump.md",
-                    "mode": "source",
-                    "source": false
-                  }
-                }
-              },
-              {
-                "id": "7b577981c6265d51",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "Design.md",
-                    "mode": "source",
-                    "source": false
-                  }
-                }
+            "id": "bef4fb1f6a6b774c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Design.md",
+                "mode": "source",
+                "source": false
               }
-            ]
+            }
           }
         ],
-        "direction": "horizontal"
+        "currentTab": 1
+      },
+      {
+        "id": "bd5bb5e7d1c4c8b8",
+        "type": "tabs",
+        "dimension": 29.287003610108304,
+        "children": [
+          {
+            "id": "5b622a4b53f3016f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "ToDo.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -119,35 +113,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "357f8d03879e8565",
-            "type": "leaf",
-            "state": {
-              "type": "backlink",
-              "state": {
-                "file": "Thoughts dump.md",
-                "collapseAll": false,
-                "extraContext": false,
-                "sortOrder": "alphabetical",
-                "showSearch": false,
-                "searchQuery": "",
-                "backlinkCollapsed": false,
-                "unlinkedCollapsed": true
-              }
-            }
-          },
-          {
-            "id": "080659c45ae4d9b0",
-            "type": "leaf",
-            "state": {
-              "type": "outgoing-link",
-              "state": {
-                "file": "Thoughts dump.md",
-                "linksCollapsed": false,
-                "unlinkedCollapsed": true
-              }
-            }
-          },
-          {
             "id": "8bc8749182f69d69",
             "type": "leaf",
             "state": {
@@ -159,21 +124,21 @@
             }
           },
           {
-            "id": "c57fbd0a15205503",
+            "id": "d384f6c7199f5bdc",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "Thoughts dump.md"
+                "file": "Design.md"
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 218.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -185,11 +150,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "f164c342a6c02ed0",
+  "active": "bef4fb1f6a6b774c",
   "lastOpenFiles": [
-    "Design.md",
     "Thoughts dump.md",
+    "Design.md",
     "ToDo.md",
+    "test.md",
     "Configuratie.md"
   ]
 }

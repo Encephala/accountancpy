@@ -17,4 +17,5 @@
 - Maar voordat we dat gaan doen: uitvogelen hoe de databases eruit moeten zien
 ## 4 sept
 - `HttpResponseNotFound` gevonden, 404 handler aangepast daarnaar
-- 
+- Nagedacht over database ontwerp, wel hoofdpijn dit, zie [[Design]]
+- Hmm toch wel happy met uitkomst, namelijk KISS
