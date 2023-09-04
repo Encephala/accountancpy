@@ -1,6 +1,7 @@
 - Database (SQLite)
 - Logic (Python)
-- Frontend (Django?)
+- Backend (Django)
+- Frontend
 ## Database
 File, hoeft geen directory voor I guess.
 Tables voor:
@@ -16,8 +17,6 @@ Tables voor:
 	- [ ] Boekingsoorten (Dagboeken)
 ## Logic
 
-## Frontend
+## Backend
 
-# TODO
-- [ ] Config in een losse file of puur in DB?
-- [ ] By design dubbel boekhouden?
+## Frontend

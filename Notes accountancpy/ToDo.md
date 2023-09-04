@@ -1,0 +1,7 @@
+- Database ontwerp maken
+- Unit tests?
+- Authentication fixen
+- Systeem voor frontend design fixen
+- Sample compose file maken
+	- DB mounten voor persistence
+- Init script dat config leest uit env vars en verwerkt

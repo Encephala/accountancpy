@@ -4,35 +4,61 @@
     "type": "split",
     "children": [
       {
-        "id": "58bad0350e981ea7",
-        "type": "tabs",
+        "id": "eb7d4979e2da8b98",
+        "type": "split",
         "children": [
           {
-            "id": "5e617f606d859230",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Design.md",
-                "mode": "source",
-                "source": false
+            "id": "c7be9805da604688",
+            "type": "tabs",
+            "dimension": 29.74137931034483,
+            "children": [
+              {
+                "id": "5b622a4b53f3016f",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "ToDo.md",
+                    "mode": "source",
+                    "source": false
+                  }
+                }
               }
-            }
+            ]
           },
           {
-            "id": "6c2a5acbaa92d87c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Thoughts dump.md",
-                "mode": "source",
-                "source": false
+            "id": "58bad0350e981ea7",
+            "type": "tabs",
+            "dimension": 70.25862068965517,
+            "children": [
+              {
+                "id": "f164c342a6c02ed0",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "Thoughts dump.md",
+                    "mode": "source",
+                    "source": false
+                  }
+                }
+              },
+              {
+                "id": "7b577981c6265d51",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "Design.md",
+                    "mode": "source",
+                    "source": false
+                  }
+                }
               }
-            }
+            ]
           }
         ],
-        "currentTab": 1
+        "direction": "horizontal"
       }
     ],
     "direction": "vertical"
@@ -159,9 +185,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "6c2a5acbaa92d87c",
+  "active": "f164c342a6c02ed0",
   "lastOpenFiles": [
     "Design.md",
-    "Thoughts dump.md"
+    "Thoughts dump.md",
+    "ToDo.md",
+    "Configuratie.md"
   ]
 }
