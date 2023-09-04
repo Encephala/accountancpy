@@ -46,5 +46,5 @@ class EntriesRow(models.Model):
     date = models.DateField()
     ledger = models.ForeignKey(Ledger, on_delete = models.PROTECT)
     document = models.FileField(upload_to = upload_path)
-    value = models.DecimalField(decimal_places = 2)
+    value = models.DecimalField(max_digits = 99, decimal_places = 2)
 
