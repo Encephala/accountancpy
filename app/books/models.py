@@ -12,7 +12,7 @@ class Ledger(models.Model):
             ("EXP", "Expenses"),
             ("ASS", "Assets"),
             ("EQU", "Equity"),
-            ("LIA", "Liabilities")
+            ("LIA", "Liabilities"),
         ]
     )
     notes = models.TextField()
@@ -31,9 +31,24 @@ class Account(models.Model):
     notes = models.TextField()
 
 
+class Journal(models.Model):
+
+    id = models.CharField(max_length = 16, primary_key = True) # Search name
+    name = models.CharField(max_length = 50) # Display name
+    type = models.CharField(max_length = 3,
+        choices = [
+            ("INC", "Income"),
+            ("EXP", "Expense"),
+            ("CAS", "Cash"),
+            ("GEN", "General"),
+        ]
+    )
+
+
 class Entries(models.Model):
     
     notes = models.TextField()
+    journal = models.ForeignKey(Journal, on_delete = models.PROTECT)
 
 
 # Upload documents to MEDIA_ROOT/<entry id>/<filename>

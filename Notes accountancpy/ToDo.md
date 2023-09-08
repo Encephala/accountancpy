@@ -1,11 +1,14 @@
 - [x] Database ontwerp maken
-- [ ] Unit tests?
-	- Django heeft ook een testin framework
 - [ ] Authentication fixen
 - [ ] Systeem voor frontend design fixen
-- [ ] Sample compose file maken
 	- [ ]  DB en documenten mounten voor persistence
-- [ ] Init script dat config leest uit env vars en verwerkt
 - [ ] URLconfig namen verwerken enzo
+### Later
+- [ ] Sample compose file maken
+- [ ] Init script dat config leest uit env vars en verwerkt
+### Kan
+- [ ] Bankrekeningen implementeren (relateert aan import denk ik?)
 - [ ] Internationalization?
-- [ ] Frontend kiezen
+- [ ] Unit tests?
+	- Django heeft ook een testing framework
+- [ ] `django-compression`

@@ -6,7 +6,7 @@
       {
         "id": "58bad0350e981ea7",
         "type": "tabs",
-        "dimension": 70.71299638989169,
+        "dimension": 70.7129963898917,
         "children": [
           {
             "id": "f164c342a6c02ed0",
@@ -38,7 +38,7 @@
       {
         "id": "bd5bb5e7d1c4c8b8",
         "type": "tabs",
-        "dimension": 29.287003610108304,
+        "dimension": 29.287003610108307,
         "children": [
           {
             "id": "5b622a4b53f3016f",
@@ -132,13 +132,42 @@
                 "file": "Design.md"
               }
             }
+          },
+          {
+            "id": "7de5089670c43ab1",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Design.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "21dfb622406239db",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Design.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
           }
         ],
         "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 218.5
+    "width": 333.5
   },
   "left-ribbon": {
     "hiddenItems": {
