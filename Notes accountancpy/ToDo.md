@@ -6,9 +6,11 @@
 ### Later
 - [ ] Sample compose file maken
 - [ ] Init script dat config leest uit env vars en verwerkt
+- [ ] Afschrijvingen
 ### Kan
 - [ ] Bankrekeningen implementeren (relateert aan import denk ik?)
 - [ ] Internationalization?
 - [ ] Unit tests?
 	- Django heeft ook een testing framework
 - [ ] `django-compression`
+- [ ] Andere database backends

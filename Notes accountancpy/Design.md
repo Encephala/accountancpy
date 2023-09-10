@@ -1,3 +1,7 @@
+## Filosofie
+- Snel en toegankelijk te gebruiken
+- Flexibel voor power uses/moeilijke usecases
+- 
 ## Database
 File, hoeft geen directory voor I guess.
 Tables voor:
@@ -32,6 +36,10 @@ Dus iets als:
 - [Tabler](https://tabler.io/)
 - [Black and white](https://www.figma.com/community/file/1201935147948130925)
 - [Basic](https://www.figma.com/community/file/1088468250791967662)
+- B&W en Basic zijn wat leeg imo
+- [Shards Dashboard](https://designrevision.com/downloads/shards-dashboard-lite/)
+- Shards wordt het, ziet er het relaxt uit imo, Tabler iets te scherp. Vast customize-baar maar hè
+- [Shards zelf](https://designrevision.com/downloads/shards/) is ook nog een optie, is general purpose, idk hoe hard je een Dashboard in ge-shoeholed wordt met Shards Dashboard, maar zal wel goed zijn
 
 - Pre- and post-processors? Fireship gebruikt bijv. SASS en PostCSS
 - Ook Javascript bundler (Webpack?)?
