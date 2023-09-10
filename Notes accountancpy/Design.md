@@ -40,6 +40,7 @@ Dus iets als:
 - [Shards Dashboard](https://designrevision.com/downloads/shards-dashboard-lite/)
 - Shards wordt het, ziet er het relaxt uit imo, Tabler iets te scherp. Vast customize-baar maar hè
 - [Shards zelf](https://designrevision.com/downloads/shards/) is ook nog een optie, is general purpose, idk hoe hard je een Dashboard in ge-shoeholed wordt met Shards Dashboard, maar zal wel goed zijn
+- Nvm toch Tabler, Shards heeft ook een hele backend jakkie
 
 - Pre- and post-processors? Fireship gebruikt bijv. SASS en PostCSS
 - Ook Javascript bundler (Webpack?)?

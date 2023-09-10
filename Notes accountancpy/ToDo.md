@@ -3,6 +3,7 @@
 - [ ] Systeem voor frontend design fixen
 	- [ ]  DB en documenten mounten voor persistence
 - [ ] URLconfig namen verwerken enzo
+- [ ] Tabler werkend krijgen (is vast een tutorial voor te vinden ergens)
 ### Later
 - [ ] Sample compose file maken
 - [ ] Init script dat config leest uit env vars en verwerkt
