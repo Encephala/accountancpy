@@ -1,7 +1,6 @@
 ## Filosofie
 - Snel en toegankelijk te gebruiken
-- Flexibel voor power uses/moeilijke usecases
-- 
+- Flexibel voor power users/moeilijke usecases
 ## Database
 File, hoeft geen directory voor I guess.
 Tables voor:
@@ -46,3 +45,6 @@ Dus iets als:
 - Ook Javascript bundler (Webpack?)?
 	- Meh, wss toch amper javascript
 - [Django compressor](https://django-compressor.readthedocs.io/en/stable/) is wss alles en meer dat dit project nodig heeft
+
+Tabler is een implementatie van Bootstrap schijnt, gezel
+

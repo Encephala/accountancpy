@@ -4,18 +4,82 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>{% block title %}Accountancpy{% endblock title %}</title>
     <link rel="icon" type="image/x-icon" href="https://openmoji.org/data/color/svg/1F4D2.svg"> <!-- TODO: link naar Tabler icon -->
 
-    <script src="{% static 'external/tabler-1.0.0-beta17.min.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'external/tabler-1.0.0-beta17.min.css' %}">
+    <script src="https://unpkg.com/htmx.org@1.9.5"></script> <!-- HTMX -->
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script> <!-- Tabler JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css"> <!-- Tabler CSS -->
 </head>
 
 <body>
-
-{% block content %}
-    <h3 text-align="center">Generic template page for Accountancpy</h3>
-{% endblock content %}
+<div class="page">
+    <!-- Sidebar -->
+    <aside class="navbar navbar-vertical navbar-expand-sm navbar-dark">
+        <div class="container-fluid">
+        <button class="navbar-toggler" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <h1 class="navbar-brand navbar-brand-autodark">
+            <a href="#">
+            <img src="https://preview.tabler.io/static/logo-white.svg" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+            </a>
+        </h1>
+        <div class="collapse navbar-collapse" id="sidebar-menu">
+            <ul class="navbar-nav pt-lg-3">
+            <li class="nav-item">
+                <a class="nav-link" href="./">
+                <span class="nav-link-title">
+                    Home
+                </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                <span class="nav-link-title">
+                    Sample navigation item
+                </span>
+                </a>
+            </ul>
+        </div>
+        </div>
+    </aside>
+    <div class="page-wrapper">
+        <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+            <div class="col">
+                <h2 class="page-title">
+                    {% block page-title %}
+                    Generic template page for Accountancpy
+                    {% endblock page-title %}
+                </h2>
+            </div>
+            </div>
+        </div>
+        </div>
+        <div class="page-body">
+        <div class="container-xl">
+            {% block content %}
+            <div class="row">
+                <div class="col-4">
+                    <div class="card card-body">
+                        hoi ik ben een kaart
+                    </div>
+                </div>
+                <div class="col-4">
+                    <a class="card card-body btn btn-cyan" href="/nonexistent">
+                        hoi ik ben een link
+                    </a>
+                </div>
+            </div>
+            {% endblock content %}
+        </div>
+        </div>
+    </div>
+    </div>
 
 </body>
 </html>

@@ -19,3 +19,15 @@
 - `HttpResponseNotFound` gevonden, 404 handler aangepast daarnaar
 - Nagedacht over database ontwerp, wel hoofdpijn dit, zie [[Design]]
 - Hmm toch wel happy met uitkomst, namelijk KISS
+## 11 sept
+- Besloten Tabler te gebruiken als Frontend
+	- Dat is een implementatie van Bootstrap
+- Werkend gekregen met locale static directory
+	- Kaolo, VSCode intellisense werkt niet dan. Dan maar wel gewoon remote URLS
+	- TODO is er een nette manier om als X niet laadt, Y te proberen in HTML?
+	- Scheelt sws hoofdpijn van static serven I guess
+		- Kreeg dit niet werkend, uiteindelijk wel zodra `STATICFILES_DIRS` ingesteld was
+		- Logisch I guess, `STATIC_URL` is voor de view, `DIRS` is om te zoeken in het filesystem
+		- Dacht dat het ook niet werkte toen ik de directory `static` genoemd had, maar goed
+- Side navbar of top navbar? Dat is de vraag
+- Wordt nog wel hoofdpijn om dit een dynamische UI te maken maar goed, wat `hover`s en animations en het komt vast goed

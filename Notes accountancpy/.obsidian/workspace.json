@@ -129,7 +129,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ToDo.md"
+                "file": "Design.md"
               }
             }
           },
@@ -139,7 +139,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "ToDo.md",
+                "file": "Design.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -156,7 +156,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "ToDo.md",
+                "file": "Design.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -179,11 +179,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "5b622a4b53f3016f",
+  "active": "bef4fb1f6a6b774c",
   "lastOpenFiles": [
+    "Thoughts dump.md",
     "Design.md",
     "ToDo.md",
-    "Thoughts dump.md",
     "test.md",
     "Configuratie.md"
   ]
