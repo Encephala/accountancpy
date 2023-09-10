@@ -1,0 +1,21 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Accountancpy{% endblock title %}</title>
+    <link rel="icon" type="image/x-icon" href="https://openmoji.org/data/color/svg/1F4D2.svg"> <!-- TODO: link naar Tabler icon -->
+
+    <script src="{% static 'external/tabler-1.0.0-beta17.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'external/tabler-1.0.0-beta17.min.css' %}">
+</head>
+
+<body>
+
+{% block content %}
+    <h3 text-align="center">Generic template page for Accountancpy</h3>
+{% endblock content %}
+
+</body>
+</html>
