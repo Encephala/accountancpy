@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotFound
+from django.template import loader
 
 # Create your views here.
 def my_404(request):
-    # TODO: Dit via template doen
-    return HttpResponseNotFound("<center><h1>Page not found.</h1><a href='/' style='font-size: 24'>Back to home</a></center>")
+    template = loader.get_template("404.html")
+
+    return HttpResponseNotFound(template.render({}, request))
