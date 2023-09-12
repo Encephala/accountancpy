@@ -22,5 +22,6 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("landing.urls")),
+    path('ledgers/', include("ledgers.urls")),
     re_path('.*', views.my_404)
 ]

@@ -29,7 +29,8 @@ Tables voor:
 			- liefst een instelling I guess maar in begin uitgaan van +/-
 ## Backend (Django)
 
-## Frontend (HTMX + TBD)
+## Frontend (HTMX + Tabler)
+### Keuze
 Een lightweight framework gaat me te veel werk kosten, nty
 Dus iets als:
 - [Tabler](https://tabler.io/)
@@ -43,8 +44,14 @@ Dus iets als:
 
 - Pre- and post-processors? Fireship gebruikt bijv. SASS en PostCSS
 - Ook Javascript bundler (Webpack?)?
-	- Meh, wss toch amper javascript
+	- Meh, wss toch amper javascript, zeker met HTMX
 - [Django compressor](https://django-compressor.readthedocs.io/en/stable/) is wss alles en meer dat dit project nodig heeft
 
 Tabler is een implementatie van Bootstrap schijnt, gezel
+### Hoe HTMX te gebruiken
+HTMX zal binnen elke Django het fetchen etc. doen. URL structure wordt dan ook chill, gewoon `/app` als maximale lengte. Dat betekent een sub-`base.html` voor elke app en daarin bouwen. 
+Mogelijke downsides? Verlies van application state als je een reload doet.
+
+Hmm wacht HTMX kan ook URL rewrite doen, dan gaat het wel gewoon goed met state bewaren?
+Is er dan nog meerwaarde om template per ding te hebben? Mss wel leuk voor wat grafische leukigheidjes.
 

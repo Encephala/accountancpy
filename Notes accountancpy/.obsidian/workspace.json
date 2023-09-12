@@ -6,7 +6,7 @@
       {
         "id": "58bad0350e981ea7",
         "type": "tabs",
-        "dimension": 70.7129963898917,
+        "dimension": 66.21078037007241,
         "children": [
           {
             "id": "f164c342a6c02ed0",
@@ -38,7 +38,7 @@
       {
         "id": "bd5bb5e7d1c4c8b8",
         "type": "tabs",
-        "dimension": 29.287003610108307,
+        "dimension": 33.789219629927594,
         "children": [
           {
             "id": "5b622a4b53f3016f",
@@ -129,7 +129,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Design.md"
+                "file": "ToDo.md"
               }
             }
           },
@@ -139,7 +139,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Design.md",
+                "file": "ToDo.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -156,7 +156,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Design.md",
+                "file": "ToDo.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -167,7 +167,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 333.5
+    "width": 200
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -179,12 +179,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "bef4fb1f6a6b774c",
+  "active": "5b622a4b53f3016f",
   "lastOpenFiles": [
-    "Thoughts dump.md",
     "Design.md",
     "ToDo.md",
-    "test.md",
-    "Configuratie.md"
+    "Configuratie.md",
+    "Thoughts dump.md",
+    "test.md"
   ]
 }

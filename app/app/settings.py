@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'ledgers.apps.LedgersConfig',
     'landing.apps.LandingConfig',
     'books.apps.BooksConfig',
     'django.contrib.admin',

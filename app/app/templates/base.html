@@ -1,3 +1,8 @@
+<!-- 
+    - [ ] Sidebar collapsible maken
+    - [ ] Sidebar in een losse file
+-->
+
 {% load static %}
 
 <!DOCTYPE html>
@@ -30,18 +35,26 @@
         <div class="collapse navbar-collapse" id="sidebar-menu">
             <ul class="navbar-nav pt-lg-3">
             <li class="nav-item">
-                <a class="nav-link" href="./">
+                <a class="nav-link" href="/">
                 <span class="nav-link-title">
                     Home
                 </span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/ledgers/">
+                <span class="nav-link-title">
+                    Ledgers
+                </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./">
                 <span class="nav-link-title">
                     Sample navigation item
                 </span>
                 </a>
+            </li>
             </ul>
         </div>
         </div>
@@ -72,7 +85,7 @@
                     </div>
                 </div>
                 <div class="col-4">
-                    <a class="card card-body btn btn-cyan" href="/nonexistent">
+                    <a class="card card-body btn btn-cyan" href="/nonexistent/">
                         hoi ik ben een link
                     </a>
                 </div>
