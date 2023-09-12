@@ -2,22 +2,6 @@ from django.db import models
 
 
 # Create your models here.
-class Ledger(models.Model):
-
-    id = models.CharField(max_length = 16, primary_key = True, blank = False) # Search name
-    name = models.CharField(max_length = 50, blank = False) # Display name
-    type = models.CharField(max_length = 3, blank = False,
-        choices = [
-            ("INC", "Income"),
-            ("EXP", "Expenses"),
-            ("ASS", "Assets"),
-            ("EQU", "Equity"),
-            ("LIA", "Liabilities"),
-        ]
-    )
-    notes = models.TextField(blank = True)
-
-
 class Account(models.Model):
 
     id = models.CharField(max_length = 16, primary_key = True, blank = False) # Search name
@@ -47,7 +31,7 @@ class Journal(models.Model):
 
 
 class Entry(models.Model):
-    
+
     journal = models.ForeignKey(Journal, on_delete = models.PROTECT, blank = False)
     notes = models.TextField(blank = True)
 
@@ -62,7 +46,7 @@ class EntryRow(models.Model):
 
     entry = models.ForeignKey(Entry, on_delete = models.CASCADE, blank = False)
     date = models.DateField(blank = False)
-    ledger = models.ForeignKey(Ledger, on_delete = models.PROTECT, blank = False)
+    ledger = models.ForeignKey("ledgers.Ledger", on_delete = models.PROTECT, blank = False)
     document = models.FileField(upload_to = upload_path, blank = True)
     value = models.DecimalField(max_digits = 99, decimal_places = 2, blank = False)
 
