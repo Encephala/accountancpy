@@ -48,8 +48,10 @@ class Journal(models.Model):
 
 class Entry(models.Model):
     
-    notes = models.TextField(blank = True)
     journal = models.ForeignKey(Journal, on_delete = models.PROTECT, blank = False)
+    notes = models.TextField(blank = True)
+
+    # TODO: Validation that Entry is balanced
 
 
 # Upload documents to MEDIA_ROOT/<entry id>/<filename>
