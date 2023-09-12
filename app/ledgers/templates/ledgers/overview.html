@@ -1,4 +1,4 @@
-<!-- 
+<!--
     - [ ] ListView implementeren hier van GBKs
     - [ ] Knop om te maken en functionaliteit om te verwijderen
     - [ ] Filter functionaliteit
@@ -8,6 +8,26 @@
 
 {% block page-title %} Overview of ledgers {% endblock page-title %}
 
-{% block content %} 
+{% block content %}
+
+    <div class="card card-body">
+        {% if ledger_list %}
+        <dl class="row">
+            <dt class="col-xl-2 col-4 border border-info strong">ID</dt>
+            <dd class="col-xl-3 col-8 border strong">Name</dd>
+            <dd class="col-xl-2 col-4 border strong">Type</dd>
+            <dd class="col-xl-5 col-8 border strong">Notes</dd>
+
+            {% for ledger in ledger_list %}
+            <dt class="col-xl-2 col-4 border border-info">Ledger ID: {{ ledger.id }}</dt>
+            <dd class="col-xl-3 col-8 border">{{ ledger.name }}</dd>
+            <dd class="col-xl-2 col-4 border">{{ ledger.type }}</dd>
+            <dd class="col-xl-5 col-8 border">{{ ledger.notes }}</dd>
+            {% endfor %}
+        </dl>
+        {% else %}
+        <p>No ledgers available.</p>
+        {% endif %}
+    </div>
 
 {% endblock content %}
