@@ -35,14 +35,14 @@
         <div class="collapse navbar-collapse" id="sidebar-menu">
             <ul class="navbar-nav pt-lg-3">
             <li class="nav-item">
-                <a class="nav-link" href="/">
+                <a class="nav-link" href="{% url 'landing' %}">
                 <span class="nav-link-title">
                     Home
                 </span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/ledgers/">
+                <a class="nav-link" href="{% url 'ledgers:overview' %}">
                 <span class="nav-link-title">
                     Ledgers
                 </span>
