@@ -4,9 +4,9 @@ from django.db import models
 # Create your models here.
 class Ledger(models.Model):
 
-    id = models.CharField(max_length = 16, primary_key = True) # Search name
-    name = models.CharField(max_length = 50) # Display name
-    type = models.CharField(max_length = 3,
+    id = models.CharField(max_length = 16, primary_key = True, blank = False) # Search name
+    name = models.CharField(max_length = 50, blank = False) # Display name
+    type = models.CharField(max_length = 3, blank = False,
         choices = [
             ("INC", "Income"),
             ("EXP", "Expenses"),
@@ -15,27 +15,27 @@ class Ledger(models.Model):
             ("LIA", "Liabilities"),
         ]
     )
-    notes = models.TextField()
+    notes = models.TextField(blank = True)
 
 
 class Account(models.Model):
 
-    id = models.CharField(max_length = 16, primary_key = True) # Search name
-    name = models.CharField(max_length = 50) # Display name
-    is_creditor = models.BooleanField(
+    id = models.CharField(max_length = 16, primary_key = True, blank = False) # Search name
+    name = models.CharField(max_length = 50, blank = False) # Display name
+    is_creditor = models.BooleanField(blank = False,
         choices = [
             (False, "Debtor"),
             (True, "Creditor")
         ]
     )
-    notes = models.TextField()
+    notes = models.TextField(blank = True)
 
 
 class Journal(models.Model):
 
-    id = models.CharField(max_length = 16, primary_key = True) # Search name
-    name = models.CharField(max_length = 50) # Display name
-    type = models.CharField(max_length = 3,
+    id = models.CharField(max_length = 16, primary_key = True, blank = False) # Search name
+    name = models.CharField(max_length = 50, blank = False) # Display name
+    type = models.CharField(max_length = 3, blank = False,
         choices = [
             ("INC", "Income"),
             ("EXP", "Expense"),
@@ -43,23 +43,24 @@ class Journal(models.Model):
             ("GEN", "General"),
         ]
     )
+    notes = models.TextField(blank = True)
 
 
-class Entries(models.Model):
+class Entry(models.Model):
     
-    notes = models.TextField()
-    journal = models.ForeignKey(Journal, on_delete = models.PROTECT)
+    notes = models.TextField(blank = True)
+    journal = models.ForeignKey(Journal, on_delete = models.PROTECT, blank = False)
 
 
 # Upload documents to MEDIA_ROOT/<entry id>/<filename>
 def upload_path(instance, filename):
     return f"{instance.entry.id}/{filename}"
 
-class EntriesRow(models.Model):
+class EntryRow(models.Model):
 
-    entry = models.ForeignKey(Entries, on_delete = models.CASCADE)
-    date = models.DateField()
-    ledger = models.ForeignKey(Ledger, on_delete = models.PROTECT)
-    document = models.FileField(upload_to = upload_path)
-    value = models.DecimalField(max_digits = 99, decimal_places = 2)
+    entry = models.ForeignKey(Entry, on_delete = models.CASCADE, blank = False)
+    date = models.DateField(blank = False)
+    ledger = models.ForeignKey(Ledger, on_delete = models.PROTECT, blank = False)
+    document = models.FileField(upload_to = upload_path, blank = True)
+    value = models.DecimalField(max_digits = 99, decimal_places = 2, blank = False)
 
