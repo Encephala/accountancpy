@@ -1,4 +1,4 @@
-FROM docker.io/python:3.11
+FROM docker.io/python:3.11.5
 
 RUN apt-get update && apt-get upgrade -y
 
@@ -12,6 +12,8 @@ EXPOSE 80
 
 RUN rm -r /var/cache/apt/archives
 
-USER 1000:1000
+RUN useradd accountancpy -s /bin/bash
 
-ENTRYPOINT [ "python", "manage.py", "runserver", "0.0.0.0:80" ]
+USER accountancpy:accountancpy
+
+ENTRYPOINT [ "python", "-Wa", "manage.py", "runserver", "0.0.0.0:80" ]
