@@ -21,7 +21,7 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include("landing.urls")),
+    path('', views.landing, name = "landing"),
     path('ledgers/', include("ledgers.urls")),
-    re_path('.*', views.my_404)
+    re_path('.*', views.my_404, name = "404"),
 ]

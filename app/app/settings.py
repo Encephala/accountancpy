@@ -34,7 +34,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'ledgers.apps.LedgersConfig',
-    'landing.apps.LandingConfig',
     'books.apps.BooksConfig',
     'django.contrib.admin',
     'django.contrib.auth',
