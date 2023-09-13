@@ -161,6 +161,16 @@
                 "unlinkedCollapsed": true
               }
             }
+          },
+          {
+            "id": "06095ba7b38c99be",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency"
+              }
+            }
           }
         ],
         "currentTab": 1

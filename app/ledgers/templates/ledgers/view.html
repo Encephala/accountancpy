@@ -1,0 +1,23 @@
+<!--
+    - [ ] ListView van regels op GBK
+    - [ ] Dan met filter opties
+    - [ ] En GBK-specifieke gegevens/instellingen (dropdown menu ofzo?)
+-->
+
+{% extends "ledgers/base.html" %}
+
+{% block page-title %} Ledger: {{ ledger.id }} {% endblock %}
+
+{% block htmx-shell %}
+<div class="row">
+    <div class="card card-body col-2 strong">ID</div>
+    <div class="card card-body col-4 strong">Name</div>
+    <div class="card card-body col-1 strong">Type</div>
+    <div class="card card-body col-5 strong">Notes</div>
+
+    <div class="card card-body col-2">{{ object.id }}</div>
+    <div class="card card-body col-4">{{ object.name }}</div>
+    <div class="card card-body col-1">{{ object.type }}</div>
+    <div class="card card-body col-5">{{ object.notes }}</div>
+</div>
+{% endblock htmx-shell %}

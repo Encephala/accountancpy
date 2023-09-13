@@ -1,0 +1,21 @@
+<div class="card card-body">
+    {% if ledger_list %}
+    <dl class="row">
+        <dt class="col-xl-2 col-4 border border-info strong">ID</dt>
+        <dd class="col-xl-3 col-8 border strong my-auto">Name</dd>
+        <dd class="col-xl-1 col-4 border strong my-auto">Type</dd>
+        <dd class="col-xl-6 col-8 border strong my-auto">Notes</dd>
+
+        {% for ledger in ledger_list %}
+        <dt class="col-xl-2 col-4 border border-info">
+            <a href="{% url 'ledgers:view' ledger.id %}" class="badge badge-pill my-1">{{ ledger.id }}</a>
+        </dt>
+        <dd class="col-xl-3 col-8 border my-auto">{{ ledger.name }}</dd>
+        <dd class="col-xl-1 col-4 border my-auto">{{ ledger.type }}</dd>
+        <dd class="col-xl-6 col-8 border my-auto">{{ ledger.notes }}</dd>
+        {% endfor %}
+    </dl>
+    {% else %}
+    <p>No ledgers available.</p>
+    {% endif %}
+</div>
