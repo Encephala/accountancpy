@@ -12,11 +12,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{% block title %}Accountancpy{% endblock title %}</title>
-    <link rel="icon" type="image/x-icon" href="https://openmoji.org/data/color/svg/1F4D2.svg"> <!-- TODO: link naar Tabler icon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'media/icon_ledger.svg' %}"> <!-- TODO: link naar Tabler icon -->
 
-    <script src="https://unpkg.com/htmx.org@1.9.5"></script> <!-- HTMX -->
-    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script> <!-- Tabler JS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css"> <!-- Tabler CSS -->
+    <script src="{% static 'htmx-1.9.5.min.js' %}"></script> <!-- HTMX -->
+    <script src="{% static 'tabler-1.0.0-beta17.min.js' %}"></script> <!-- Tabler JS -->
+    <link rel="stylesheet" href="{% static 'tabler-1.0.0-beta17.min.css' %}"> <!-- Tabler CSS -->
 </head>
 
 <body>
