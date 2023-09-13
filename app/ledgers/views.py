@@ -4,12 +4,13 @@ from django.views import generic
 from .models import Ledger
 
 # Create your views here.
-# def overview(request):
-#     return render(request, "ledgers/overview.html")
+def overview(request):
+    return render(request, "ledgers/overview.html")
 
 
-class Overview(generic.ListView):
-    template_name = "ledgers/overview.html"
+
+class LedgersList(generic.ListView):
+    template_name = "ledgers/ledgers-list.html"
 
     def get_queryset(self):
         """Return first 50 Ledgers."""

@@ -5,5 +5,6 @@ from . import views
 app_name = "ledgers"
 
 urlpatterns = [
-    path("", views.Overview.as_view(), name="overview"),
+    path("", views.overview, name="overview"),
+    path("ledgers-list", views.LedgersList.as_view(), name="list")
 ]

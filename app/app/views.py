@@ -8,6 +8,4 @@ def landing(request):
 
 
 def my_404(request):
-    template = loader.get_template("404.html")
-
-    return HttpResponseNotFound(template.render({}, request))
+    return render(request, "404.html")
