@@ -23,5 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.landing, name = "landing"),
     path('ledgers/', include("ledgers.urls")),
+    path('entries/', include("entries.urls")),
     re_path('.*', views.my_404, name = "404"),
 ]
