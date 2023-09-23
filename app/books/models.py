@@ -29,24 +29,7 @@ class Journal(models.Model):
     )
     notes = models.TextField(blank = True)
 
-
-class Entry(models.Model):
-
-    journal = models.ForeignKey(Journal, on_delete = models.PROTECT, blank = False)
-    notes = models.TextField(blank = True)
-
-    # TODO: Validation that Entry is balanced
-
-
 # Upload documents to MEDIA_ROOT/<entry id>/<filename>
+# This has to remain here in order for the migrations of books to not break
 def upload_path(instance, filename):
-    return f"{instance.entry.id}/{filename}"
-
-class EntryRow(models.Model):
-
-    entry = models.ForeignKey(Entry, on_delete = models.CASCADE, blank = False)
-    date = models.DateField(blank = False)
-    ledger = models.ForeignKey("ledgers.Ledger", on_delete = models.PROTECT, blank = False)
-    document = models.FileField(upload_to = upload_path, blank = True)
-    value = models.DecimalField(max_digits = 99, decimal_places = 2, blank = False)
-
+    pass

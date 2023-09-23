@@ -92,3 +92,8 @@
 - Wat gekut met git, ben wel wat werk kwijt, maar heb het denk wel in mn hoofd?
 - Was wat aankloten maar heb het weer zoals het ongeveer was hype
 - HTMX kan dan wel priem gebruikt worden om bijv. ListView te laden van entries op een Ledger
+## 23 sept
+- Moet `entries` app gaan maken om de regels in te kunnen laden in `ledgers`
+- Beetje rondgespeeld met Bootstrap en layouts maken
+	- `.column-gap-x` is chill om gelijke spacing tussen kolommen te hebben maar wel nog `.col-x` te kunnen gebruiken voor sizing
+- Wat gezeik toen ik `Entries` en `EntriesRow` models wilde verplaatsen. `makemigrations` had er geen zin in omdat de eerdere migrations voor `books` refereerden naar de functie `upload_path` die niet meer in de file stond. Heb een dummy functie in die file laten staan en de echte functie verplaatst naar `app/settings.py` zodat het een absolute globale referentie heeft

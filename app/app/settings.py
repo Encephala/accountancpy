@@ -17,6 +17,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 MEDIA_ROOT = Path(__file__).resolve().parent.parent.parent / "media"
 
+# Upload documents to MEDIA_ROOT/<entry id>/<filename>
+def upload_path(instance, filename):
+    return f"{instance.entry.id}/{filename}"
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -33,6 +37,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'entries.apps.EntriesConfig',
     'ledgers.apps.LedgersConfig',
     'books.apps.BooksConfig',
     'django.contrib.admin',
