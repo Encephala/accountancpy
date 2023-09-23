@@ -96,7 +96,17 @@
 - Moet `entries` app gaan maken om de regels in te kunnen laden in `ledgers`
 - Beetje rondgespeeld met Bootstrap en layouts maken
 	- `.column-gap-x` is chill om gelijke spacing tussen kolommen te hebben maar wel nog `.col-x` te kunnen gebruiken voor sizing
+	- Oh nee dat doet het helemaal niet?
 - Wat gezeik toen ik `Entries` en `EntriesRow` models wilde verplaatsen. `makemigrations` had er geen zin in omdat de eerdere migrations voor `books` refereerden naar de functie `upload_path` die niet meer in de file stond. Heb een dummy functie in die file laten staan en de echte functie verplaatst naar `app/settings.py` zodat het een absolute globale referentie heeft
 #### `EntriesRow` view aanmaken
 - `content` directory in elke `templates` dir is voor elementen in een pagina, as before
+- Proberen om te werken met een generic `EntryRowView` die via het `?...`-deel van de URL een filter query gepasst krijgt, maar dat kan niet; je kan dat nooit weer omzetten in code, kan alleen values passen
+- Geaccepteerd dat het een view wordt voor elke mogelijke filter, dus nu `EntryRowByLedger` aangemaakt
+- Werkt direct, welloe hoofdpijn. KISS?
+- Interessant puntje, na for-loop over alle entries op een ledger, hoe bereken je het totaal? 🤔
+	- Dat gaat in de Python code, niet in het template
+	- Moet gewoon `aggregate` callen op een `QuerySet` 
+- Was table heading en table footer aan het bouwen in de `content/entry_row_view.html`, da is niet helemaal hoe het hoort
+- Heading en footer terug naar `ledgers` pagina, daar kan ook totaal van ledger opgevraagd worden
+- Volledige copy-paste van deze view gemaakt maar dan voor by-entry, dat kan vast beter maar idk KISS joe
 - 

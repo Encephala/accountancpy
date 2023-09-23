@@ -1,13 +1,9 @@
 - [x] Database ontwerp maken
 - [ ] Authentication fixen
-- [ ] Systeem voor frontend design fixen
-	- [ ]  DB en documenten mounten voor persistence
-- [ ] URLconfig namen verwerken enzo
+- [x] Systeem voor frontend design fixen
+- [x] URLconfig namen verwerken enzo
 - [x] Tabler werkend krijgen (is vast een tutorial voor te vinden ergens)
-	- [ ] Als ik Tabler ooit wil aanpassen, met git submodule werken? Interessant om eens naar te kijken
-- [ ] HTMX implementeren voor de link op de 404 pagina
-	- [ ] Wat impliceert templates refactoren naar alleen content en dus `{% block content %}` weg halen uit het template?
-	- Lekker om te leren hoe HTMX werkt
+	- [x] Als ik Tabler ooit wil aanpassen, met git submodule werken? Interessant om eens naar te kijken
 - [x] hostname van container instellen in Dockerfile
 	- Ah dat kan niet, probleem dat we een user waren die geen naam had (niet bestond). User gemaakt in Dockerfile
 - [ ] File permissions fixen, is nu `777` overal (Kan dat wel met WSL en `/mnt/c`? :/)
@@ -17,12 +13,11 @@
 	- [ ] En `coverage.py`
 ### Later
 - [ ] Sample compose file maken
+	- [ ] DB en documenten mounten voor persistence
 - [ ] Init script dat config leest uit env vars en verwerkt
 - [ ] Afschrijvingen
 ### Kan
 - [ ] Bankrekeningen implementeren (relateert aan import denk ik?)
 - [ ] Internationalization?
-- [ ] Unit tests?
-	- Django heeft ook een testing framework
 - [ ] `django-compression`
 - [ ] Andere database backends

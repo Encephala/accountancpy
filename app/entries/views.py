@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_list_or_404
 from django.views import generic
 
 from .models import EntryRow
@@ -7,10 +7,20 @@ from .models import EntryRow
 def overview(request):
     return render(request, "entries/_base.html")
 
-class EntryRowView(generic.DetailView):
+
+class EntryRowByLedger(generic.ListView):
     model = EntryRow
     template_name = "entries/content/entry_row_view.html"
-    context_object_name = "entry"
+    context_object_name = "entry_row_list"
 
-    def get_object(self, queryset = None):
-        return get_object_or_404(EntryRow, pk = self.kwargs["entry_id"])
+    def get_queryset(self):
+        return get_list_or_404(EntryRow, ledger = self.kwargs["ledger_id"])
+
+
+class EntryRowByEntry(generic.ListView):
+    model = EntryRow
+    template_name = "entries/content/entry_row_view.html"
+    context_object_name = "entry_row_list"
+
+    def get_queryset(self):
+        return get_list_or_404(EntryRow, entry = self.kwargs["entry_id"])

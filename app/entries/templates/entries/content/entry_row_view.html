@@ -1,14 +1,25 @@
-<div class="row">
-    <div class="card">
-        <div class="card-body">{{ entry.date }}</div>
+{% if entry_row_list %}
+{% for entry_row in entry_row_list %}
+<div class="row column-gap-1 my-1 justify-content-around">
+    <div class="card col-2">
+        <div class="card-body">{{ entry_row.date | date:"D j M 'y" }}</div>
     </div>
-    <div class="card">
-        <div class="card-body">{{ entry.ledger.id }}</div>
+    <div class="card col-2">
+        <div class="card-body"><a href="{% url 'entries:view' entry_row.entry.id %}" class="badge badge-pill my-1">{{ entry_row.entry.id }}</a></div>
     </div>
-    <div class="card">
-        <div class="card-body">{{ entry.document }}</div>
+    <div class="card col-5">
+        <div class="card-body">{{ entry_row.document | default:'<em>No corresponding document.</em>' }}</div>
     </div>
-    <div class="card">
-        <div class="card-body">{{ entry.value }}</div>
+    <div class="card col-2">
+        <div class="card-body">{{ entry_row.value }}</div>
     </div>
 </div>
+{% endfor %}
+
+{% else %}
+<div class="row">
+    <div class="card">
+        <div class="card-body">No entries found.</div>
+    </div>
+</div>
+{% endif %}
