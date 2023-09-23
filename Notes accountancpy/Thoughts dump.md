@@ -97,3 +97,6 @@
 - Beetje rondgespeeld met Bootstrap en layouts maken
 	- `.column-gap-x` is chill om gelijke spacing tussen kolommen te hebben maar wel nog `.col-x` te kunnen gebruiken voor sizing
 - Wat gezeik toen ik `Entries` en `EntriesRow` models wilde verplaatsen. `makemigrations` had er geen zin in omdat de eerdere migrations voor `books` refereerden naar de functie `upload_path` die niet meer in de file stond. Heb een dummy functie in die file laten staan en de echte functie verplaatst naar `app/settings.py` zodat het een absolute globale referentie heeft
+#### `EntriesRow` view aanmaken
+- `content` directory in elke `templates` dir is voor elementen in een pagina, as before
+- 
