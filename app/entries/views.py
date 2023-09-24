@@ -47,3 +47,12 @@ class EntryRowByEntry(generic.ListView):
 
     def get_queryset(self):
         return get_list_or_404(self.model, entry = self.kwargs["entry_id"])
+
+
+class EntryRowByAccount(generic.ListView):
+    model = EntryRow
+    template_name = "entries/content/entry_row_list.html"
+    context_object_name = "entry_row_list"
+
+    def get_queryset(self):
+        return get_list_or_404(self.model, entry = self.kwargs["account_id"])
