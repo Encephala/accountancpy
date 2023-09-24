@@ -8,17 +8,18 @@
 	- Ah dat kan niet, probleem dat we een user waren die geen naam had (niet bestond). User gemaakt in Dockerfile
 - [ ] CRUD (naast R) implementeren voor alle classes
 - [ ] File permissions fixen, is nu `777` overal (Kan dat wel met WSL en `/mnt/c`? :/)
-- [ ] [Deployment checklist](https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/) afgaan
 - [ ] CI opzetten voor het project
 	- [ ] Met Django tests
 	- [ ] En `coverage.py`
 - [ ] HTMX loads met een fade ofzo fixen, idk hoe dat moet
 - [ ] Iets van graphics die aangeven welke app je in bent want nu zijn alle details pagina's zo vergelijkbaar dat het verwarrend is
+	- Background color is al goed begin
 - [ ] Afletteren van rows implementeren
 ### Later
 - [ ] Sample compose file maken
 	- [ ] DB en documenten mounten voor persistence
 - [ ] Init script dat config leest uit env vars en verwerkt
+- [ ] [Deployment checklist](https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/) afgaan
 - [ ] Afschrijvingen
 ### Kan
 - [ ] Bankrekeningen implementeren (relateert aan import denk ik?)

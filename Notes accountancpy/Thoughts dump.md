@@ -117,7 +117,7 @@
 - Wilde `num_rows` van een entry laten zien in de `EntryList`, daar wat gedoe mee gehad
 	- Moet in `get_context_data` de `QuerySet` annotaten en dan de geannotate set in de context plakken
 	- In `context` zit `object_list`, maar dat is niet degene die je wil hebben. Je moet `class_list` hebben, in dit geval `context["entry_list"]`
-	- Laatste oepsie is dat ik `Count("id")` nam als aantal rows, maar dat is incorrect; er is altijd maar 1 `id` in een `Entry`,  het moest zijn `Count("entryrow")` (lowercase van type van \_set)
+	- Laatste oepsie is dat ik `Count("id")` nam als aantal rows, maar dat is incorrect; er is altijd maar 1 `id` in een `Entry`,  het moest zijn `Count("entryrow")` (lowercase van type in `..._set`)
 - [ ] Ook in `EntryDetails` wordt de ID van elke `EntryRow` erbij gezet, dat is beetje onnodig. Idk of ik dit ga fixen, mss in een refactor later
 #### `Accounts` app
 - Ken het trucje inmiddels, `startapp` en dan models overzetten van `books`, basic views en urlpatterns maken, toevoegen aan apps in settings
@@ -147,7 +147,6 @@
 	- Ah, er kwam een error in de console. Omdat ik `get_queryset` override en een `list` return, is het geen `QuerySet` meer
 	- Weggedaan met `get_list_or_404` en `super().get_queryset().filter()` gebruikt, werkt
 	- Ik typte dat het zou werken voordat ik het getest had maar hè, het moest wel :)
-
 #### `Books` app weg
 - Eindelijk, party
 - Was nog 1 referentie naar `books.journal` in een migration, heb die handmatig aangepast naar `journals.journal`, dat maakt vast niks stuk (^:
@@ -156,3 +155,7 @@
 	- Oh, de correcte manier om dit te doen was [`squashmigrations`](https://docs.djangoproject.com/en/4.2/topics/migrations/#migration-squashing), naja fixed
 	- Er was ook nog een referentie in dependencies, ook handmatig aangepast om naar `journals` te verwijzen ipv naar `books`
 - All good!
+
+
+Al met al lekker daggie, volgende keer op naar CRUD en dan moet ik echt tests gaan doen.
+Eigenlijk wel echt beter om eerst tests te doen hè, dan kan ik ook test-driven development doen voor CRUD.

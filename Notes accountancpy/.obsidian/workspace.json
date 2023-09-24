@@ -32,7 +32,8 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "bd5bb5e7d1c4c8b8",
@@ -128,7 +129,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Thoughts dump.md"
+                "file": "ToDo.md"
               }
             }
           },
@@ -138,7 +139,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Thoughts dump.md",
+                "file": "ToDo.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -155,7 +156,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Thoughts dump.md",
+                "file": "ToDo.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -188,12 +189,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "f164c342a6c02ed0",
+  "active": "5b622a4b53f3016f",
   "lastOpenFiles": [
-    "ToDo.md",
-    "Thoughts dump.md",
     "Design.md",
     "Configuratie.md",
+    "ToDo.md",
+    "Thoughts dump.md",
     "test.md"
   ]
 }

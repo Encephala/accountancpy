@@ -28,7 +28,7 @@ Tables voor:
 			- +/- of debet/credit?
 			- liefst een instelling I guess maar in begin uitgaan van +/-
 ## Backend (Django)
-
+Veel over te leren, maar een prima systeem.
 ## Frontend (HTMX + Tabler)
 ### Keuze
 Een lightweight framework gaat me te veel werk kosten, nty
@@ -49,9 +49,5 @@ Dus iets als:
 
 Tabler is een implementatie van Bootstrap schijnt, gezel
 ### Hoe HTMX te gebruiken
-HTMX zal binnen elke Django het fetchen etc. doen. URL structure wordt dan ook chill, gewoon `/app` als maximale lengte. Dat betekent een sub-`base.html` voor elke app en daarin bouwen. 
-Mogelijke downsides? Verlies van application state als je een reload doet.
-
-Hmm wacht HTMX kan ook URL rewrite doen, dan gaat het wel gewoon goed met state bewaren?
-Is er dan nog meerwaarde om template per ding te hebben? Mss wel leuk voor wat grafische leukigheidjes.
-
+Gebruik Django templating om pagina's te laden. HTMX komt niet aan de `location` van de browser.
+HTMX kan gebruikt worden om alle content binnen de pagina in te laden en bijvoorbeeld dynamische filters etc. te doen.
