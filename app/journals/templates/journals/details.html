@@ -1,0 +1,42 @@
+{% extends 'journals/_base.html' %}
+
+{% block page-title %} Journal: {{ journal.id }} {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mb-1 column-gap-1 justify-content-around">
+        <div class="card card-body col-3 strong">Name</div>
+        <div class="card card-body col-1 strong">Type</div>
+        <div class="card card-body col-7 strong">Notes</div>
+    </div>
+    <div class="row column-gap-1">
+        <div class="card card-body col-3">{{ journal.name }}</div>
+        <div class="card card-body col-1">{{ journal.type }}</div>
+        <div class="card card-body col-7">{{ journal.notes | default:'<em>No notes.</em>' }}</div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="row mb-1 column-gap-1 justify-content-around">
+        <div class="card col-2 strong">
+            <div class="card-body">Entry</div>
+        </div>
+        <div class="card col-2 strong">
+            <div class="card-body">Journal</div>
+        </div>
+        <div class="card col-2 strong">
+            <div class="card-body">Number of rows</div>
+        </div>
+        <div class="card col-5 strong">
+            <div class="card-body">Notes</div>
+        </div>
+    </div>
+
+    <div id="entry_rows_placeholder"
+        hx-target="this"
+        hx-swap="outerHTML"
+        hx-trigger="load"
+        hx-get="{% url 'entries:journal_rows' journal.id %}">
+    </div>
+</div>
+{% endblock content %}

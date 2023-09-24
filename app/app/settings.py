@@ -37,6 +37,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'journals.apps.JournalsConfig',
     'accounts.apps.AccountsConfig',
     'entries.apps.EntriesConfig',
     'ledgers.apps.LedgersConfig',

@@ -20,7 +20,7 @@
         <div class="card card-body col-2">{{ ledger.id }}</div>
         <div class="card card-body col-4">{{ ledger.name }}</div>
         <div class="card card-body col-1">{{ ledger.type }}</div>
-        <div class="card card-body col-4">{{ ledger.notes }}</div>
+        <div class="card card-body col-4">{{ ledger.notes | default:'<em>No notes.</em>' }}</div>
     </div>
 </div>
 

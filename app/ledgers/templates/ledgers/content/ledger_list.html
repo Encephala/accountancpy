@@ -3,7 +3,7 @@
     {% for ledger in ledger_list %}
     <div class="col-xl-2 col-4 card">
         <div class="card-body">
-            <a href="{% url 'ledgers:view' ledger.id %}" class="badge badge-pill">{{ ledger.id }}</a>
+            <a href="{% url 'ledgers:details' ledger.id %}" class="badge badge-pill">{{ ledger.id }}</a>
         </div>
     </div>
     <div class="col-xl-3 col-7 card">
@@ -15,13 +15,6 @@
     <div class="col-xl-5 col-7 card">
         <div class="card-body">{{ ledger.notes | default:'<em>No notes.</em>' }}</div>
     </div>
-
-    <!-- <div class="col-xl-2 col-4 border border-info">
-        <a href="{% url 'ledgers:view' ledger.id %}" class="badge badge-pill">{{ ledger.id }}</a>
-    </div>
-    <div class="col-xl-3 col-8 border my-auto">{{ ledger.name }}</div>
-    <div class="col-xl-1 col-4 border my-auto">{{ ledger.type }}</div>
-    <div class="col-xl-6 col-8 border my-auto">{{ ledger.notes }}</div> -->
     {% endfor %}
 </div>
 {% else %}

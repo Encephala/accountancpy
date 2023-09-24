@@ -26,5 +26,6 @@ urlpatterns = [
     path('ledgers/', include("ledgers.urls")),
     path('entries/', include("entries.urls")),
     path('accounts/', include("accounts.urls")),
+    path('journals/', include("journals.urls")),
     re_path('.*', views.my_404, name = "404"), # TODO: 404 via Django's systemen fixen ipv dit
 ]

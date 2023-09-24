@@ -5,7 +5,7 @@ from app.settings import upload_path
 class Entry(models.Model):
 
     # TODO: Weg van books.Journal en over naar "journal.Journal"
-    journal = models.ForeignKey("books.Journal", on_delete = models.PROTECT, blank = False)
+    journal = models.ForeignKey("journals.Journal", on_delete = models.PROTECT, blank = False)
     notes = models.TextField(blank = True)
 
     # TODO: Validation that Entry is balanced

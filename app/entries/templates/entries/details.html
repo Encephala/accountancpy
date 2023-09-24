@@ -12,7 +12,7 @@
     <div class="row row-cards column-gap-1">
         <div class="card card-body col-2">{{ entry.id }}</div>
         <div class="card card-body col-4">{{ entry.journal.id }}</div>
-        <div class="card card-body col-4">{{ entry.notes }}</div>
+        <div class="card card-body col-4">{{ entry.notes | default:'<em>No notes.</em>' }}</div>
     </div>
 </div>
 

@@ -118,6 +118,7 @@
 	- Moet in `get_context_data` de `QuerySet` annotaten en dan de geannotate set in de context plakken
 	- In `context` zit `object_list`, maar dat is niet degene die je wil hebben. Je moet `class_list` hebben, in dit geval `context["entry_list"]`
 	- Laatste oepsie is dat ik `Count("id")` nam als aantal rows, maar dat is incorrect; er is altijd maar 1 `id` in een `Entry`,  het moest zijn `Count("entryrow")` (lowercase van type van \_set)
+- [ ] Ook in `EntryDetails` wordt de ID van elke `EntryRow` erbij gezet, dat is beetje onnodig. Idk of ik dit ga fixen, mss in een refactor later
 #### `Accounts` app
 - Ken het trucje inmiddels, `startapp` en dan models overzetten van `books`, basic views en urlpatterns maken, toevoegen aan apps in settings
 - Interessante, urls resolven in volgorde van de lijst, dus als de url "list/" en "<account_id>/" allebei hebt, moet je de "list/" eerst zetten, anders resolvet list als een account en zegt hij dat gegeven `account_id` niet bestaat
@@ -134,4 +135,9 @@
 - Had foutje gemaakt met copy-pasten, deed `get_list_or_404` met `entry = self.kwargs["account_id"]` :^)
 #### `Journal` app
 - Laatste app, daarna CRUD voor alle apps en afletteren gaan fixen
+- Zelfde trucje, model verplaatsen en URL en view en details en list en navbar en app toevoegen aan settings
+- Hmm enige complicatie: `EntryRow` hebben geen Journal ForeignKey, dat zijn de `Entry` zelf
+	- Zal niet moeilijk te fixen zijn
+	- Yup, was gewoon `journal = self.kwargs["journal_id"]` vervangen door `entry__journal...` ([documentatie](https://docs.djangoproject.com/en/4.2/intro/tutorial02/))
+	- Hmm dan is het eigenlijk ook logischer om lijst van `Entry` te hebben staan ipv `EntryRow`
 - 
