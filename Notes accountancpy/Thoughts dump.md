@@ -110,3 +110,11 @@
 - Heading en footer terug naar `ledgers` pagina, daar kan ook totaal van ledger opgevraagd worden
 - Volledige copy-paste van deze view gemaakt maar dan voor by-entry, dat kan vast beter maar idk KISS joe
 ## 24 sept
+- Gevoel gekregen voor wat logische namen zijn voor templates/views etc, goed teken dat ik web dev/MVC begin te begrijpen
+- Pretty much weer copy-paste van view voor `EntryRow` gemaakt voor list van `Entry`, maar niet te DRY want de kolommen en namen daarvan zijn elke keer anders
+	- I guess dat ook die kolom-namen technisch gezien template kunnen worden? maar KISS
+- Wilde `num_rows` van een entry laten zien in de `EntryList`, daar wat gedoe mee gehad
+	- Moet in `get_context_data` de `QuerySet` annotaten en dan de geannotate set in de context plakken
+	- In `context` zit `object_list`, maar dat is niet degene die je wil hebben. Je moet `class_list` hebben, in dit geval `context["entry_list"]`
+	- Laatste oepsie is dat ik `Count("id")` nam als aantal rows, maar dat is incorrect; er is altijd maar 1 `id` in een `Entry`,  het moest zijn `Count("entryrow")` (lowercase van type van \_set)
+- 

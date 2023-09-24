@@ -24,12 +24,7 @@
     </div>
 </div>
 
-<div class="container-xl mt-4"
-    hx-target="#entry_row_placeholder"
-    hx-swap="outerHTML"
-    hx-trigger="load"
-    hx-get="{% url 'entries:ledger_rows' ledger.id %}"
->
+<div class="container-xl mt-4">
     <div class="row column-gap-1 strong mb-2 justify-content-around">
         <div class="card col-2">
             <div class="card-body">Date</div>
@@ -45,7 +40,11 @@
         </div>
     </div>
 
-    <div id="entry_row_placeholder">
+    <div id="entry_row_placeholder"
+        hx-target="this"
+        hx-swap="outerHTML"
+        hx-trigger="load"
+        hx-get="{% url 'entries:ledger_rows' ledger.id %}">
     </div>
 
     <div class="row column-gap-1 strong mt-2 justify-content-around">

@@ -8,7 +8,7 @@
 
         {% for ledger in ledger_list %}
         <dt class="col-xl-2 col-4 border border-info">
-            <a href="{% url 'ledgers:view' ledger.id %}" class="badge badge-pill my-1">{{ ledger.id }}</a>
+            <a href="{% url 'ledgers:view' ledger.id %}" class="badge badge-pill">{{ ledger.id }}</a>
         </dt>
         <dd class="col-xl-3 col-8 border my-auto">{{ ledger.name }}</dd>
         <dd class="col-xl-1 col-4 border my-auto">{{ ledger.type }}</dd>

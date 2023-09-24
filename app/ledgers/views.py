@@ -10,10 +10,9 @@ def overview(request):
     return render(request, "ledgers/overview.html")
 
 
-class LedgerView(generic.DetailView):
+class LedgerDetails(generic.DetailView):
     model = Ledger
     template_name = "ledgers/details.html"
-    context_object_name = "ledger"
 
     def get_object(self, queryset = None):
         return get_object_or_404(Ledger, pk = self.kwargs["ledger_id"])
@@ -26,6 +25,7 @@ class LedgerView(generic.DetailView):
 
 # HTMX endpoints
 class LedgersList(generic.ListView):
+    model = Ledger
     template_name = "ledgers/content/ledger_list.html"
 
     def get_queryset(self):

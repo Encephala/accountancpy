@@ -1,0 +1,21 @@
+{% for entry in entry_list %}
+<div class="row column-gap-1 my-1 justify-content-around">
+    <div class="card col-2">
+        <div class="card-body">
+            <a href="{% url 'entries:details' entry.id %}" class="badge badge-pill">{{ entry.id }}</a>
+        </div>
+    </div>
+    <div class="card col-2">
+        <div class="card-body">
+            <!-- TODO: Link naar journal -->
+            <a href="#" class="badge badge-pill">{{ entry.journal.id }}</a>
+        </div>
+    </div>
+    <div class="card col-2">
+        <div class="card-body">{{ entry.num_rows }}</div>
+    </div>
+    <div class="card col-5">
+        <div class="card-body">{{ entry.notes }}</div>
+    </div>
+</div>
+{% endfor %}

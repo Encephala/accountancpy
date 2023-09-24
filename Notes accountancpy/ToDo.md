@@ -6,6 +6,7 @@
 	- [x] Als ik Tabler ooit wil aanpassen, met git submodule werken? Interessant om eens naar te kijken
 - [x] hostname van container instellen in Dockerfile
 	- Ah dat kan niet, probleem dat we een user waren die geen naam had (niet bestond). User gemaakt in Dockerfile
+- [ ] CRUD (naast R) implementeren voor alle classes
 - [ ] File permissions fixen, is nu `777` overal (Kan dat wel met WSL en `/mnt/c`? :/)
 - [ ] [Deployment checklist](https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/) afgaan
 - [ ] CI opzetten voor het project
