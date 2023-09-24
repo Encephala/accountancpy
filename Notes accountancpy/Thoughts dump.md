@@ -129,6 +129,8 @@
 	- Context aantal regels op Account
 - `Account` toegevoegd als `ForeignKey` van `EntryRow`, mag leeg zijn
 	- Django heeft best chill systeem om dit te fixen, nice
+	- Wacht dit mag helemaal niet fout gaan, foreignkey zou blank moeten mogen zijn
+	- Fixed, `blank = True` staat nog niet `null` toe in de DB, `null = True` was nodig
 - Had foutje gemaakt met copy-pasten, deed `get_list_or_404` met `entry = self.kwargs["account_id"]` :^)
 #### `Journal` app
 - Laatste app, daarna CRUD voor alle apps en afletteren gaan fixen
