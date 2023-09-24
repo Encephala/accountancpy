@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('ledgers', '0001_initial'),
-        ('books', '0004_remove_entryrow_entry_remove_entryrow_ledger_and_more'),
+        ('journals', '0001_initial'),
     ]
 
     operations = [
@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('notes', models.TextField(blank=True)),
-                ('journal', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='books.journal')),
+                ('journal', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='journals.journal')),
             ],
         ),
         migrations.CreateModel(

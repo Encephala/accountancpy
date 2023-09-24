@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'entries.apps.EntriesConfig',
     'ledgers.apps.LedgersConfig',
-    'books.apps.BooksConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

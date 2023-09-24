@@ -4,7 +4,6 @@ from app.settings import upload_path
 # Create your models here.
 class Entry(models.Model):
 
-    # TODO: Weg van books.Journal en over naar "journal.Journal"
     journal = models.ForeignKey("journals.Journal", on_delete = models.PROTECT, blank = False)
     notes = models.TextField(blank = True)
 
