@@ -13,7 +13,7 @@
         <div class="card-body">{{ account.is_creditor }}</div>
     </div>
     <div class="card col-2">
-        <div class="card-body">{{ account.notes }}</div>
+        <div class="card-body">{{ account.notes | default:'<em>No notes.</em>' }}</div>
     </div>
 </div>
 {% endfor %}

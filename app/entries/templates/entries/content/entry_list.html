@@ -15,7 +15,7 @@
         <div class="card-body">{{ entry.num_rows }}</div>
     </div>
     <div class="card col-5">
-        <div class="card-body">{{ entry.notes }}</div>
+        <div class="card-body">{{ entry.notes | default:'<em>No notes.</em>' }}</div>
     </div>
 </div>
 {% endfor %}
