@@ -9,3 +9,6 @@ def landing(request):
 
 def my_404(request):
     return render(request, "404.html")
+
+def favicon(request):
+    return redirect("static/media/icon_ledger.svg", permanent = True)

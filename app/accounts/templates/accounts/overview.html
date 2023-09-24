@@ -1,0 +1,29 @@
+{% extends 'accounts/_base.html' %}
+
+{% block page-title %} Overview of Accounts {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row column-gap-1 my-1 justify-content-around strong">
+        <div class="card col-2">
+            <div class="card-body">ID</div>
+        </div>
+        <div class="card col-3">
+            <div class="card-body">Name</div>
+        </div>
+        <div class="card col-2">
+            <div class="card-body">Type</div>
+        </div>
+        <div class="card col-2">
+            <div class="card-body">Notes</div>
+        </div>
+    </div>
+
+    <div id="account_rows_placeholder"
+        hx-target="this"
+        hx-swap="outerHTML"
+        hx-get="{% url 'accounts:list' %}"
+        hx-trigger="load">
+    </div>
+</div>
+{% endblock content %}

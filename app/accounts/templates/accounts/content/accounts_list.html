@@ -1,0 +1,23 @@
+{% if account_list %}
+{% for account in account_list %}
+<div class="row column-gap-1 my-1 justify-content-around">
+    <div class="card col-2">
+        <div class="card-body">
+            <a href="{% url 'accounts:details' account.id %}" class="badge badge-pill">{{ account.id }}</a>
+        </div>
+    </div>
+    <div class="card col-3">
+        <div class="card-body">{{ account.name }}</div>
+    </div>
+    <div class="card col-2">
+        <div class="card-body">{{ account.is_creditor }}</div>
+    </div>
+    <div class="card col-2">
+        <div class="card-body">{{ account.notes }}</div>
+    </div>
+</div>
+{% endfor %}
+
+{% else %}
+<p>No accounts found.</p>
+{% endif %}

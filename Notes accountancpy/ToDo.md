@@ -12,6 +12,8 @@
 - [ ] CI opzetten voor het project
 	- [ ] Met Django tests
 	- [ ] En `coverage.py`
+- [ ] HTMX loads met een fade ofzo fixen, idk hoe dat moet
+- [ ] Iets van graphics die aangeven welke app je in bent want nu zijn alle details pagina's zo vergelijkbaar dat het verwarrend is
 ### Later
 - [ ] Sample compose file maken
 	- [ ] DB en documenten mounten voor persistence

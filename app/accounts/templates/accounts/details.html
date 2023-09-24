@@ -1,0 +1,42 @@
+{% extends 'accounts/_base.html' %}
+
+{% block page-title %} Account: {{ account.id }} {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row row-cards mb-1 column-gap-1 justify-content-around">
+        <div class="card card-body col-2 strong">Name</div>
+        <div class="card card-body col-2 strong">Type</div>
+        <div class="card card-body col-4 strong">Notes</div>
+    </div>
+    <div class="row row-cards column-gap-1">
+        <div class="card card-body col-2">{{ account.id }}</div>
+        <div class="card card-body col-2">{{ account.is_creditor }}</div>
+        <div class="card card-body col-4">{{ account.notes }}</div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="row column-gap-1 strong mb-2 justify-content-around">
+        <div class="card col-2">
+            <div class="card-body">Date</div>
+        </div>
+        <div class="card col-2">
+            <div class="card-body">Entry</div>
+        </div>
+        <div class="card col-5">
+            <div class="card-body">Document</div>
+        </div>
+        <div class="card col-2">
+            <div class="card-body">Value</div>
+        </div>
+    </div>
+
+    <div id="entry_rows_placeholder"
+        hx-target="this"
+        hx-swap="outerHTML"
+        hx-trigger="load"
+        hx-get="{% url 'entries:account_rows' account.id %}">
+    </div>
+</div>
+{% endblock content %}

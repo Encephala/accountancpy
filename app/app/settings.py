@@ -37,6 +37,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'accounts.apps.AccountsConfig',
     'entries.apps.EntriesConfig',
     'ledgers.apps.LedgersConfig',
     'books.apps.BooksConfig',

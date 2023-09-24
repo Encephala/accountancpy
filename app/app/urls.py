@@ -21,8 +21,10 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('favicon.ico', views.favicon, name = "favicon"),
     path('', views.landing, name = "landing"),
     path('ledgers/', include("ledgers.urls")),
     path('entries/', include("entries.urls")),
-    re_path('.*', views.my_404, name = "404"),
+    path('accounts/', include("accounts.urls")),
+    re_path('.*', views.my_404, name = "404"), # TODO: 404 via Django's systemen fixen ipv dit
 ]
