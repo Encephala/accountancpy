@@ -7,8 +7,7 @@
     </div>
     <div class="card col-2">
         <div class="card-body">
-            <!-- TODO: Link naar journal -->
-            <a href="#" class="badge badge-pill">{{ entry.journal.id }}</a>
+            <a href="{% url 'journals:details' entry.journal.id %}" class="badge badge-pill">{{ entry.journal.id }}</a>
         </div>
     </div>
     <div class="card col-2">

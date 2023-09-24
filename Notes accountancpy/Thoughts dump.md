@@ -140,4 +140,19 @@
 	- Zal niet moeilijk te fixen zijn
 	- Yup, was gewoon `journal = self.kwargs["journal_id"]` vervangen door `entry__journal...` ([documentatie](https://docs.djangoproject.com/en/4.2/intro/tutorial02/))
 	- Hmm dan is het eigenlijk ook logischer om lijst van `Entry` te hebben staan ipv `EntryRow`
-- 
+- Dat gedaan
+- Nu werkt filteren op `Journal` niet goed, wack
+	- Ik had ook geen eigen `get_queryset` gedefiniëerd, afgeleid door `get_context_data` die gedefiniëerd was
+	- Dat nu wel gedaan, maar nu returnt het niks. Gaat vast ergens iets mis met namen van variabelen
+	- Ah, er kwam een error in de console. Omdat ik `get_queryset` override en een `list` return, is het geen `QuerySet` meer
+	- Weggedaan met `get_list_or_404` en `super().get_queryset().filter()` gebruikt, werkt
+	- Ik typte dat het zou werken voordat ik het getest had maar hè, het moest wel :)
+
+#### `Books` app weg
+- Eindelijk, party
+- Was nog 1 referentie naar `books.journal` in een migration, heb die handmatig aangepast naar `journals.journal`, dat maakt vast niks stuk (^:
+	- `makemigrations` heb er geen problemen mee, maar dat is logisch
+	- ook `migrate` gaat priem, jeetje
+	- Oh, de correcte manier om dit te doen was [`squashmigrations`](https://docs.djangoproject.com/en/4.2/topics/migrations/#migration-squashing), naja fixed
+	- Er was ook nog een referentie in dependencies, ook handmatig aangepast om naar `journals` te verwijzen ipv naar `books`
+- All good!
