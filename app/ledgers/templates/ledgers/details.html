@@ -8,7 +8,7 @@
 
 {% block page-title %} Ledger: {{ ledger.id }} {% endblock %}
 
-{% block htmx-shell %}
+{% block content %}
 <div class="container-xl">
     <div class="row row-cards mb-1 column-gap-1">
         <div class="card card-body col-2 strong">ID</div>
@@ -17,10 +17,10 @@
         <div class="card card-body col-4 strong">Notes</div>
     </div>
     <div class="row row-cards column-gap-1">
-        <div class="card card-body col-2">{{ object.id }}</div>
-        <div class="card card-body col-4">{{ object.name }}</div>
-        <div class="card card-body col-1">{{ object.type }}</div>
-        <div class="card card-body col-4">{{ object.notes }}</div>
+        <div class="card card-body col-2">{{ ledger.id }}</div>
+        <div class="card card-body col-4">{{ ledger.name }}</div>
+        <div class="card card-body col-1">{{ ledger.type }}</div>
+        <div class="card card-body col-4">{{ ledger.notes }}</div>
     </div>
 </div>
 
@@ -57,4 +57,4 @@
         </div>
     </div>
 </div>
-{% endblock htmx-shell %}
+{% endblock content %}

@@ -12,7 +12,8 @@ def overview(request):
 
 class LedgerView(generic.DetailView):
     model = Ledger
-    template_name = "ledgers/view.html"
+    template_name = "ledgers/details.html"
+    context_object_name = "ledger"
 
     def get_object(self, queryset = None):
         return get_object_or_404(Ledger, pk = self.kwargs["ledger_id"])
@@ -25,7 +26,7 @@ class LedgerView(generic.DetailView):
 
 # HTMX endpoints
 class LedgersList(generic.ListView):
-    template_name = "ledgers/content/list.html"
+    template_name = "ledgers/content/ledger_list.html"
 
     def get_queryset(self):
         """Return first 50 Ledgers."""

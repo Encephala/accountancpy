@@ -10,10 +10,10 @@
 
 {% block page-title %} Overview of ledgers {% endblock page-title %}
 
-{% block htmx-shell %}
+{% block content %}
 <div
-    hx-get="{% url 'ledgers:list' %}" hx-trigger="load" hx-target="#ledger-htmx-target" hx-swap="innerHTML"
+    hx-get="{% url 'ledgers:ledger_list' %}" hx-trigger="load" hx-target="this" hx-swap="outerHTML"
     class="flex-row-reverse align-items-center mx-auto" style="width: 100px">
     <img src="{% static 'media/loading.gif' %}">
 </div>
-{% endblock htmx-shell %}
+{% endblock content %}

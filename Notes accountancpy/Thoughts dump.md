@@ -109,4 +109,4 @@
 - Was table heading en table footer aan het bouwen in de `content/entry_row_view.html`, da is niet helemaal hoe het hoort
 - Heading en footer terug naar `ledgers` pagina, daar kan ook totaal van ledger opgevraagd worden
 - Volledige copy-paste van deze view gemaakt maar dan voor by-entry, dat kan vast beter maar idk KISS joe
-- 
+## 24 sept

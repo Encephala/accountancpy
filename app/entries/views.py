@@ -10,7 +10,7 @@ def overview(request):
 
 class EntryRowByLedger(generic.ListView):
     model = EntryRow
-    template_name = "entries/content/entry_row_view.html"
+    template_name = "entries/content/entry_row_list.html"
     context_object_name = "entry_row_list"
 
     def get_queryset(self):
@@ -19,7 +19,7 @@ class EntryRowByLedger(generic.ListView):
 
 class EntryRowByEntry(generic.ListView):
     model = EntryRow
-    template_name = "entries/content/entry_row_view.html"
+    template_name = "entries/content/entry_row_list.html"
     context_object_name = "entry_row_list"
 
     def get_queryset(self):
