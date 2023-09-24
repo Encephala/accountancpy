@@ -127,3 +127,9 @@
 	- Ben eigenlijk ook wel beetje voor het idee van test-driven development
 - `DetailsView` van `Account` wordt nog wel fun om te maken, let's go
 	- Context aantal regels op Account
+- `Account` toegevoegd als `ForeignKey` van `EntryRow`, mag leeg zijn
+	- Django heeft best chill systeem om dit te fixen, nice
+- Had foutje gemaakt met copy-pasten, deed `get_list_or_404` met `entry = self.kwargs["account_id"]` :^)
+#### `Journal` app
+- Laatste app, daarna CRUD voor alle apps en afletteren gaan fixen
+- 

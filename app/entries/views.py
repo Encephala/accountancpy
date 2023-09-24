@@ -55,4 +55,4 @@ class EntryRowByAccount(generic.ListView):
     context_object_name = "entry_row_list"
 
     def get_queryset(self):
-        return get_list_or_404(self.model, entry = self.kwargs["account_id"])
+        return get_list_or_404(self.model, account = self.kwargs["account_id"])

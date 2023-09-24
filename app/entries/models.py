@@ -16,5 +16,6 @@ class EntryRow(models.Model):
     entry = models.ForeignKey(Entry, on_delete = models.CASCADE, blank = False)
     date = models.DateField(blank = False)
     ledger = models.ForeignKey("ledgers.Ledger", on_delete = models.PROTECT, blank = False)
+    account = models.ForeignKey("accounts.Account", on_delete = models.PROTECT, blank = True)
     document = models.FileField(upload_to = upload_path, blank = True)
     value = models.DecimalField(max_digits = 99, decimal_places = 2, blank = False)
