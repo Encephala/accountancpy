@@ -159,3 +159,38 @@
 
 Al met al lekker daggie, volgende keer op naar CRUD en dan moet ik echt tests gaan doen.
 Eigenlijk wel echt beter om eerst tests te doen hè, dan kan ik ook test-driven development doen voor CRUD.
+## 25 sept
+Vandaag gaan we tests maken
+- Eerst nog wat aangekloot met kleine changes aan `Dockerfile` (all warnings aanzetten in entrypoint), kwam erachter dat interactie tussen drive client en `git rebase` niet optimaal is, rebase pauseert telkens, maar gewoon `--continue` spammen lost het op
+- Ah ff geleerd tussendoor: ipv mijn gedoe met context om uit te rekenen hoeveel rows er in een entry zitten, had ik ook een method kunnen definiëren op het model
+- Geen triviale tests maken, dus niet testen dat een gemaakt object ook echt bestaat ofzo
+- Matig, je moet specificeren welke apps je wil testen als je `test` runt, want het zoekt niet automatisch je tests af.
+- Test dat een gemaakte Ledger op de pagina staat:
+	- Werkt niet want HTMX wordt niet gerenderd, tof
+	- Dan maar gewoon die pagina testen op iets statisch
+	- Turns out dat Django test `assertContains` case-sensitive is
+- Test voor `QuerySetEquals` voelt ook beetje overkill, maar goed
+- Omdat `django.urls.reverse` resolvet met een url argument in de text, moet in die call ook args gepasst worden. In de `get` call kan je alleen `GET`-data als `?foo=bar` gooien
+- Enig tests, voor `Ledger` gemaakt in veel tijd. Nu snel rest knallen?
+- Ook tussendoor even ordering toegevoegd aan alle QuerySets, want `QuerySetEquals` wordt autistisch als je een list (met impliciete ordering) vergelijkt met een QuerySet die geen impliciete/expliciete ordering heeft
+	- `ordering = id` toegevoegd aan de view maar het lijkt nog steeds niet te werken, wack
+	- `ordering = False` it is in `AssertQuerySetEqual`
+- Wack, `Entry*` heeft als enige `pk` als primary key in plaats van `id`, bruh
+	- Huh maar als ik instantieer met args ipv kwargs geeft het "expected number for id", heet het intern in Django impliciet id?
+	- Ohhh, `id` is de default name voor primary key, maar `pk` is altijd een referentie naar deze primary key, ook als je zelf een andere PK instelt
+- Wack, om `Entry` te instantiëren moet er een journal zijn maar dan moet je Journal importeren en dat moet via `from journals.model`, want `..` mag niet
+- Maar hey omdat ik bij `Entry` niet de QuerySet slice is zn ordering we bewaard gebleven? `ordered = False` is iig niet nodig
+- Hey handige, zo'n domme `Journal` die moet bestaan om entries te maken kan gemaakt worden in `__init__`
+	- Oh nee niet `__init__`,  die gebruikt unittest specifiek. Blijkbaar heb unittest hiervoor de method `setUp`
+	- Chill, joe
+- Gedoe met testen dat `EntryRowByLedger` goed werkt, want "entry_row_list" zit telkens niet in de context
+	- [Lijkt erop](https://forum.djangoproject.com/t/testing-class-based-views-with-custom-context-object-name/23628) dat Django niet zo lekker gaat context_object_name aanpassen
+	- Wil hij dan gewoon dat ik `context["object_list"]` query? Doen ze ook niet in [het voorbeeld]()
+	- Nee, `"object_list"` lost het niet op
+	- `print(response.context)` helpt ook niet, daar staat helemaal niks met `*_list` in :/
+	- Bruh like mn templates werken gewoon met `entry_row_list`, waarom de test niet?
+	- Hmm had geen `status_code = 200`-check, mss vangt dat het af?
+	- Ah yep ik kreeg telkens 404. Why?
+	- Tsja, ik maak het hem ook niet makkelijk als ik wil testen of er een entry op een journal staat, maar ik schrijf code alsof ik wil testen of er een entryrow op een ledger staat
+	- Gecorrigeerd, alleen nog `entry_row_list` aanpassen naar `entry_list`, en fixed (:
+- 
