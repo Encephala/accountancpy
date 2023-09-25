@@ -27,6 +27,7 @@ class LedgerDetails(generic.DetailView):
 class LedgersList(generic.ListView):
     model = Ledger
     template_name = "ledgers/content/ledger_list.html"
+    ordering = "id"
 
     def get_queryset(self):
         """Return first 50 Ledgers."""

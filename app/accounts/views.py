@@ -19,3 +19,4 @@ class AccountDetails(generic.DetailView):
 class AccountList(generic.ListView):
     model = Account
     template_name = "accounts/content/accounts_list.html"
+    ordering = "id"

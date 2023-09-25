@@ -18,3 +18,4 @@ class JournalDetails(generic.DetailView):
 class JournalList(generic.ListView):
     model = Journal
     template_name = "journals/content/list.html"
+    ordering = "id"
