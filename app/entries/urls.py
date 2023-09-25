@@ -6,7 +6,7 @@ app_name = "entries"
 
 urlpatterns = [
     path("", views.overview, name = "overview"),
-    path("list/", views.EntryList.as_view(), name = "entry_list"),
+    path("list/", views.EntryList.as_view(), name = "list"),
     path("rows-by-entry/<entry_id>/", views.EntryRowByEntry.as_view(), name = "entry_rows"),
     path("rows-by-ledger/<ledger_id>/", views.EntryRowByLedger.as_view(), name = "ledger_rows"),
     path("rows-by-account/<account_id>/", views.EntryRowByAccount.as_view(), name = "account_rows"),

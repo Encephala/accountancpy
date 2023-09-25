@@ -26,7 +26,7 @@
     </div>
 </div>
 <div
-    hx-get="{% url 'ledgers:ledger_list' %}" hx-trigger="load" hx-target="this" hx-swap="outerHTML"
+    hx-get="{% url 'ledgers:list' %}" hx-trigger="load" hx-target="this" hx-swap="outerHTML"
     class="mx-auto" style="width: 100px">
     <img src="{% static 'media/loading.gif' %}">
 </div>
