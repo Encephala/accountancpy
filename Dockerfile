@@ -1,4 +1,4 @@
-FROM docker.io/python:3.11.5
+FROM docker.io/python:3.12
 
 RUN apt-get update && apt-get upgrade -y
 
