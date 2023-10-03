@@ -227,6 +227,23 @@ Vandaag is CRUD, leggo
 - Yo the Django extension for vscode is pretty okhand, it has like syntax highlighting and auto complete, that's like all you need in an IDE????
 	- It is somewhat aggressive with autocomplete though idk
 	- Also does it do all HTML always everywhere now? may be annoying but okhand for now
+	- Never mind it breaks the HTML autocomplete which is just much more functional so uhh yeah bye
 - Well that wasn't so hard
 - Should also do validation, but before we get into that, let's go straight into the `CreateView`
-- 
+- Didn't get the form to render, didn't realize `CreateView` is meant to load the page as well
+	- Does it also do the creating of the object? 🤔
+	- It sure does, poggies
+- Getting some jank rendering:
+![[Pasted image 20231004001138.png]]
+- Honestly not sure why this happens, have spit it so every div is only one class
+	- It still happens with notes field removed
+	- Django only renders the input, nothing else, so that's not jank either
+	- Real weird tbh
+	- I don't get this whole html/css stuff yet yike
+	- It's not because of the `<form>` either
+	- It's not because of the form components either
+	- Okay alignment was different if you do it right, so for consistent alignment have to do it wrong xd
+- In order to specify number of rows, have to create a custom Form class
+	- https://stackoverflow.com/questions/6536373/how-can-i-set-the-size-of-rows-columns-in-textfield-in-django-models
+	- https://www.valentinog.com/blog/django-widgets/
+- Enough for today, next time is cleaning up the UI here, adding UD, and adding buttons for CUD (where do these go in UI?)

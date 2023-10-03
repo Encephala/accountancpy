@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from django.http import HttpResponseBadRequest
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+from django import forms
 
 from django.db.models import Sum
 
@@ -27,27 +28,17 @@ class LedgerDetails(generic.DetailView):
         return context
 
 
-# My half-assed attempt at creating my own CreateView
+# Create new Ledger
 # Shows the page on which you create a new thingy
 def new(request):
     return render(request, "ledgers/new.html")
 
 
-# Takes a POST request and creates thingy and redirects to overview view
-def create(request):
-    try:
-        id = request.POST.get("id")
-        name = request.POST.get("name")
-        type = request.POST.get("type")
-        notes = request.POST.get("notes")
-
-        Ledger(id, name, type, notes).save()
-    except TypeError as err:
-        return HttpResponseBadRequest(err)
-
-
-    # Redirect to Ledger ListView
-    return redirect(reverse("ledgers:overview"))
+class LedgerCreate(generic.CreateView):
+    model = Ledger
+    fields = ["id", "name", "type", "notes"]
+    template_name = "ledgers/new.html"
+    success_url = reverse_lazy("ledgers:overview")
 
 
 # HTMX endpoints
