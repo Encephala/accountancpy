@@ -16,3 +16,5 @@ class Ledger(models.Model):
     )
     notes = models.TextField(blank = True)
 
+    def __str__(self):
+        return self.id
