@@ -198,4 +198,35 @@ Vandaag gaan we tests maken
 ## 3 oct
 Vandaag is CRUD, leggo
 `Journal`/`Ledger` zijn root van relational data, dus ik pak mn OG, `Ledger`
+- https://docs.djangoproject.com/en/4.2/topics/db/queries/
+- `__str__`-methods toegevoegd aan models, goed om keer gedaan te hebben en voortaan te doen
+- Dat was veel lezen over database models, wel genoeg van opgepikt, maar brein is ook beetje gefrituurd van vandaag + lezen dus uhhhh tsja idk wat is blijven hangen
+	- Snap beter hoe `QuerySet` werken, die zijn wel cool
+- Geen voorbeelden van views, dus nu moet ik nog gaan lezen over de generic views voor CUD (R is `ListView` en `DetailView`)
+	- https://docs.djangoproject.com/en/4.2/ref/class-based-views/generic-editing/
+	- fun, here goes frituurd brein part 2
+- Actually, should probably self-implement it first and then go with the class views-approach?
+	- Eh can I be fucked? probably not idkkk
+	- okay sure
+- Big advantage of using built-in `CreateView` is that it probably automatically creates appropriate entry fields? Hopefully?
+- Ah, an HTML form uses GET by default, let's set that to POST
+- Also why doesn't my submit button align properly idk it just wants to be full width
+	- Let's try wrapping it in a container, probs the btn class?
+	- Nah, now it just has a button in a div that stretches full width
+	- `.w-25` works now but `.float-end` still no bueno, ah but `.ms-auto` is bueno
+	- `.float-end` probs does nothing if not in a float
+	- neat `.w-10` does work, idk why I thought it didn't
+	- Ah hmm the `.card-body` in the `.card` made it go wide
+	- But without `.card-body` it doesn't get the proper height
+	- Probs just need to actually separate `.card` and `.card-body` :^)
+	- Yo that was it pog, now it behaves as I'd expect
+	- Maybe `.column-gap-x` also works if I don't do this the wrong way
+- Motherfuck why is it still a GET it literally says POST in the rendered HTML
+	- Is Chrome being a caching cunt?
+	- Probably, now I'm getting CSRF error, thanks Django
+- Yo the Django extension for vscode is pretty okhand, it has like syntax highlighting and auto complete, that's like all you need in an IDE????
+	- It is somewhat aggressive with autocomplete though idk
+	- Also does it do all HTML always everywhere now? may be annoying but okhand for now
+- Well that wasn't so hard
+- Should also do validation, but before we get into that, let's go straight into the `CreateView`
 - 

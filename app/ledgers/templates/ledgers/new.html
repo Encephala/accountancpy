@@ -1,0 +1,31 @@
+{% extends "ledgers/_base.html" %}
+
+{% block page-title %} Create new Ledger {% endblock %}
+
+{% block content %}
+<div class="container-xl">
+    <div class="row row-cards mb-1 column-gap-1">
+        <div class="card card-body col-2 strong">ID</div>
+        <div class="card card-body col-4 strong">Name</div>
+        <div class="card card-body col-1 strong">Type</div>
+        <div class="card card-body col-4 strong">Notes</div>
+    </div>
+
+    <form action="{% url 'ledgers:create' %}" method="POST">
+        {% csrf_token %}
+        <div class="row row-cards column-gap-1 mb-1">
+            <input class="card card-body col-2" type="text" id="id" name="id">
+            <input class="card card-body col-4" type="text" id="name" name="name">
+            <input class="card card-body col-1" type="text" id="type" name="type">
+            <input class="card card-body col-4" type="text" id="notes" name="notes">
+        </div>
+
+        <div class="row row-cards">
+            <div class="card col-2 ms-auto">
+                <input class="card-body btn btn-ghost-azure"
+                    type="submit" value="Send the thingy">
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock content %}
