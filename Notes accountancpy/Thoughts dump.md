@@ -119,6 +119,7 @@
 	- In `context` zit `object_list`, maar dat is niet degene die je wil hebben. Je moet `class_list` hebben, in dit geval `context["entry_list"]`
 	- Laatste oepsie is dat ik `Count("id")` nam als aantal rows, maar dat is incorrect; er is altijd maar 1 `id` in een `Entry`,  het moest zijn `Count("entryrow")` (lowercase van type in `..._set`)
 - [ ] Ook in `EntryDetails` wordt de ID van elke `EntryRow` erbij gezet, dat is beetje onnodig. Idk of ik dit ga fixen, mss in een refactor later
+	- Kaolo fixbaar door een binary parameter toe te voegen aan template
 #### `Accounts` app
 - Ken het trucje inmiddels, `startapp` en dan models overzetten van `books`, basic views en urlpatterns maken, toevoegen aan apps in settings
 - Interessante, urls resolven in volgorde van de lijst, dus als de url "list/" en "<account_id>/" allebei hebt, moet je de "list/" eerst zetten, anders resolvet list als een account en zegt hij dat gegeven `account_id` niet bestaat
@@ -193,4 +194,8 @@ Vandaag gaan we tests maken
 	- Ah yep ik kreeg telkens 404. Why?
 	- Tsja, ik maak het hem ook niet makkelijk als ik wil testen of er een entry op een journal staat, maar ik schrijf code alsof ik wil testen of er een entryrow op een ledger staat
 	- Gecorrigeerd, alleen nog `entry_row_list` aanpassen naar `entry_list`, en fixed (:
+
+## 3 oct
+Vandaag is CRUD, leggo
+`Journal`/`Ledger` zijn root van relational data, dus ik pak mn OG, `Ledger`
 - 

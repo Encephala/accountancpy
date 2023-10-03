@@ -42,7 +42,6 @@ class LedgersViewsTest(TestCase):
 
         response = self.client.get(reverse("ledgers:list"))
 
-        print(response.context)
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(
             response.context["ledger_list"],
