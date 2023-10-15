@@ -3,9 +3,25 @@
 {% block page-title %}<div class="text-center">Page not found</div>{% endblock page-title %}
 
 {% block content %}
+<div class="row mb-1">
+    <div class="card col-12 col-md-4">
+        <div class="card-body">
+            <p class="">Did you forget to add a trailing <code>/</code>?</p>
+        </div>
+    </div>
+</div>
+
 <div class="row align-items-center">
-    <div class="col-6 mx-auto">
-        <a class="card card-body btn btn-cyan" href="/">Back to home</a>
+    <div class="card col-12 col-md-2 align-items-center">
+        <div class="card-body">
+            <a class="btn btn-ghost-cyan" href="/">Home</a>
+        </div>
+    </div>
+
+    <div class="card col-12 col-md-2 align-items-center">
+        <div class="card-body">
+            <a class="btn btn-ghost-cyan" href="{{ request.path }}/">Add /</a>
+        </div>
     </div>
 </div>
 {% endblock content %}
