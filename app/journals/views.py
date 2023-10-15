@@ -12,8 +12,6 @@ class JournalDetails(generic.DetailView):
     model = Journal
     template_name = "journals/details.html"
 
-    def get_object(self):
-        return get_object_or_404(self.model, id = self.kwargs["journal_id"])
 
 class JournalList(generic.ListView):
     model = Journal

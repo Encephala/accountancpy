@@ -12,9 +12,6 @@ class AccountDetails(generic.DetailView):
     model = Account
     template_name = "accounts/details.html"
 
-    def get_object(self):
-        return get_object_or_404(self.model, id = self.kwargs["account_id"])
-
 
 class AccountList(generic.ListView):
     model = Account

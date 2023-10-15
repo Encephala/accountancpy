@@ -8,6 +8,6 @@ urlpatterns = [
     path("", views.overview, name="overview"),
     path("list/", views.LedgersList.as_view(), name="list"),
     path("create/", views.LedgerCreate.as_view(), name="create"),
-    path("update/<ledger_id>/", views.LedgerUpdate.as_view(), name="update"),
-    path("<ledger_id>/", views.LedgerDetails.as_view(), name="details"),
+    path("update/<pk>/", views.LedgerUpdate.as_view(), name="update"),
+    path("<pk>/", views.LedgerDetails.as_view(), name="details"),
 ]

@@ -18,9 +18,6 @@ class LedgerDetails(generic.DetailView):
     model = Ledger
     template_name = "ledgers/details.html"
 
-    def get_object(self, queryset = None):
-        return get_object_or_404(Ledger, pk = self.kwargs["ledger_id"])
-
     # This should probably be a method like entryrow_sum rather than this hacked context_data
     # Which leads me to wonder, can you call an object method in a templated file? would be banger
     def get_context_data(self, **kwargs):
