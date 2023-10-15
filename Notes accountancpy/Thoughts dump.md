@@ -255,3 +255,8 @@ Vandaag is CRUD, leggo
 - [This StackOverflow answer](https://stackoverflow.com/a/64317285/5410751) seems like a nice concise way to get what I want
 	- I specified the class property `form` rather than `form_class`, so it didn't work, but now it does
 - Just adding class `.form-control` is enough styling for now tbh
+- `UpdateView` is hopelijk gewoon copy paste van `CreateView` met zelfde template, zelfde form maar andere logica?
+	- Krijg error `Generic detail view LedgerUpdate must be called with either an object pk or a slug in the URLconf.`
+	- Nope, klein verschil: ik gebruikte `ledger_id` in de URL config als variable, dus moet dan custom `get_object` schrijven net zoals ik bij `DetailView` gedaan had
+	- Beetje onnodig, heb eht maar aangepast naar `pk`, dat is leesbaar genoeg
+- 

@@ -29,12 +29,23 @@ class LedgerDetails(generic.DetailView):
         return context
 
 
-# Create new Ledger
 class LedgerCreate(generic.CreateView):
     model = Ledger
-    template_name = "ledgers/new.html"
+    template_name = "ledgers/create_update.html"
     success_url = reverse_lazy("ledgers:overview")
     form_class = LedgerForm
+
+
+class LedgerUpdate(generic.UpdateView):
+    model = Ledger
+    template_name = "ledgers/create_update.html"
+    success_url = reverse_lazy("ledgers:overview")
+    form_class = LedgerForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["is_update"] = True
+        return context
 
 
 # HTMX endpoints

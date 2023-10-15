@@ -1,0 +1,40 @@
+{% extends "ledgers/_base.html" %}
+
+{% block page-title %} Create new Ledger {% endblock %}
+
+{% block content %}
+<div class="row row-cards mb-1 column-gap-1">
+    <div class="card card-body col-2 strong">ID</div>
+    <div class="card card-body col-4 strong">Name</div>
+    <div class="card card-body col-1 strong">Type</div>
+    <div class="card card-body col-4 strong">Notes</div>
+</div>
+
+<form action="{% url 'ledgers:create' %}" method="POST">
+    {% csrf_token %}
+    <div class="row row-cards mb-1 column-gap-1">
+        <div class="card card-body col-2 h-100">
+            {{ form.id }}
+        </div>
+        <div class="card card-body col-4 h-100">
+            {{ form.name }}
+        </div>
+        <div class="card card-body col-1 h-100">
+            {{ form.type }}
+        </div>
+        <div class="card card-body col-4">
+            {{ form.notes }}
+        </div>
+    </div>
+
+    <div class="row row-cards">
+        <div class="card col-1 ms-auto">
+            {% if is_update %}
+            <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Update!">
+            {% else %}
+            <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Create!">
+            {% endif %}
+        </div>
+    </div>
+</form>
+{% endblock content %}
