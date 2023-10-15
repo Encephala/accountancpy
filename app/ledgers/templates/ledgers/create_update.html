@@ -1,6 +1,12 @@
 {% extends "ledgers/_base.html" %}
 
-{% block page-title %} Create new Ledger {% endblock %}
+{% block page-title %}
+{% if is_update %}
+Update Ledger: {{ ledger.id }}
+{% else %}
+Create new Ledger
+{% endif %}
+{% endblock page-title %}
 
 {% block content %}
 <div class="row row-cards mb-1 column-gap-1">
@@ -10,7 +16,11 @@
     <div class="card card-body col-4 strong">Notes</div>
 </div>
 
+{% if is_update %}
+<form action="{% url 'ledgers:update' ledger %}" method="POST">
+{% else %}
 <form action="{% url 'ledgers:create' %}" method="POST">
+{% endif %}
     {% csrf_token %}
     <div class="row row-cards mb-1 column-gap-1">
         <div class="card card-body col-2 h-100">
