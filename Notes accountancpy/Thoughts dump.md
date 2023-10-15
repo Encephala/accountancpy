@@ -257,6 +257,15 @@ Vandaag is CRUD, leggo
 - Just adding class `.form-control` is enough styling for now tbh
 - `UpdateView` is hopelijk gewoon copy paste van `CreateView` met zelfde template, zelfde form maar andere logica?
 	- Krijg error `Generic detail view LedgerUpdate must be called with either an object pk or a slug in the URLconf.`
-	- Nope, klein verschil: ik gebruikte `ledger_id` in de URL config als variable, dus moet dan custom `get_object` schrijven net zoals ik bij `DetailView` gedaan had
-	- Beetje onnodig, heb eht maar aangepast naar `pk`, dat is leesbaar genoeg
-- 
+	- Nope, small difference: I used `ledger_id` in the URL as variable, so had to define a custom `get_object` as I did with the `DetailView`
+	- Bit unnecessary, adjusted it to use `pk` in this app and all others
+- Not entirely sure if I like the logic of using `is_update` in the view, seems error-prone, but ah well I guess?
+	- Have to adjust page title, form button text and form action URL
+
+- Updated 404 page to be explain that may have failed to add trailing `/`, added button to add it
+
+- Finally a `DeleteView`
+- `DeleteView` borrows from `DetailView` in lot of ways, perhaps some HTMX magic would be nice there to prevent repetition
+- Created a template that shows a Ledger's attributes and allows a user to delete if a confirm box is checked
+
+Next time: adding buttons to link to create/update/delete pages, adding number of rows on ledger to delete page, adding CRUD to other models

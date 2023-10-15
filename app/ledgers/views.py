@@ -45,6 +45,12 @@ class LedgerUpdate(generic.UpdateView):
         return context
 
 
+class LedgerDelete(generic.DeleteView):
+    model = Ledger
+    template_name = "ledgers/delete.html"
+    success_url = reverse_lazy("ledgers:overview")
+
+
 # HTMX endpoints
 class LedgersList(generic.ListView):
     model = Ledger
