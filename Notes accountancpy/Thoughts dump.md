@@ -233,6 +233,7 @@ Vandaag is CRUD, leggo
 - Didn't get the form to render, didn't realize `CreateView` is meant to load the page as well
 	- Does it also do the creating of the object? 🤔
 	- It sure does, poggies
+- Have to use `reverse_lazy` if `reverse` is needed in a `views.py`, as those get imported by `urls.py` but `reverse` imports `urls.py` so import loop
 - Getting some jank rendering:
 ![[Pasted image 20231004001138.png]]
 - Honestly not sure why this happens, have spit it so every div is only one class
@@ -243,7 +244,14 @@ Vandaag is CRUD, leggo
 	- It's not because of the `<form>` either
 	- It's not because of the form components either
 	- Okay alignment was different if you do it right, so for consistent alignment have to do it wrong xd
+	- Here "it" means usind `.card .card-body` on the same div
 - In order to specify number of rows, have to create a custom Form class
 	- https://stackoverflow.com/questions/6536373/how-can-i-set-the-size-of-rows-columns-in-textfield-in-django-models
 	- https://www.valentinog.com/blog/django-widgets/
-- Enough for today, next time is cleaning up the UI here, adding UD, and adding buttons for CUD (where do these go in UI?)
+- Enough for today, next time is cleaning up the UI here, adding (cr)UD, and adding buttons for CUD (where do these go in UI?)
+
+## 15 oct
+- Default form styling can be adjusted only by making a custom form in Django
+- [This StackOverflow answer](https://stackoverflow.com/a/64317285/5410751) seems like a nice concise way to get what I want
+	- I specified the class property `form` rather than `form_class`, so it didn't work, but now it does
+- Just adding class `.form-control` is enough styling for now tbh

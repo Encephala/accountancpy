@@ -7,6 +7,7 @@ from django import forms
 from django.db.models import Sum
 
 from .models import Ledger
+from .forms import LedgerForm
 
 # Create your views here.
 def overview(request):
@@ -29,16 +30,11 @@ class LedgerDetails(generic.DetailView):
 
 
 # Create new Ledger
-# Shows the page on which you create a new thingy
-def new(request):
-    return render(request, "ledgers/new.html")
-
-
 class LedgerCreate(generic.CreateView):
     model = Ledger
-    fields = ["id", "name", "type", "notes"]
     template_name = "ledgers/new.html"
     success_url = reverse_lazy("ledgers:overview")
+    form_class = LedgerForm
 
 
 # HTMX endpoints
