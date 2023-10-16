@@ -277,13 +277,48 @@ Next time: adding buttons to link to create/update/delete pages, adding number o
 	- Status 200 with 4 kB transferred, should be 302 for the redirect?
 - Apparently I should be rendering form error messages but I'm not
 	- https://docs.djangoproject.com/en/4.2/topics/forms/#rendering-form-error-messages
-- Nah that wasn't it. Apparently I wasn't rendering the `id` field so it was an invalid submission
-	- Weird though, I'd expect Django to shit out an error then?
+- Nah that wasn't it. Apparently I wasn't rendering the `id` form field so it was an invalid submission
+	- Weird though, I'd expect Django to shit out an error then? But it didn't when I added `non_field_errors`
 - [ ] Do need to render `non_field_errors` on all forms though
 - Well, now my newly created journal gets entries rendered on it by default, that doesn't seem right
 	- It's rendering entries, so it's going wrong in `entries:journal_rows`
 	- I needed to define custom `get_queryset` for this view, fixed
 	- Fixed this for all `EntryRow` views as well
 - [ ] There's no way to see on an `EntryRow` what `Account` the row is tied to
+	- Stupid
 - [x] Also I should update URLs so they're like `journals/<pk>/delete/` etc, that makes more sense
-- 
+- Quickly added update- and delete view, went smoothly
+
+Neato, `Journal` CRUD done
+
+Same trick for `Entry` and `EntryRow`
+- Just realised you can edit the primary key in the update views so far, that's not what we want I guess
+- I guess changing an `Entry`'s journal is fine?
+- Difference here is that I want to edit the `EntryRow` edits on the page of the `Entry` edit, this'll be fun
+	- No like unironically
+	- Same thing for creating an `Entry`
+	- Oof, creating is gonna require an auto-expanding form that adds extra rows
+- Not sure if `create_update.html` is worthwhile here, might want to split it out
+- Oof, this is gonna take some thinking to get right
+- How do I properly render an `EntryRow` form? Can make it do multiple calls to the HTMX endpoint, that works I guess
+- But then I have to add custom JS to submit all of them with a single button, that's kinda wack
+- Definitely not gonna do it manually without Django though, all the validation etc. seems a hell
+- First time rendering the page, only the `Journal` input gets rendered right, yike:
+![[Pasted image 20231016224219.png]]
+- Ah, had `form.name` instead of `.notes`, fixed that part
+- And had `model = Entry` instead of `EntryRow`, that fixed the other part
+- God Django's included batteries make life easier
+- Now all that remains is making style less shit, having the create button work (xd), and automatically adding rows
+- The last one seems most fun, let's go
+- Had a medium struggle with it
+	- The event to listen to is `input`, I was using `changed`, but that's just a modifier
+	- Otherwise everything is intuitive
+	- Had to pass the URL parameter `index` to the context explicitly
+- Got it to work, neat
+- Now adding a delete button to each row
+	- Hmm that should re-enable the HTMX trigger, because otherwise you can never add a row again
+	- Can either
+		- Add a button to Add, or
+		- Create a hidden element somewhere on the page to keep track and instead of trigger once, trigger if last row :^)
+		- Do the latter but with Javascript to store a value
+- Submit button needs to only submit non-empty rows and fail if any row fails, that's probably headache material

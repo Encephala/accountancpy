@@ -6,6 +6,8 @@ from django.template import loader
 def landing(request):
     return render(request, "landing.html")
 
+def empty(request):
+    return HttpResponse("")
 
 def my_404(request):
     return render(request, "404.html")

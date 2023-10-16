@@ -1,0 +1,45 @@
+<div class="row row-cards mb-1 column-gap-1 justify-content-around" id="row-{{ index }}">
+    {{ form.non_field_errors }}
+    <div class="card card-body col-2" id="date-{{ index }}">
+        {{ form.date }}
+    </div>
+    <div class="card card-body col-1" id="ledger-{{ index }}">
+        {{ form.ledger }}
+    </div>
+    <div class="card card-body col-1" id="account-{{ index }}">
+        {{ form.account }}
+    </div>
+    <div class="card card-body col-4" id="document-{{ index }}">
+        {{ form.document }}
+    </div>
+    <div class="card card-body col-2" id="value-{{ index }}">
+        {{ form.value }}
+    </div>
+
+    <!-- Checkbox to delete row -->
+    <div class="card card-body col-1">
+        <button class="btn btn-ghost-cyan" type="button"
+            {% if index == 1 %} disabled {% endif %}
+            hx-get="{% url 'empty' %}"
+            hx-trigger="click"
+            hx-target="#row-{{ index }}"
+            hx-swap="outerHTML">
+            Delete
+        </button>
+    </div>
+
+    <!-- HTMX trigger to automatically add new row if this one is updated-->
+    <div hidden
+    hx-get="{% url 'entries:create_row' index=index|add:'1' %}"
+    hx-trigger="input from:#date-{{ index }} > input once,
+    input from:#ledger-{{ index }} > select once,
+    input from:#account-{{ index }} > select once,
+    input from:#document-{{ index }} > input once,
+    input from:#value-{{ index }} > input, once"
+    hx-target="#row-{{ index }}"
+    hx-swap="afterend"
+    >
+</div>
+</div>
+
+

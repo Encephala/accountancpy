@@ -7,6 +7,13 @@
 - [x] hostname van container instellen in Dockerfile
 	- Ah dat kan niet, probleem dat we een user waren die geen naam had (niet bestond). User gemaakt in Dockerfile
 - [ ] CRUD (naast R) implementeren voor alle classes
+	- [ ] `Ledger`
+	- [ ] `Journal`
+	- [ ] `Entry` and `EntryRow`
+	- [ ] `Account`
+	- [ ] Update views don't allow editing primary key?
+	- [ ] Add `Account` to read of `EntryRow`
+- [ ] Add `hx-` prefix to URLs that represent HTMX endpoints for readability
 - [ ] File permissions fixen, is nu `777` overal (Kan dat wel met WSL en `/mnt/c`? :/)
 - [ ] CI opzetten voor het project
 	- [ ] Met Django tests

@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_list_or_404
 from django.views import generic
+from django.urls import reverse_lazy
 
 from .models import Entry, EntryRow
+from .forms import EntryForm, EntryRowForm
 
 from django.db.models import Count
 
@@ -27,9 +29,39 @@ class EntryList(generic.ListView):
         return context
 
 
+class EntryCreate(generic.CreateView):
+    model = Entry
+    template_name = "entries/create_update.html"
+    form_class = EntryForm
+
+    # Show details of created Entry
+    def get_success_url(self, **kwargs):
+        return reverse("entries:details", pk = self.object.pk)
+
+
+class EntryUpdate(generic.UpdateView):
+    pass
+
+
+class EntryDelete(generic.DeleteView):
+    pass
+
+
+# HTMX endpoints
+class EntryRowCreate(generic.CreateView):
+    model = EntryRow
+    template_name = "entries/content/entryrow_create_update.html"
+    form_class = EntryRowForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["index"] = self.kwargs["index"]
+        return context
+
+
 class EntryRowByLedger(generic.ListView):
     model = EntryRow
-    template_name = "entries/content/entry_row_list.html"
+    template_name = "entries/content/entryrow_list.html"
     context_object_name = "entry_row_list"
     ordering = "id"
 
@@ -39,7 +71,7 @@ class EntryRowByLedger(generic.ListView):
 
 class EntryRowByEntry(generic.ListView):
     model = EntryRow
-    template_name = "entries/content/entry_row_list.html"
+    template_name = "entries/content/entryrow_list.html"
     context_object_name = "entry_row_list"
     ordering = "id"
 
@@ -49,7 +81,7 @@ class EntryRowByEntry(generic.ListView):
 
 class EntryRowByAccount(generic.ListView):
     model = EntryRow
-    template_name = "entries/content/entry_row_list.html"
+    template_name = "entries/content/entryrow_list.html"
     context_object_name = "entry_row_list"
     ordering = "id"
 

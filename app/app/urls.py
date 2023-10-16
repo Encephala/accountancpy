@@ -22,6 +22,7 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls, name = "admin"),
     path('favicon.ico', views.favicon, name = "favicon"),
+    path('empty/', views.empty, name = "empty"), # HTMX endpoint to delete elements
     path('', views.landing, name = "landing"),
     path('ledgers/', include("ledgers.urls")),
     path('entries/', include("entries.urls")),
