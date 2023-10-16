@@ -1,0 +1,50 @@
+{% extends "journals/_base.html" %}
+
+{% block page-title %}
+{% if is_update %}
+Update Journal: {{ journal.id }}
+{% else %}
+Create new Journal
+{% endif %}
+{% endblock page-title %}
+
+{% block content %}
+<div class="row row-cards mb-1 column-gap-1">
+    <div class="card card-body col-2 strong">ID</div>
+    <div class="card card-body col-4 strong">Name</div>
+    <div class="card card-body col-1 strong">Type</div>
+    <div class="card card-body col-4 strong">Notes</div>
+</div>
+
+{% if is_update %}
+<form action="{% url 'journals:update' journal %}" method="POST">
+{% else %}
+<form action="{% url 'journals:create' %}" method="POST">
+{% endif %}
+    {% csrf_token %}
+    <div class="row row-cards mb-1 column-gap-1">
+        <div class="card card-body col-2 h-100">
+            {{ form.id }}
+        </div>
+        <div class="card card-body col-4 h-100">
+            {{ form.name }}
+        </div>
+        <div class="card card-body col-1 h-100">
+            {{ form.type }}
+        </div>
+        <div class="card card-body col-4">
+            {{ form.notes }}
+        </div>
+    </div>
+
+    <div class="row row-cards">
+        <div class="card col-1 ms-auto">
+            {% if is_update %}
+            <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Update!">
+            {% else %}
+            <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Create!">
+            {% endif %}
+        </div>
+    </div>
+</form>
+{% endblock content %}

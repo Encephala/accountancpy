@@ -269,3 +269,17 @@ Vandaag is CRUD, leggo
 - Created a template that shows a Ledger's attributes and allows a user to delete if a confirm box is checked
 
 Next time: adding buttons to link to create/update/delete pages, adding number of rows on ledger to delete page, adding CRUD to other models
+
+## 16 oct
+`Journal` CRUD:
+- Add create view by pretty much copy pasting
+- Hmm, pushing the create button creates a Post request but doesn't return to the right page, nor does it create the journal?
+	- Status 200 with 4 kB transferred, should be 302 for the redirect?
+- Apparently I should be rendering form error messages but I'm not
+	- https://docs.djangoproject.com/en/4.2/topics/forms/#rendering-form-error-messages
+- Nah that wasn't it. Apparently I wasn't rendering the `id` field so it was an invalid submission
+	- Weird though, I'd expect Django to shit out an error then?
+- [ ] Do need to render `non_field_errors` on all forms though
+- Well, now my newly created journal gets entries rendered on it by default, that doesn't seem right
+	- It's rendering entries, so it's going wrong in `entries:journal_rows`
+- Also I should update URLs so they're like `journals/<pk>/delete/` etc, that makes more sense
