@@ -23,11 +23,21 @@ class JournalCreate(generic.CreateView):
 
 
 class JournalUpdate(generic.UpdateView):
-    pass
+    model = Journal
+    template_name = "journals/create_update.html"
+    success_url = reverse_lazy("journals:overview")
+    form_class = JournalForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["is_update"] = True
+        return context
 
 
 class JournalDelete(generic.DeleteView):
-    pass
+    model = Journal
+    template_name = "journals/delete.html"
+    success_url = reverse_lazy("journals:overview")
 
 
 class JournalList(generic.ListView):
