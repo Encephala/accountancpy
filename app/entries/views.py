@@ -33,6 +33,9 @@ class EntryRowByLedger(generic.ListView):
     context_object_name = "entry_row_list"
     ordering = "id"
 
+    def get_queryset(self):
+        return EntryRow.objects.filter(ledger = self.kwargs["pk"])
+
 
 class EntryRowByEntry(generic.ListView):
     model = EntryRow
@@ -40,12 +43,18 @@ class EntryRowByEntry(generic.ListView):
     context_object_name = "entry_row_list"
     ordering = "id"
 
+    def get_queryset(self):
+        return EntryRow.objects.filter(entry = self.kwargs["pk"])
+
 
 class EntryRowByAccount(generic.ListView):
     model = EntryRow
     template_name = "entries/content/entry_row_list.html"
     context_object_name = "entry_row_list"
     ordering = "id"
+
+    def get_queryset(self):
+        return EntryRow.objects.filter(account = self.kwargs["pk"])
 
 
 class EntryByJournal(generic.ListView):
