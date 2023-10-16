@@ -282,4 +282,5 @@ Next time: adding buttons to link to create/update/delete pages, adding number o
 - [ ] Do need to render `non_field_errors` on all forms though
 - Well, now my newly created journal gets entries rendered on it by default, that doesn't seem right
 	- It's rendering entries, so it's going wrong in `entries:journal_rows`
+	- I needed to define custom `get_queryset` for this view, fixed
 - Also I should update URLs so they're like `journals/<pk>/delete/` etc, that makes more sense

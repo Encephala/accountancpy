@@ -1,5 +1,4 @@
-from django.db import models
-from django.shortcuts import render, get_list_or_404, get_object_or_404
+from django.shortcuts import render, get_list_or_404
 from django.views import generic
 
 from .models import Entry, EntryRow
@@ -15,6 +14,7 @@ class EntryDetails(generic.DetailView):
     model = Entry
     template_name = "entries/details.html"
 
+
 class EntryList(generic.ListView):
     model = Entry
     template_name = "entries/content/entry_list.html"
@@ -23,8 +23,7 @@ class EntryList(generic.ListView):
     # Annotate entries with num_rows
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        entries = self.get_queryset().annotate(num_rows = Count("entryrow"))
-        context["entry_list"] = entries
+        context["entry_list"] =  self.get_queryset().annotate(num_rows = Count("entryrow"))
         return context
 
 
@@ -59,3 +58,6 @@ class EntryByJournal(generic.ListView):
         context = super().get_context_data(**kwargs)
         context["entry_list"] = self.get_queryset().annotate(num_rows = Count("entryrow"))
         return context
+
+    def get_queryset(self):
+        return Entry.objects.filter(journal = self.kwargs["pk"])
