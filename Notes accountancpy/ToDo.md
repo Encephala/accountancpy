@@ -10,6 +10,9 @@
 	- [ ] `Ledger`
 	- [ ] `Journal`
 	- [ ] `Entry` and `EntryRow`
+		- [ ] Fix delete button logic
+		- [ ] Finish page style
+		- [ ] Make create button have correct logic
 	- [ ] `Account`
 	- [ ] Update views don't allow editing primary key?
 	- [ ] Add `Account` to read of `EntryRow`
@@ -17,7 +20,7 @@
 - [ ] File permissions fixen, is nu `777` overal (Kan dat wel met WSL en `/mnt/c`? :/)
 - [ ] CI opzetten voor het project
 	- [ ] Met Django tests
-	- [ ] En `coverage.py`
+	- [ ] En `coverage.py`?
 - [ ] HTMX loads met een fade ofzo fixen, idk hoe dat moet
 - [ ] Iets van graphics die aangeven welke app je in bent want nu zijn alle details pagina's zo vergelijkbaar dat het verwarrend is
 	- Background color is al goed begin

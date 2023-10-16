@@ -322,3 +322,4 @@ Same trick for `Entry` and `EntryRow`
 		- Create a hidden element somewhere on the page to keep track and instead of trigger once, trigger if last row :^)
 		- Do the latter but with Javascript to store a value
 - Submit button needs to only submit non-empty rows and fail if any row fails, that's probably headache material
+- `hx-on` is a much cleaner solution to deleting the row than `hx-get` to an empty response
