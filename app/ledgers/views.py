@@ -1,7 +1,6 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render
 from django.views import generic
-from django.http import HttpResponseBadRequest
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from django import forms
 
 from django.db.models import Sum
