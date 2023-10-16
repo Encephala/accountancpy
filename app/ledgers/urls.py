@@ -8,7 +8,7 @@ urlpatterns = [
     path("", views.overview, name="overview"),
     path("list/", views.LedgersList.as_view(), name="list"),
     path("create/", views.LedgerCreate.as_view(), name="create"),
-    path("update/<pk>/", views.LedgerUpdate.as_view(), name="update"),
-    path("delete/<pk>/", views.LedgerDelete.as_view(), name="delete"),
     path("<pk>/", views.LedgerDetails.as_view(), name="details"),
+    path("<pk>/update/", views.LedgerUpdate.as_view(), name="update"),
+    path("<pk>/delete/", views.LedgerDelete.as_view(), name="delete"),
 ]

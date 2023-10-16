@@ -284,5 +284,5 @@ Next time: adding buttons to link to create/update/delete pages, adding number o
 	- It's rendering entries, so it's going wrong in `entries:journal_rows`
 	- I needed to define custom `get_queryset` for this view, fixed
 	- Fixed this for all `EntryRow` views as well
-- [ ] There's no way to see on an `EntryRow` what account the entry is tied to
+- [ ] There's no way to see on an `EntryRow` what `Account` the row is tied to
 - Also I should update URLs so they're like `journals/<pk>/delete/` etc, that makes more sense
