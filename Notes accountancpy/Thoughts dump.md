@@ -344,3 +344,6 @@ Same trick for `Entry` and `EntryRow`
 	- Customise behaviour of the `EntryCreate` view
 	- While processing the view, probably in `Form.clean`, get all `EntryRow`, by sending a response to the client with an `HX-Trigger` header. If all `EntryRow` are valid and their sum is zero, save all of them and return the success url
 - Yeah, that should work! Bit of work and bit of learning about Django but neato burrito
+
+- With all the amending/force pushing I've been doing, I should really start working with branches
+- Makes me learn git better anyways
