@@ -323,3 +323,24 @@ Same trick for `Entry` and `EntryRow`
 		- Do the latter but with Javascript to store a value
 - Submit button needs to only submit non-empty rows and fail if any row fails, that's probably headache material
 - `hx-on` is a much cleaner solution to deleting the row than `hx-get` to an empty response
+
+
+## 17 oct
+- If I submit all forms with the same button, it creates a race condition for creating the rows on the entry
+- Best way is to trigger creating all rows when server responds with 200 for creating entry?
+- Let's think how you'd do that
+- Respond with hidden element which has HTMX to trigger them?
+- That doesn't sound bad, let's go
+- Hmm but then that doesn't trigger form validation for `EntryRow`s though
+- Added `form`-tags for each individual entryrow, but didn't update `hx-target` for new entryrows so there were some logic errors there.
+
+- Alternative solution is to use some JS and queue for send when pressing the button, then only send entry if all validation passed
+	- Don't like that though, I feel like checking form validity isn't gonna be easy js? but I guess it should be idk
+
+- Replaced djanky empty HTMX-endpoint to delete row with a script tag and an `onclick` event
+- Still wondering how to do form validation here properly though
+
+- Okay here's my take:
+	- Customise behaviour of the `EntryCreate` view
+	- While processing the view, probably in `Form.clean`, get all `EntryRow`, by sending a response to the client with an `HX-Trigger` header. If all `EntryRow` are valid and their sum is zero, save all of them and return the success url
+- Yeah, that should work! Bit of work and bit of learning about Django but neato burrito

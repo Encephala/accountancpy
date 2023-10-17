@@ -29,8 +29,19 @@ Create new Entry
         </div>
     </div>
 
+    <!-- Create function to delete a row, called by button.onclick in each row -->
+    <script>
+        function del_row(index) {
+            if (!(index == 1)) {
+                document.getElementById("form_entryrow-" + index).remove();
+            } else {
+                console.log("Why are you trying to hack the site >:(")
+            }
+        }
+    </script>
+
     <div id="entry_rows_placeholder"
-        hx-get="{% url 'entries:create_row' 1 %}"
+        hx-get="{% url 'entries:create_row' index=1 %}"
         hx-trigger="load"
         hx-target="this"
         hx-swap="outerHTML">

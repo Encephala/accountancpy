@@ -128,7 +128,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ToDo.md"
+                "file": "Thoughts dump.md"
               }
             }
           },
@@ -138,7 +138,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "ToDo.md",
+                "file": "Thoughts dump.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -155,7 +155,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "ToDo.md",
+                "file": "Thoughts dump.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -188,10 +188,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "5b622a4b53f3016f",
+  "active": "f164c342a6c02ed0",
   "lastOpenFiles": [
-    "Thoughts dump.md",
     "ToDo.md",
+    "Thoughts dump.md",
     "Images/Pasted image 20231016224219.png",
     "Images",
     "Images/Pasted image 20231004001138.png",

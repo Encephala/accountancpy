@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_list_or_404
 from django.views import generic
 from django.urls import reverse_lazy
+from django.http import HttpResponse
 
 from .models import Entry, EntryRow
 from .forms import EntryForm, EntryRowForm
@@ -33,10 +34,7 @@ class EntryCreate(generic.CreateView):
     model = Entry
     template_name = "entries/create_update.html"
     form_class = EntryForm
-
-    # Show details of created Entry
-    def get_success_url(self, **kwargs):
-        return reverse("entries:details", pk = self.object.pk)
+    success_url = reverse_lazy("entries:trigger_create_row")
 
 
 class EntryUpdate(generic.UpdateView):
