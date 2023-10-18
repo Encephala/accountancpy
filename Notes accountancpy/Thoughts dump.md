@@ -347,3 +347,39 @@ Same trick for `Entry` and `EntryRow`
 
 - With all the amending/force pushing I've been doing, I should really start working with branches
 - Makes me learn git better anyways
+
+- And I think I've finally stumbled onto some code that I really want to test, namely that validation properly catches all the invalid scenario's :)
+## 18 oct
+#### Making the `EntryRow` delete/add logic correct
+- Yo easy solution to my problem of creating new one, pretty sure there's a CSS selector for last element?
+- Okay yeah so that works, neat
+- Now I moved the HTMX out of the `EntryRow` form and into the main page
+- However, only issue that remains is that for the sake of the delete button, I need the index of the entry to delete it
+- Sadly, javascript doesn't natively support something like nearest form
+- Well, don't make it more difficult than it has to, I'm sure HTMX programmed the `once` tag well
+- Well, it does, but `:last-child` doesn't seem to update?
+- It does, but I guess this isn't how HTMX works
+- Ah, because `once` is coded properly, it won't fire a second time. That almost entirely makes sense
+- Fuck
+- Hmm, jank solution is to have the delete button readd the HTMX trigger
+- Not even that jank? Just looks ugly in the code
+- Wait now it's firing multiple times? wat
+- Is it time for a fuck-it moment and create an HTMX endpoint which returns this trigger element and is triggered upon clicking the button?
+- Yeah sure why not
+- No we're not doing that
+- Why not? Because the `div` contains a URL and the variable `index`, both of which have to be properly templated, which idk how to and can't be fucked to figure out, there has to be a cleaner solution
+- Significantly cleaned up the selector for the creation, can just listen on `form` `changed` event
+- Have just been struggling to reset this trigger, wack
+- Hmm can I just use JS `element.replaceWith(element)`?
+	- Nah that doesn't seem to work, the HTMX event doesn't get reset
+- Yo I can add the element to the entryrow_create and do an out-of-band swap? `hx-swap-oob`
+- Wait no I have to reset the trigger on deleting, wack
+- So looks like I either have to give up on auto-add, or accept that I need to have an add button for this case, or copy Exact and have new line created on pressing tab(?), or on delete trigger a request that replaces this element
+- YO [`htmx.process()`](https://htmx.org/api/#process) may well be just what I'm looking for???!?!??!?!?!
+	- Nope
+- Dude why is this so hard
+- Hmm, HTMX has a `handledFor` array which keeps track of elements for which the event has already triggered, maybe I can just reset that array?
+- Meh, am not able to find that array in the code. It's part of the event, but all events I can find are plain javascript events rather than HTMX ones (well except for `htmx:load` on  the `body` but that doesn't help me)
+- Insight: this logic isn't great either anwyays. Why would I want to edit a row that I just finished to create a new one?
+- Am gonna just add a button and implement Exact's tab logic
+- Hmm how does that work 

@@ -1,42 +1,39 @@
-<form action="{% url 'entries:create_row' index %}" method="POST" id="form_entryrow-{{ index }}">
-    <div class="row row-cards mb-1 column-gap-1 justify-content-around" id="row-{{ index }}">
+<form class="form_entryrow" id="form_entryrow-{{ index }}">
+    <div class="row row-cards mb-1 column-gap-1 justify-content-around">
         {{ form.non_field_errors }}
-        <div class="card card-body col-2" id="date-{{ index }}">
+        <div class="card card-body col-2 date">
             {{ form.date }}
         </div>
-        <div class="card card-body col-1" id="ledger-{{ index }}">
+        <div class="card card-body col-1 ledger">
             {{ form.ledger }}
         </div>
-        <div class="card card-body col-1" id="account-{{ index }}">
+        <div class="card card-body col-1 account">
             {{ form.account }}
         </div>
-        <div class="card card-body col-4" id="document-{{ index }}">
+        <div class="card card-body col-4 document">
             {{ form.document }}
         </div>
-        <div class="card card-body col-2" id="value-{{ index }}">
+        <div class="card card-body col-2 value">
             {{ form.value }}
         </div>
 
         <!-- Button to delete row -->
         <div class="card card-body col-1">
             <button class="btn btn-ghost-cyan" type="button"
-                {% if index == 1 %} disabled {% endif %}
-                onclick="del_row({{ index }})">
+            {% if index == 1 %} disabled {% endif %}
+            onclick="delete_row({{ index }})"
+            >
                 Delete
             </button>
         </div>
+    </div>
 
-        <!-- HTMX trigger to automatically add new row if this one is updated-->
-        <div hidden
-        hx-get="{% url 'entries:create_row' index=index|add:'1' %}"
-        hx-trigger="input from:#date-{{ index }} > input once,
-        input from:#ledger-{{ index }} > select once,
-        input from:#account-{{ index }} > select once,
-        input from:#document-{{ index }} > input once,
-        input from:#value-{{ index }} > input, once"
-        hx-target="closest form"
-        hx-swap="afterend"
-        >
-    </div>
-    </div>
+    <!-- HTMX trigger to automatically add new row if last one is updated-->
+    <div hidden class="entryrow_create_trigger"
+    hx-get="{% url 'entries:create_row' index=index|add:'1' %}"
+    hx-trigger="change from:#form_entryrow-{{ index }} once"
+    hx-target="#entryrow_container"
+    hx-swap="beforeend"
+    ></div>
+
 </form>

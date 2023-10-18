@@ -28,33 +28,37 @@ Create new Entry
             {{ form.notes }}
         </div>
     </div>
+</form>
 
-    <!-- Create function to delete a row, called by button.onclick in each row -->
-    <script>
-        function del_row(index) {
-            if (!(index == 1)) {
-                document.getElementById("form_entryrow-" + index).remove();
-            } else {
-                console.log("Why are you trying to hack the site >:(")
-            }
+<!-- Create function to delete a row, called by button.onclick in each row -->
+<script>
+    function delete_row(index) {
+        if (!(index == 1)) {
+            document.getElementById("form_entryrow-" + index).remove();
+        } else {
+            console.log("Why are you trying to hack the site >:(")
         }
-    </script>
+    }
+</script>
 
+<div id="entryrow_container">
     <div id="entry_rows_placeholder"
         hx-get="{% url 'entries:create_row' index=1 %}"
         hx-trigger="load"
         hx-target="this"
         hx-swap="outerHTML">
     </div>
+</div>
 
-    <div class="row row-cards">
-        <div class="card col-1 ms-auto">
-            {% if is_update %}
-            <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Update!">
-            {% else %}
-            <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Create!">
-            {% endif %}
-        </div>
+
+<div class="row row-cards">
+    <div class="card col-1 ms-auto">
+        {% if is_update %}
+        <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Update!">
+        {% else %}
+        <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Create!">
+        {% endif %}
     </div>
-</form>
+</div>
+
 {% endblock content %}
