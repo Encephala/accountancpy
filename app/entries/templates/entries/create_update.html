@@ -9,26 +9,28 @@ Create new Entry
 {% endblock page-title %}
 
 {% block content %}
-<div class="row row-cards mb-1 column-gap-1">
+<div class="container mb-4">
+    <div class="row row-cards mb-1 column-gap-1">
     <div class="card card-body col-2 strong">Journal</div>
     <div class="card card-body col-4 strong">Notes</div>
 </div>
 
-{% if is_update %}
-<form action="{% url 'entries:update' entry %}" method="POST">
-{% else %}
-<form action="{% url 'entries:create' %}" method="POST">
-{% endif %}
-    {% csrf_token %}
-    <div class="row row-cards mb-1 column-gap-1">
-        <div class="card card-body col-2 h-100">
-            {{ form.journal }}
+    {% if is_update %}
+    <form action="{% url 'entries:update' entry %}" method="POST">
+    {% else %}
+    <form action="{% url 'entries:create' %}" method="POST">
+    {% endif %}
+        {% csrf_token %}
+        <div class="row row-cards mb-1 column-gap-1">
+            <div class="card card-body col-2 h-100">
+                {{ form.journal }}
+            </div>
+            <div class="card card-body col-4 h-100">
+                {{ form.notes }}
+            </div>
         </div>
-        <div class="card card-body col-4 h-100">
-            {{ form.notes }}
-        </div>
-    </div>
-</form>
+    </form>
+</div>
 
 <!-- Create and delete functions, called by .delete-button and .create-button -->
 <script>
@@ -77,19 +79,40 @@ Create new Entry
     }
 </script>
 
-<div id="entryrow_container"
+<div class="container" id="entryrow_container"
 hx-get="{% url 'entries:create_row' %}"
 hx-trigger="load"
-></div>
+hx-target="find div"
+hx-swap="afterend"
+>
+    <div class="row row-cards mb-1 column-gap-1 justify-content-around sticky-top strong">
+        <div class="card card-body col-1" style="opacity: 0"></div>
 
+        <div class="card card-body col-5 col-xl-2 date">
+            Date
+        </div>
+        <div class="card card-body col-3 col-xl-1 ledger">
+            Ledger
+        </div>
+        <div class="card card-body col-3 col-xl-1 account">
+            Account
+        </div>
+        <div class="card card-body col-8 col-xl-4 document">
+            Document
+        </div>
+        <div class="card card-body col-8 col-xl-2 value">
+            Value
+        </div>
+    </div>
 
-<div class="row row-cards">
-    <div class="card col-1 ms-auto">
-        {% if is_update %}
-        <button class="p-2 m-1 btn btn-ghost-cyan">Update!</button>
-        {% else %}
-        <button class="p-2 m-1 btn btn-ghost-cyan">Create!</button>
-        {% endif %}
+    <div class="row row-cards">
+        <div class="card col-1 ms-auto">
+            {% if is_update %}
+            <button class="p-2 m-1 btn btn-ghost-cyan">Update!</button>
+            {% else %}
+            <button class="p-2 m-1 btn btn-ghost-cyan">Create!</button>
+            {% endif %}
+        </div>
     </div>
 </div>
 
