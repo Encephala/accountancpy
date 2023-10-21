@@ -9,7 +9,7 @@ urlpatterns = [
     path("list/", views.EntryList.as_view(), name = "list"),
 
     path("create/", views.EntryCreate.as_view(), name = "create"),
-    path("create-row/<int:index>/", views.EntryRowCreate.as_view(), name = "create_row"),
+    path("create-row/", views.EntryRowCreate.as_view(), name = "create_row"),
 
     path("<pk>/", views.EntryDetails.as_view(), name = "details"),
     path("<pk>/update", views.EntryUpdate.as_view(), name = "update"),

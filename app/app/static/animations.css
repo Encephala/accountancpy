@@ -1,0 +1,25 @@
+.fade-in {
+    -webkit-animation: fadeIn 150ms ease-in-out;
+    -moz-animation: fadeIn 150ms ease-in-out;
+    -o-animation: fadeIn 150ms ease-in-out;
+    -ms-animation: fadeIn 150ms ease-in-out;
+    animation: fadeIn 150ms ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0 }
+    100% { opacity: 1 }
+}
+
+.fade-out {
+    -webkit-animation: fadeOut 150ms ease-in-out;
+    -moz-animation: fadeOut 150ms ease-in-out;
+    -o-animation: fadeOut 150ms ease-in-out;
+    -ms-animation: fadeOut 150ms ease-in-out;
+    animation: fadeOut 150ms ease-in-out;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1 }
+    100% { opacity: 0 }
+}

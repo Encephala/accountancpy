@@ -1,38 +1,46 @@
-<form class="form_entryrow" id="form_entryrow-{{ index }}">
+{% load static %}
+
+<!-- This is the first EntryRow form, it is cloned by JS to create new ones -->
+<form class="form_entryrow fade-in slide" id="form_entryrow-1" data-index="1">
     <div class="row row-cards mb-1 column-gap-1 justify-content-around">
+        <div class="card card-body col-1">
+            <div class="row justify-content-around">
+                <button class="btn btn-ghost-cyan p-0 rounded-circle delete-button" type="button"
+                style="width: 25px; height: 25px;"
+                tabindex="-1"
+                disabled
+                onclick="delete_row(1)"
+                >
+                    <img src="{% static 'media/feather/x-circle.svg' %}">
+                </button>
+
+                <button class="btn btn-ghost-cyan p-0 rounded add-button" type="button"
+                style="width: 25px; height: 25px;"
+                tabindex="-1"
+                onclick="add_row(1)"
+                >
+                    <img src="{% static 'media/feather/plus-circle.svg' %}">
+                </button>
+            </div>
+        </div>
+
         {{ form.non_field_errors }}
-        <div class="card card-body col-2 date">
+        <div class="card card-body col-5 col-xl-2 date">
             {{ form.date }}
         </div>
-        <div class="card card-body col-1 ledger">
+        <div class="card card-body col-3 col-xl-1 ledger">
             {{ form.ledger }}
         </div>
-        <div class="card card-body col-1 account">
+        <div class="card card-body col-3 col-xl-1 account">
             {{ form.account }}
         </div>
-        <div class="card card-body col-4 document">
+        <div class="card card-body col-8 col-xl-4 document">
             {{ form.document }}
         </div>
-        <div class="card card-body col-2 value">
+        <div class="card card-body col-8 col-xl-2 value"
+        onkeydown="tab_pressed(event)"
+        >
             {{ form.value }}
         </div>
-
-        <div class="card card-body col-1">
-            <button class="btn btn-ghost-cyan" type="button"
-            {% if index == 1 %} disabled {% endif %}
-            onclick="delete_row({{ index }})"
-            >
-                Delete
-            </button>
-        </div>
     </div>
-
-    <!-- HTMX trigger to automatically add new row -->
-    <div hidden class="entryrow_create_trigger"
-    hx-get="{% url 'entries:create_row' index=index|add:'1' %}"
-    hx-trigger="keydown[key == 'Tab'] from:(#form_entryrow-{{ index }} .value input) once"
-    hx-target="#entryrow_container"
-    hx-swap="beforeend"
-    ></div>
-
 </form>

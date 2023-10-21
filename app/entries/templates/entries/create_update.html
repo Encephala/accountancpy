@@ -30,11 +30,47 @@ Create new Entry
     </div>
 </form>
 
-<!-- Create function to delete a row, called by button.onclick in each row -->
+<!-- Create and delete functions, called by .delete-button and .create-button -->
 <script>
+    var index = 2;
+    function add_row(source_index) {
+        var current_index = index;
+
+        var source_form = document.getElementById("form_entryrow-" + source_index);
+
+        var new_form = source_form.cloneNode(true);
+        new_form.id = "form_entryrow-" + index;
+        new_form.dataset.index = current_index;
+        new_form.reset();
+
+        var delete_button = new_form.querySelector(".delete-button");
+        delete_button.onclick = function() { delete_row(current_index); };
+        delete_button.disabled = false;
+
+        var add_button = new_form.querySelector(".add-button");
+        add_button.onclick = function() { add_row(current_index) };
+
+        source_form.insertAdjacentElement("afterend", new_form);
+
+        index++;
+    }
+
+    // Only add a new row if tab was pressed on the final input on the page
+    function tab_pressed(event) {
+        if (event.key === "Tab") {
+            var last_form = document.querySelector("#entryrow_container form:last-child");
+            if (event.srcElement == last_form.querySelector(".value input")) {
+                add_row(last_form.dataset.index);
+            }
+        }
+    }
+
     function delete_row(index) {
-        if (!(index == 1)) {
-            document.getElementById("form_entryrow-" + index).remove();
+        if (!(index === 1)) {
+            var row = document.getElementById("form_entryrow-" + index)
+            row.classList.remove("fade-in");
+            row.classList.add("fade-out");
+            setTimeout(() => row.remove(), 150);
         } else {
             console.log("Why are you trying to hack the site >:(")
         }
@@ -42,11 +78,9 @@ Create new Entry
 </script>
 
 <div id="entryrow_container"
-    hx-get="{% url 'entries:create_row' index=1 %}"
-    hx-trigger="load"
-    hx-target="this"
-    hx-swap="innerHTML">
-</div>
+hx-get="{% url 'entries:create_row' %}"
+hx-trigger="load"
+></div>
 
 
 <div class="row row-cards">

@@ -46,15 +46,9 @@ class EntryDelete(generic.DeleteView):
 
 
 # HTMX endpoints
-class EntryRowCreate(generic.CreateView):
-    model = EntryRow
+class EntryRowCreate(generic.FormView):
     template_name = "entries/content/entryrow_create_update.html"
     form_class = EntryRowForm
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["index"] = self.kwargs["index"]
-        return context
 
 
 class EntryRowByLedger(generic.ListView):
