@@ -10,7 +10,7 @@ class Entry(models.Model):
     # TODO: Validation that Entry is balanced
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
 
 class EntryRow(models.Model):
@@ -23,4 +23,4 @@ class EntryRow(models.Model):
     value = models.DecimalField(max_digits = 99, decimal_places = 2, blank = False)
 
     def __str__(self):
-        return self.id
+        return str(self.id)
