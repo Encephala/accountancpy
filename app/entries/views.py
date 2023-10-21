@@ -4,9 +4,12 @@ from django.urls import reverse_lazy
 from django.http import HttpResponse
 
 from .models import Entry, EntryRow
-from .forms import EntryForm, EntryRowForm
+from .forms import EntryForm, EntryRowFormSet
 
 from django.db.models import Count
+
+import logging
+logger = logging.getLogger("django")
 
 # Create your views here.
 def overview(request):
@@ -34,23 +37,51 @@ class EntryCreate(generic.CreateView):
     model = Entry
     template_name = "entries/create_update.html"
     form_class = EntryForm
-    success_url = reverse_lazy("entries:trigger_create_row")
+    success_url = reverse_lazy(f"entries:list")
 
+    def post(self, request, *args, **kwargs):
+        entry = EntryForm(request.POST)
+        self.object = entry
+
+
+        if entry.is_valid():
+            entry = entry.save(commit = False)
+
+            entryrows = EntryRowFormSet(request.POST)
+
+
+            if entryrows.is_valid():
+                entry.save()
+                for row in entryrows:
+                    logger.info(f"row: {row.visible_fields()}")
+                    row.fields["entry"] = entry
+                    row.save()
+
+                return render(self.get_success_url())
+
+            logger.info(f"entryrows invalid {entryrows.errors} {entryrows.non_form_errors()}")
+            return self.form_invalid(self.object)
+
+        logger.info(f"entry invalid {entry.non_field_errors()}")
+        return self.form_invalid(self.object)
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["entryrow_formset"] = EntryRowFormSet(queryset = EntryRow.objects.none())
+        context["is_update"] = False
+
+        return context
 
 class EntryUpdate(generic.UpdateView):
     pass
-
 
 class EntryDelete(generic.DeleteView):
     pass
 
 
 # HTMX endpoints
-class EntryRowCreate(generic.FormView):
-    template_name = "entries/content/entryrow_create_update.html"
-    form_class = EntryRowForm
-
-
 class EntryRowByLedger(generic.ListView):
     model = EntryRow
     template_name = "entries/content/entryrow_list.html"

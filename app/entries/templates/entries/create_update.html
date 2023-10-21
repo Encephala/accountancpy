@@ -1,5 +1,7 @@
 {% extends "entries/_base.html" %}
 
+{% load static %}
+
 {% block page-title %}
 {% if is_update %}
 Update Entry: {{ entry.id }}
@@ -11,17 +13,19 @@ Create new Entry
 {% block content %}
 <div class="container mb-4">
     <div class="row row-cards mb-1 column-gap-1">
-    <div class="card card-body col-2 strong">Journal</div>
-    <div class="card card-body col-4 strong">Notes</div>
-</div>
+        <div class="card card-body col-2 strong">Journal</div>
+        <div class="card card-body col-4 strong">Notes</div>
+    </div>
 
+    {{ form.non_field_errors }}
+    {{ form.non_form_errors }}
     {% if is_update %}
-    <form action="{% url 'entries:update' entry %}" method="POST">
+    <form id="form" action="{% url 'entries:update' entry %}" method="POST">
     {% else %}
-    <form action="{% url 'entries:create' %}" method="POST">
+    <form id="form" action="{% url 'entries:create' %}" method="POST">
     {% endif %}
         {% csrf_token %}
-        <div class="row row-cards mb-1 column-gap-1">
+        <div class="row row-cards mb-2 column-gap-1">
             <div class="card card-body col-2 h-100">
                 {{ form.journal }}
             </div>
@@ -29,91 +33,160 @@ Create new Entry
                 {{ form.notes }}
             </div>
         </div>
-    </form>
-</div>
 
-<!-- Create and delete functions, called by .delete-button and .create-button -->
-<script>
-    var index = 2;
-    function add_row(source_index) {
-        var current_index = index;
+        <script data-start_index="{{ entryrow_formset|length }}">
+            var index = document.currentScript.dataset.start_index;
+            function add_row(source_index) {
+                var current_index = index;
 
-        var source_form = document.getElementById("form_entryrow-" + source_index);
+                var source_form = document.getElementById("form_entryrow-" + source_index);
 
-        var new_form = source_form.cloneNode(true);
-        new_form.id = "form_entryrow-" + index;
-        new_form.dataset.index = current_index;
-        new_form.reset();
+                // Update form
+                var new_form = source_form.cloneNode(true);
+                new_form.id = "form_entryrow-" + index;
+                new_form.dataset.index = current_index;
+                new_form.querySelectorAll("input,select").forEach((element) => element.value = "");
 
-        var delete_button = new_form.querySelector(".delete-button");
-        delete_button.onclick = function() { delete_row(current_index); };
-        delete_button.disabled = false;
+                // Update buttons
+                var delete_button = new_form.querySelector(".delete-button");
+                delete_button.onclick = function() { delete_row(current_index); };
+                delete_button.disabled = false;
 
-        var add_button = new_form.querySelector(".add-button");
-        add_button.onclick = function() { add_row(current_index) };
+                var add_button = new_form.querySelector(".add-button");
+                add_button.onclick = function() { add_row(current_index) };
 
-        source_form.insertAdjacentElement("afterend", new_form);
+                // Update form elements
+                new_form.querySelector(".date input").setAttribute("name", "form-" + current_index + "-date");
+                new_form.querySelector(".date input").setAttribute("id", "id_form-" + current_index + "-date");
+                new_form.querySelector(".ledger select").setAttribute("name", "form-" + current_index + "-ledger");
+                new_form.querySelector(".ledger select").setAttribute("id", "id_form-" + current_index + "-ledger");
+                new_form.querySelector(".account select").setAttribute("name", "form-" + current_index + "-account");
+                new_form.querySelector(".account select").setAttribute("id", "id_form-" + current_index + "-account");
+                new_form.querySelector(".document input").setAttribute("name", "form-" + current_index + "-document");
+                new_form.querySelector(".document input").setAttribute("id", "id_form-" + current_index + "-document");
+                new_form.querySelector(".value input").setAttribute("name", "form-" + current_index + "-value");
+                new_form.querySelector(".value input").setAttribute("id", "id_form-" + current_index + "-value");
 
-        index++;
-    }
+                // Insert into DOM
+                source_form.insertAdjacentElement("afterend", new_form);
 
-    // Only add a new row if tab was pressed on the final input on the page
-    function tab_pressed(event) {
-        if (event.key === "Tab") {
-            var last_form = document.querySelector("#entryrow_container form:last-child");
-            if (event.srcElement == last_form.querySelector(".value input")) {
-                add_row(last_form.dataset.index);
+                // Update management form
+                var total_forms_element = document.getElementById("id_form-TOTAL_FORMS")
+                var number_of_rows = document.querySelectorAll(".form_entryrow").length;
+                total_forms_element.setAttribute("value", number_of_rows);
+
+                index++;
             }
-        }
-    }
 
-    function delete_row(index) {
-        if (!(index === 1)) {
-            var row = document.getElementById("form_entryrow-" + index)
-            row.classList.remove("fade-in");
-            row.classList.add("fade-out");
-            setTimeout(() => row.remove(), 150);
-        } else {
-            console.log("Why are you trying to hack the site >:(")
-        }
-    }
-</script>
+            // Only add a new row if tab was pressed on the final input on the page
+            function tab_pressed(event) {
+                if (event.key === "Tab") {
+                    var forms = document.querySelectorAll("#entryrow_container .form_entryrow");
+                    var last_form = forms[forms.length - 1];
+                    if (event.srcElement == last_form.querySelector(".value input")) {
+                        add_row(last_form.dataset.index);
+                    }
+                }
+            }
 
-<div class="container" id="entryrow_container"
-hx-get="{% url 'entries:create_row' %}"
-hx-trigger="load"
-hx-target="find div"
-hx-swap="afterend"
->
-    <div class="row row-cards mb-1 column-gap-1 justify-content-around sticky-top strong">
-        <div class="card card-body col-1" style="opacity: 0"></div>
+            function delete_row(index) {
+                if (!(index === 0)) {
+                    var row = document.getElementById("form_entryrow-" + index)
+                    row.classList.remove("fade-in");
+                    row.classList.add("fade-out");
+                    setTimeout(() => {
+                        row.remove();
 
-        <div class="card card-body col-5 col-xl-2 date">
-            Date
-        </div>
-        <div class="card card-body col-3 col-xl-1 ledger">
-            Ledger
-        </div>
-        <div class="card card-body col-3 col-xl-1 account">
-            Account
-        </div>
-        <div class="card card-body col-8 col-xl-4 document">
-            Document
-        </div>
-        <div class="card card-body col-8 col-xl-2 value">
-            Value
-        </div>
-    </div>
+                        // Update management form
+                        var total_forms_element = document.getElementById("id_form-TOTAL_FORMS")
+                        var number_of_rows = document.querySelectorAll(".form_entryrow").length;
+                        total_forms_element.setAttribute("value", number_of_rows);
+                    }, 150);
+                } else {
+                    console.log("Why are you trying to hack the site >:(")
+                }
+            }
+        </script>
 
-    <div class="row row-cards">
-        <div class="card col-1 ms-auto">
-            {% if is_update %}
-            <button class="p-2 m-1 btn btn-ghost-cyan">Update!</button>
-            {% else %}
-            <button class="p-2 m-1 btn btn-ghost-cyan">Create!</button>
-            {% endif %}
+        <div id="entryrow_container">
+            <div class="row row-cards mb-1 column-gap-1 justify-content-around sticky-top strong">
+                <div class="card card-body col-1" style="opacity: 0"></div>
+
+                <div class="card card-body col-5 col-xl-2 date">
+                    Date
+                </div>
+                <div class="card card-body col-3 col-xl-1 ledger">
+                    Ledger
+                </div>
+                <div class="card card-body col-3 col-xl-1 account">
+                    Account
+                </div>
+                <div class="card card-body col-8 col-xl-4 document">
+                    Document
+                </div>
+                <div class="card card-body col-8 col-xl-2 value">
+                    Value
+                </div>
+            </div>
+
+            {{ entryrow_formset.non_form_errors }}
+            {{ entryrow_formset.management_form }}
+            {% for form in entryrow_formset %}
+            <div class="form_entryrow fade-in slide" id="form_entryrow-{{ forloop.counter0 }}" data-index="{{ forloop.counter0 }}">
+                <div class="row row-cards mb-1 column-gap-1 justify-content-around">
+                    <div class="card card-body col-1">
+                        <div class="row justify-content-around">
+                            <button class="btn btn-ghost-cyan p-0 rounded-circle delete-button" type="button"
+                            style="width: 25px; height: 25px;"
+                            tabindex="-1"
+                            disabled
+                            onclick="delete_row({{ forloop.counter0 }})"
+                            >
+                                <img src="{% static 'media/feather/x-circle.svg' %}">
+                            </button>
+
+                            <button class="btn btn-ghost-cyan p-0 rounded add-button" type="button"
+                            style="width: 25px; height: 25px;"
+                            tabindex="-1"
+                            onclick="add_row({{ forloop.counter0 }})"
+                            >
+                                <img src="{% static 'media/feather/plus-circle.svg' %}">
+                            </button>
+                        </div>
+                    </div>
+
+                    {{ form.non_field_errors }}
+                    <div class="card card-body col-5 col-xl-2 date">
+                        {{ form.date }}
+                    </div>
+                    <div class="card card-body col-3 col-xl-1 ledger">
+                        {{ form.ledger }}
+                    </div>
+                    <div class="card card-body col-3 col-xl-1 account">
+                        {{ form.account }}
+                    </div>
+                    <div class="card card-body col-8 col-xl-4 document">
+                        {{ form.document }}
+                    </div>
+                    <div class="card card-body col-8 col-xl-2 value"
+                    onkeydown="tab_pressed(event)"
+                    >
+                        {{ form.value }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="row row-cards">
+                <div class="card col-1 ms-auto">
+                    {% if is_update %}
+                    <input type="submit" class="p-2 m-1 btn btn-ghost-cyan" value="Update!"></button>
+                    {% else %}
+                    <input type="submit" class="p-2 m-1 btn btn-ghost-cyan" value="Create!"></button>
+                    {% endif %}
+                </div>
+            </div>
         </div>
-    </div>
+    </form>
 </div>
 
 {% endblock content %}
