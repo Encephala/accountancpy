@@ -17,7 +17,6 @@
             {{ form.value }}
         </div>
 
-        <!-- Button to delete row -->
         <div class="card card-body col-1">
             <button class="btn btn-ghost-cyan" type="button"
             {% if index == 1 %} disabled {% endif %}
@@ -28,10 +27,10 @@
         </div>
     </div>
 
-    <!-- HTMX trigger to automatically add new row if last one is updated-->
+    <!-- HTMX trigger to automatically add new row -->
     <div hidden class="entryrow_create_trigger"
     hx-get="{% url 'entries:create_row' index=index|add:'1' %}"
-    hx-trigger="change from:#form_entryrow-{{ index }} once"
+    hx-trigger="keydown[key == 'Tab'] from:(#form_entryrow-{{ index }} .value input) once"
     hx-target="#entryrow_container"
     hx-swap="beforeend"
     ></div>
