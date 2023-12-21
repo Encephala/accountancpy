@@ -1,0 +1,18 @@
+FROM docker.io/python:3.12
+
+RUN apt-get update && apt-get upgrade -y
+
+COPY ./requirements.txt /requirements.txt
+
+RUN pip install -r /requirements.txt
+
+# This is where . gets mounted in the devcontainer
+WORKDIR /workspaces/accountancpy
+
+EXPOSE 8000
+
+RUN rm -r /var/cache/apt/archives
+
+RUN useradd accountancpy --create-home --shell /bin/bash
+
+ENTRYPOINT [ "python", "-Wa", "app/manage.py", "runserver", "0.0.0.0:8000" ]
