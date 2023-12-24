@@ -1,6 +1,8 @@
 FROM docker.io/python:3.12
 
-RUN apt-get update && apt-get upgrade -y
+RUN apt-get update && apt-get upgrade -y && apt-get install neovim less sudo -y
+
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 COPY ./requirements.txt /requirements.txt
 
@@ -13,6 +15,6 @@ EXPOSE 8000
 
 RUN rm -r /var/cache/apt/archives
 
-RUN useradd accountancpy --create-home --shell /bin/bash
+RUN useradd accountancpy --create-home --shell /bin/bash -G sudo
 
 ENTRYPOINT [ "python", "-Wa", "app/manage.py", "runserver", "0.0.0.0:8000" ]
