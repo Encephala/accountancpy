@@ -5,7 +5,7 @@
     "build": {
         // Sets the run context to one level up instead of the .devcontainer folder.
         "context": "..",
-        "dockerfile": "Dockerfile-devcont"
+        "dockerfile": "Dockerfile-devcontainer"
     },
 
     "forwardPorts": [8000],
@@ -15,6 +15,7 @@
     // if that process doesn't exit
     "overrideCommand": false,
 
+    // Set remoteUser so that UID/GID is matched with host UID/GID
     "remoteUser": "accountancpy",
 
     // Mount local home for ssh keys/env etc.
