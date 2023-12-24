@@ -37,13 +37,14 @@ Create new Entry
         <script data-start_index="{{ entryrow_formset|length }}">
             var index = document.currentScript.dataset.start_index;
             function add_row(source_index) {
+                // Copy value of `index` to a local variable so it stays fixed
                 var current_index = index;
 
                 var source_form = document.getElementById("form_entryrow-" + source_index);
 
                 // Update form
                 var new_form = source_form.cloneNode(true);
-                new_form.id = "form_entryrow-" + index;
+                new_form.id = "form_entryrow-" + current_index;
                 new_form.dataset.index = current_index;
                 new_form.querySelectorAll("input,select").forEach((element) => element.value = "");
 
