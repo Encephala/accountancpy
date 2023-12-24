@@ -47,6 +47,7 @@ Create new Entry
                 new_form.id = "form_entryrow-" + current_index;
                 new_form.dataset.index = current_index;
                 new_form.querySelectorAll("input,select").forEach((element) => element.value = "");
+                new_form.querySelector("div.date input").value = source_form.querySelector("div.date input").value;
 
                 // Update buttons
                 var delete_button = new_form.querySelector(".delete-button");
