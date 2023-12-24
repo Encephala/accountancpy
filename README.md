@@ -12,4 +12,4 @@ I try to prefix commit names as follows:
 - `visual`: Changes page style without changing functionality
 - `doc`: Only contains changes to documentation
 - `dep`: Updates a dependency
-
+- `dev`: Changes development configuration
