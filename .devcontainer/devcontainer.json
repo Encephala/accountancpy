@@ -17,9 +17,10 @@
 
     "remoteUser": "accountancpy",
 
-    // Fix SSH auth for git in container
+    // Mount local home for ssh keys/env etc.
+    // Should be fine in terms of security because the container is local anyways
     "mounts": [
-        "type=bind,source=${localEnv:HOME}/.ssh,target=/home/accountancpy/.ssh,readonly=true"
+        "type=bind,source=${localEnv:HOME},target=/home/accountancpy"
     ],
 
     // Remove container after closing editor
