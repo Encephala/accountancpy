@@ -28,7 +28,7 @@ class EntryForm(forms.ModelForm):
 class EntryRowForm(forms.ModelForm):
     class Meta:
         model = EntryRow
-        # exclude = ["entry"]
+        exclude = ["entry"]
         fields = "__all__"
         widgets = {
             "date": forms.DateInput(attrs = {"type":"date"}),
@@ -44,16 +44,17 @@ class EntryRowForm(forms.ModelForm):
 
 class BaseEntryRowFormSet(BaseModelFormSet):
     def clean(self):
+        super().clean()
         if any(self.errors):
             return
 
         sum_of_values = 0
 
         for entryrow in self.forms:
-            if self.can_delete and self._should_delete_form(form):
+            if self.can_delete and self._should_delete_form(entryrow):
                 continue
 
-            sum_of_values = entryrow.cleaned_data.get("value")
+            sum_of_values += entryrow.cleaned_data["value"]
 
         if sum_of_values != 0:
             raise ValidationError("The rows in this entry don't sum to € 0,-. (€ %(sum)s)",

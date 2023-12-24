@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_list_or_404
+from django.shortcuts import render, redirect
 from django.views import generic
 from django.urls import reverse_lazy
 from django.http import HttpResponse
@@ -49,15 +49,18 @@ class EntryCreate(generic.CreateView):
 
             entryrows = EntryRowFormSet(request.POST)
 
-
             if entryrows.is_valid():
+                # If everything is valid, we can save stuff
                 entry.save()
-                for row in entryrows:
-                    logger.info(f"row: {row.visible_fields()}")
-                    row.fields["entry"] = entry
-                    row.save()
 
-                return render(self.get_success_url())
+                entryrows_instances = entryrows.save(commit = False)
+
+                for instance in entryrows_instances:
+                    instance.entry = entry
+                    instance.save()
+
+                # TODO: This call is wrong
+                return redirect(self.get_success_url(), )
 
             logger.info(f"entryrows invalid {entryrows.errors} {entryrows.non_form_errors()}")
             return self.form_invalid(self.object)
