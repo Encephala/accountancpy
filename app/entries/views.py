@@ -37,7 +37,7 @@ class EntryCreate(generic.CreateView):
     model = Entry
     template_name = "entries/create_update.html"
     form_class = EntryForm
-    success_url = reverse_lazy(f"entries:list")
+    success_url = reverse_lazy(f"entries:overview")
 
     def post(self, request, *args, **kwargs):
         entry = EntryForm(request.POST)
@@ -59,8 +59,7 @@ class EntryCreate(generic.CreateView):
                     instance.entry = entry
                     instance.save()
 
-                # TODO: This call is wrong
-                return redirect(self.get_success_url(), )
+                return redirect(self.get_success_url())
 
             logger.info(f"entryrows invalid {entryrows.errors} {entryrows.non_form_errors()}")
             return self.form_invalid(self.object)
