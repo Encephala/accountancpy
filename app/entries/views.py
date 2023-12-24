@@ -37,7 +37,9 @@ class EntryCreate(generic.CreateView):
     model = Entry
     template_name = "entries/create_update.html"
     form_class = EntryForm
-    success_url = reverse_lazy(f"entries:overview")
+
+    def get_success_url(self):
+        return reverse_lazy("entries:overview")
 
     def post(self, request, *args, **kwargs):
         entry = EntryForm(request.POST)
