@@ -5,8 +5,7 @@ A destined-for-the-graveyard project to create simple personal bookkeepping soft
 ## Commit style
 
 I try to prefix commit names as follows:
-- `feat`: Adds new functionality
-- `change`: Adds/changes functionality that makes
+- `feat`: Adds or changes functionality
 - `fix`: Fixes broken behaviour
 - `style`: Changes code style without changing functionality
 - `visual`: Changes page style without changing functionality
