@@ -145,7 +145,7 @@ Create new Entry
                             <button class="btn btn-ghost-cyan p-0 rounded-circle delete-button" type="button"
                             style="width: 25px; height: 25px;"
                             tabindex="-1"
-                            disabled
+                            {% if forloop.counter0 == 0 %} disabled {% endif %}
                             onclick="delete_row({{ forloop.counter0 }})"
                             >
                                 <img src="{% static 'media/feather/x-circle.svg' %}">
@@ -162,7 +162,6 @@ Create new Entry
                     </div>
 
                     {{ form.non_field_errors }}
-                    {{ form.id.errors }}
                     <div hidden class="id">
                         {{ form.id }}
                     </div>
