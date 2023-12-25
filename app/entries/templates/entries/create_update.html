@@ -27,9 +27,11 @@ Create new Entry
         {% csrf_token %}
         <div class="row row-cards mb-2 column-gap-1">
             <div class="card card-body col-2 h-100">
+                {{ form.journal.errors }}
                 {{ form.journal }}
             </div>
             <div class="card card-body col-4 h-100">
+                {{ form.notes.errors }}
                 {{ form.notes }}
             </div>
         </div>
@@ -159,20 +161,25 @@ Create new Entry
 
                     {{ form.non_field_errors }}
                     <div class="card card-body col-5 col-xl-2 date">
+                        {{ form.date.errors }}
                         {{ form.date }}
                     </div>
                     <div class="card card-body col-3 col-xl-1 ledger">
+                        {{ form.ledger.errors }}
                         {{ form.ledger }}
                     </div>
                     <div class="card card-body col-3 col-xl-1 account">
+                        {{ form.account.errors }}
                         {{ form.account }}
                     </div>
                     <div class="card card-body col-8 col-xl-4 document">
+                        {{ form.document.errors }}
                         {{ form.document }}
                     </div>
                     <div class="card card-body col-8 col-xl-2 value"
                     onkeydown="tab_pressed(event)"
                     >
+                        {{ form.value.errors }}
                         {{ form.value }}
                     </div>
                 </div>
