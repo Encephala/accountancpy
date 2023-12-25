@@ -35,6 +35,9 @@ class EntryRowForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        # Force non-edited rows to still be validated
+        self.empty_permitted = False
+
         # Render widgets with Bootstrap styling
         for field in self.visible_fields():
             field.field.widget.attrs["class"] = "form-control"
@@ -42,13 +45,13 @@ class EntryRowForm(forms.ModelForm):
 
 class BaseEntryRowFormSet(BaseModelFormSet):
     def clean(self):
-        # super().clean()
+        super().clean()
         if any(self.errors):
             return
 
         sum_of_values = 0
 
-        for entryrow in self:
+        for entryrow in self.forms:
             if self.can_delete and self._should_delete_form(entryrow):
                 continue
 
