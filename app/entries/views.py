@@ -52,13 +52,13 @@ class EntryCreate(generic.CreateView):
         if entryform.is_valid():
             entry = entryform.save(commit = False)
 
-            entryrows = EntryRowFormSet(request.POST)
+            entryrow_formset = EntryRowFormSet(request.POST)
 
-            if entryrows.is_valid():
+            if entryrow_formset.is_valid():
                 # If everything is valid, we can save stuff
                 entry.save()
 
-                entryrows_instances = entryrows.save(commit = False)
+                entryrows_instances = entryrow_formset.save(commit = False)
 
                 for instance in entryrows_instances:
                     instance.entry = entry
@@ -66,17 +66,22 @@ class EntryCreate(generic.CreateView):
 
                 return redirect(self.get_success_url())
 
-            logger.info(f"entryrows invalid {entryrows.errors} {entryrows.non_form_errors()}")
-            return self.form_invalid(entryform)
+            return self.form_invalid(entryform, entryrow_formset)
 
-        logger.info(f"entry invalid {entry.non_field_errors()}")
-        return self.form_invalid(entryform)
+        return self.form_invalid(entryform, entryrow_formset)
 
+    def form_invalid(self, entryform, entryrow_formset):
+        context = self.get_context_data(form = entryform, entryrow_formset = entryrow_formset)
+        return self.render_to_response(context)
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, entryrow_formset = None, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context["entryrow_formset"] = EntryRowFormSet(queryset = EntryRow.objects.none())
+        if entryrow_formset:
+            context["entryrow_formset"] = entryrow_formset
+        else:
+            context["entryrow_formset"] = EntryRowFormSet(queryset = EntryRow.objects.none())
+
         context["is_update"] = False
 
         return context
