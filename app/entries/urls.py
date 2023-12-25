@@ -12,8 +12,8 @@ urlpatterns = [
     # path("create-row/", views.EntryRowCreate.as_view(), name = "create_row"),
 
     path("<pk>/", views.EntryDetails.as_view(), name = "details"),
-    path("<pk>/update", views.EntryUpdate.as_view(), name = "update"),
-    path("<pk>/delete", views.EntryDelete.as_view(), name = "delete"),
+    path("<pk>/update/", views.EntryUpdate.as_view(), name = "update"),
+    path("<pk>/delete/", views.EntryDelete.as_view(), name = "delete"),
 
     path("rows-by-entry/<pk>/", views.EntryRowByEntry.as_view(), name = "entry_rows"),
     path("rows-by-ledger/<pk>/", views.EntryRowByLedger.as_view(), name = "ledger_rows"),
