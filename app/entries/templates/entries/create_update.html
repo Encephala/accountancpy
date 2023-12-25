@@ -60,6 +60,8 @@ Create new Entry
                 add_button.onclick = function() { add_row(current_index) };
 
                 // Update form elements
+                new_form.querySelector(".id input").setAttribute("name", "form-" + current_index + "-date");
+                new_form.querySelector(".id input").setAttribute("id", "id_form-" + current_index + "-date");
                 new_form.querySelector(".date input").setAttribute("name", "form-" + current_index + "-date");
                 new_form.querySelector(".date input").setAttribute("id", "id_form-" + current_index + "-date");
                 new_form.querySelector(".ledger select").setAttribute("name", "form-" + current_index + "-ledger");
@@ -160,6 +162,10 @@ Create new Entry
                     </div>
 
                     {{ form.non_field_errors }}
+                    {{ form.id.errors }}
+                    <div hidden class="id">
+                        {{ form.id }}
+                    </div>
                     <div class="card card-body col-5 col-xl-2 date">
                         {{ form.date.errors }}
                         {{ form.date }}

@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.http import HttpResponse
 
 from .models import Entry, EntryRow
-from .forms import EntryForm, EntryRowFormSet, EntryRowFormSetNoExtra
+from .forms import EntryForm, EntryRowFormSet, EntryRowUpdateFormSet
 
 from django.db.models import Count
 
@@ -42,15 +42,17 @@ class EntryCreate(generic.CreateView):
         return reverse_lazy("entries:overview")
 
     def post(self, request, *args, **kwargs):
+        self.object = None
+
         entryform = EntryForm(request.POST)
         entryrow_formset = EntryRowFormSet(request.POST)
 
         if entryform.is_valid() and entryrow_formset.is_valid():
             entry = entryform.save()
 
-            entryrows_instances = entryrow_formset.save(commit = False)
+            entryrow_instances = entryrow_formset.save(commit = False)
 
-            for instance in entryrows_instances:
+            for instance in entryrow_instances:
                 instance.entry = entry
                 instance.save()
 
@@ -79,21 +81,22 @@ class EntryUpdate(generic.UpdateView):
     template_name = "entries/create_update.html"
     form_class = EntryForm
 
+    def get_success_url(self):
+        return reverse_lazy("entries:details", kwargs = { "pk": self.object.id })
+
     def post(self, request, *args, **kwargs):
-        entryform = EntryForm(request.POST)
-        entryrow_formset = EntryRowFormSet(request.POST)
+        self.object = self.get_object()
+
+        entryform = EntryForm(request.POST, instance = self.object)
+        entryrow_formset = EntryRowUpdateFormSet(request.POST, instance = self.object)
 
         if entryform.is_valid() and entryrow_formset.is_valid():
-            entry = entryform.save()
-
-            entryrows_instances = entryrow_formset.save(commit = False)
-
-            for instance in entryrows_instances:
-                instance.entry = entry
-                instance.save()
+            entryform.save()
+            entryrow_formset.save()
 
             return redirect(self.get_success_url())
 
+        logger.info(f"Form invalid {entryform.errors} {entryrow_formset.errors} {entryrow_formset.non_form_errors()}")
         return self.form_invalid(entryform, entryrow_formset)
 
     def form_invalid(self, entryform, entryrow_formset):
@@ -108,8 +111,7 @@ class EntryUpdate(generic.UpdateView):
             kwargs["entryrow_formset"] = entryrow_formset
         else:
             # Manually construct formset from entryrows
-            entryrows = EntryRow.objects.filter(entry = self.object)
-            kwargs["entryrow_formset"] = EntryRowFormSetNoExtra(queryset = entryrows)
+            kwargs["entryrow_formset"] = EntryRowUpdateFormSet(instance = self.object)
 
         return super().get_context_data(**kwargs)
 
