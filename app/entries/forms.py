@@ -68,5 +68,5 @@ class BaseEntryRowFormSet(BaseModelFormSet):
                                 params = {"sum": sum_of_values}, code = "nonzero-sum")
 
 
-EntryRowFormSet = modelformset_factory(EntryRow, fields = "__all__", form = EntryRowForm,
-                                       formset = BaseEntryRowFormSet)
+EntryRowFormSet = modelformset_factory(EntryRow, form = EntryRowForm, formset = BaseEntryRowFormSet)
+EntryRowFormSetNoExtra = modelformset_factory(EntryRow, form = EntryRowForm, formset = BaseEntryRowFormSet, extra = 0)

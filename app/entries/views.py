@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.http import HttpResponse
 
 from .models import Entry, EntryRow
-from .forms import EntryForm, EntryRowFormSet
+from .forms import EntryForm, EntryRowFormSet, EntryRowFormSetNoExtra
 
 from django.db.models import Count
 
@@ -41,53 +41,77 @@ class EntryCreate(generic.CreateView):
     def get_success_url(self):
         return reverse_lazy("entries:overview")
 
-    def get_object(self, queryset = None):
-        return queryset
-
     def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
-
         entryform = EntryForm(request.POST)
+        entryrow_formset = EntryRowFormSet(request.POST)
 
-        if entryform.is_valid():
-            entry = entryform.save(commit = False)
+        if entryform.is_valid() and entryrow_formset.is_valid():
+            entry = entryform.save()
 
-            entryrow_formset = EntryRowFormSet(request.POST)
+            entryrows_instances = entryrow_formset.save(commit = False)
 
-            if entryrow_formset.is_valid():
-                # If everything is valid, we can save stuff
-                entry.save()
+            for instance in entryrows_instances:
+                instance.entry = entry
+                instance.save()
 
-                entryrows_instances = entryrow_formset.save(commit = False)
-
-                for instance in entryrows_instances:
-                    instance.entry = entry
-                    instance.save()
-
-                return redirect(self.get_success_url())
-
-            return self.form_invalid(entryform, entryrow_formset)
+            return redirect(self.get_success_url())
 
         return self.form_invalid(entryform, entryrow_formset)
 
     def form_invalid(self, entryform, entryrow_formset):
-        context = self.get_context_data(form = entryform, entryrow_formset = entryrow_formset)
+        context = self.get_context_data(form = entryform, formset = entryrow_formset)
+
         return self.render_to_response(context)
 
     def get_context_data(self, entryrow_formset = None, **kwargs):
-        context = super().get_context_data(**kwargs)
+        kwargs["is_update"] = False
 
         if entryrow_formset:
-            context["entryrow_formset"] = entryrow_formset
+            kwargs["entryrow_formset"] = entryrow_formset
         else:
-            context["entryrow_formset"] = EntryRowFormSet(queryset = EntryRow.objects.none())
+            kwargs["entryrow_formset"] = EntryRowFormSet(queryset = EntryRow.objects.none())
 
-        context["is_update"] = False
+        return super().get_context_data(**kwargs)
 
-        return context
 
 class EntryUpdate(generic.UpdateView):
-    pass
+    model = Entry
+    template_name = "entries/create_update.html"
+    form_class = EntryForm
+
+    def post(self, request, *args, **kwargs):
+        entryform = EntryForm(request.POST)
+        entryrow_formset = EntryRowFormSet(request.POST)
+
+        if entryform.is_valid() and entryrow_formset.is_valid():
+            entry = entryform.save()
+
+            entryrows_instances = entryrow_formset.save(commit = False)
+
+            for instance in entryrows_instances:
+                instance.entry = entry
+                instance.save()
+
+            return redirect(self.get_success_url())
+
+        return self.form_invalid(entryform, entryrow_formset)
+
+    def form_invalid(self, entryform, entryrow_formset):
+        context = self.get_context_data(form = entryform, formset = entryrow_formset)
+
+        return self.render_to_response(context)
+
+    def get_context_data(self, entryrow_formset = None, **kwargs):
+        kwargs["is_update"] = True
+
+        if entryrow_formset:
+            kwargs["entryrow_formset"] = entryrow_formset
+        else:
+            # Manually construct formset from entryrows
+            entryrows = EntryRow.objects.filter(entry = self.object)
+            kwargs["entryrow_formset"] = EntryRowFormSetNoExtra(queryset = entryrows)
+
+        return super().get_context_data(**kwargs)
 
 class EntryDelete(generic.DeleteView):
     pass
