@@ -29,7 +29,7 @@ class EntryList(generic.ListView):
     # Annotate entries with num_rows
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["entry_list"] =  self.get_queryset().annotate(num_rows = Count("entryrow"))
+        context["entry_list"] = self.get_queryset().annotate(num_rows = Count("entryrow"))
         return context
 
 
@@ -41,13 +41,16 @@ class EntryCreate(generic.CreateView):
     def get_success_url(self):
         return reverse_lazy("entries:overview")
 
+    def get_object(self, queryset = None):
+        return queryset
+
     def post(self, request, *args, **kwargs):
-        entry = EntryForm(request.POST)
-        self.object = entry
+        self.object = self.get_object()
 
+        entryform = EntryForm(request.POST)
 
-        if entry.is_valid():
-            entry = entry.save(commit = False)
+        if entryform.is_valid():
+            entry = entryform.save(commit = False)
 
             entryrows = EntryRowFormSet(request.POST)
 
@@ -64,10 +67,10 @@ class EntryCreate(generic.CreateView):
                 return redirect(self.get_success_url())
 
             logger.info(f"entryrows invalid {entryrows.errors} {entryrows.non_form_errors()}")
-            return self.form_invalid(self.object)
+            return self.form_invalid(entryform)
 
         logger.info(f"entry invalid {entry.non_field_errors()}")
-        return self.form_invalid(self.object)
+        return self.form_invalid(entryform)
 
 
     def get_context_data(self, **kwargs):

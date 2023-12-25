@@ -42,13 +42,13 @@ class EntryRowForm(forms.ModelForm):
 
 class BaseEntryRowFormSet(BaseModelFormSet):
     def clean(self):
-        super().clean()
+        # super().clean()
         if any(self.errors):
             return
 
         sum_of_values = 0
 
-        for entryrow in self.forms:
+        for entryrow in self:
             if self.can_delete and self._should_delete_form(entryrow):
                 continue
 
@@ -59,4 +59,5 @@ class BaseEntryRowFormSet(BaseModelFormSet):
                                 params = {"sum": sum_of_values}, code = "nonzero-sum")
 
 
-EntryRowFormSet = modelformset_factory(EntryRow, fields = "__all__", form = EntryRowForm, formset = BaseEntryRowFormSet)
+EntryRowFormSet = modelformset_factory(EntryRow, fields = "__all__", form = EntryRowForm,
+                                       formset = BaseEntryRowFormSet)
