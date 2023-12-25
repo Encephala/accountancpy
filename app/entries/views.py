@@ -59,7 +59,7 @@ class EntryCreate(generic.CreateView):
         return self.form_invalid(entryform, entryrow_formset)
 
     def form_invalid(self, entryform, entryrow_formset):
-        context = self.get_context_data(form = entryform, formset = entryrow_formset)
+        context = self.get_context_data(form = entryform, entryrow_formset = entryrow_formset)
 
         return self.render_to_response(context)
 
@@ -97,7 +97,7 @@ class EntryUpdate(generic.UpdateView):
         return self.form_invalid(entryform, entryrow_formset)
 
     def form_invalid(self, entryform, entryrow_formset):
-        context = self.get_context_data(form = entryform, formset = entryrow_formset)
+        context = self.get_context_data(form = entryform, entryrow_formset = entryrow_formset)
 
         return self.render_to_response(context)
 
