@@ -27,7 +27,6 @@ class EntryRowForm(forms.ModelForm):
     class Meta:
         model = EntryRow
         exclude = ["entry"]
-        fields = "__all__"
         widgets = {
             "date": forms.DateInput(attrs = {"type":"date"}),
         }
@@ -35,15 +34,22 @@ class EntryRowForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # Force non-edited rows to still be validated
-        self.empty_permitted = False
-
         # Render widgets with Bootstrap styling
         for field in self.visible_fields():
             field.field.widget.attrs["class"] = "form-control"
 
 
 class BaseEntryRowFormSet(BaseModelFormSet):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for entryrow_form in self.forms:
+            # Force non-edited rows to still be validated
+            entryrow_form.empty_permitted = False
+
+            # Render the HTML required attribute
+            entryrow_form.use_required_attribute = True
+
     def clean(self):
         super().clean()
         if any(self.errors):
@@ -51,11 +57,11 @@ class BaseEntryRowFormSet(BaseModelFormSet):
 
         sum_of_values = 0
 
-        for entryrow in self.forms:
-            if self.can_delete and self._should_delete_form(entryrow):
+        for entryrow_form in self.forms:
+            if self.can_delete and self._should_delete_form(entryrow_form):
                 continue
 
-            sum_of_values += entryrow.cleaned_data["value"]
+            sum_of_values += entryrow_form.cleaned_data["value"]
 
         if sum_of_values != 0:
             raise ValidationError("The rows in this entry don't sum to € 0,-. (€ %(sum)s)",
