@@ -24,15 +24,19 @@ Create new Ledger
     {% csrf_token %}
     <div class="row row-cards mb-1 column-gap-1">
         <div class="card card-body col-2 h-100">
+            {{ form.id.errors }}
             {{ form.id }}
         </div>
         <div class="card card-body col-4 h-100">
+            {{ form.name.errors }}
             {{ form.name }}
         </div>
         <div class="card card-body col-1 h-100">
+            {{ form.type.errors }}
             {{ form.type }}
         </div>
         <div class="card card-body col-4">
+            {{ form.notes.errors }}
             {{ form.notes }}
         </div>
     </div>

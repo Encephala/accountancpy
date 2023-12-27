@@ -1,12 +1,15 @@
-from django.shortcuts import render, get_list_or_404
+from django.shortcuts import render, redirect
 from django.views import generic
 from django.urls import reverse_lazy
 from django.http import HttpResponse
 
 from .models import Entry, EntryRow
-from .forms import EntryForm, EntryRowForm
+from .forms import EntryForm, EntryRowFormSet, EntryRowUpdateFormSet
 
 from django.db.models import Count
+
+import logging
+logger = logging.getLogger("django")
 
 # Create your views here.
 def overview(request):
@@ -26,7 +29,7 @@ class EntryList(generic.ListView):
     # Annotate entries with num_rows
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["entry_list"] =  self.get_queryset().annotate(num_rows = Count("entryrow"))
+        context["entry_list"] = self.get_queryset().annotate(num_rows = Count("entryrow"))
         return context
 
 
@@ -34,29 +37,89 @@ class EntryCreate(generic.CreateView):
     model = Entry
     template_name = "entries/create_update.html"
     form_class = EntryForm
-    success_url = reverse_lazy("entries:trigger_create_row")
+
+    def get_success_url(self):
+        return reverse_lazy("entries:overview")
+
+    def post(self, request, *args, **kwargs):
+        self.object = None
+
+        entryform = EntryForm(request.POST)
+        entryrow_formset = EntryRowFormSet(request.POST)
+
+        if entryform.is_valid() and entryrow_formset.is_valid():
+            entry = entryform.save()
+
+            entryrow_instances = entryrow_formset.save(commit = False)
+
+            for instance in entryrow_instances:
+                instance.entry = entry
+                instance.save()
+
+            return redirect(self.get_success_url())
+
+        return self.form_invalid(entryform, entryrow_formset)
+
+    def form_invalid(self, entryform, entryrow_formset):
+        context = self.get_context_data(form = entryform, entryrow_formset = entryrow_formset)
+
+        return self.render_to_response(context)
+
+    def get_context_data(self, entryrow_formset = None, **kwargs):
+        kwargs["is_update"] = False
+
+        if entryrow_formset:
+            kwargs["entryrow_formset"] = entryrow_formset
+        else:
+            kwargs["entryrow_formset"] = EntryRowFormSet(queryset = EntryRow.objects.none())
+
+        return super().get_context_data(**kwargs)
 
 
 class EntryUpdate(generic.UpdateView):
-    pass
+    model = Entry
+    template_name = "entries/create_update.html"
+    form_class = EntryForm
 
+    def get_success_url(self):
+        return reverse_lazy("entries:details", kwargs = { "pk": self.object.id })
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        entryform = EntryForm(request.POST, instance = self.object)
+        entryrow_formset = EntryRowUpdateFormSet(request.POST, instance = self.object)
+
+        if entryform.is_valid() and entryrow_formset.is_valid():
+            entryform.save()
+            entryrow_formset.save()
+
+            return redirect(self.get_success_url())
+
+        return self.form_invalid(entryform, entryrow_formset)
+
+    def form_invalid(self, entryform, entryrow_formset):
+        context = self.get_context_data(form = entryform, entryrow_formset = entryrow_formset)
+
+        return self.render_to_response(context)
+
+    def get_context_data(self, entryrow_formset = None, **kwargs):
+        kwargs["is_update"] = True
+
+        if entryrow_formset:
+            kwargs["entryrow_formset"] = entryrow_formset
+        else:
+            kwargs["entryrow_formset"] = EntryRowUpdateFormSet(instance = self.object)
+
+        return super().get_context_data(**kwargs)
 
 class EntryDelete(generic.DeleteView):
-    pass
+    model = Entry
+    template_name = "entries/delete.html"
+    success_url = reverse_lazy("entries:overview")
 
 
 # HTMX endpoints
-class EntryRowCreate(generic.CreateView):
-    model = EntryRow
-    template_name = "entries/content/entryrow_create_update.html"
-    form_class = EntryRowForm
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["index"] = self.kwargs["index"]
-        return context
-
-
 class EntryRowByLedger(generic.ListView):
     model = EntryRow
     template_name = "entries/content/entryrow_list.html"
