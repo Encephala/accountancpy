@@ -1,13 +1,42 @@
 {% if entry_row_list %}
+<div class="row column-gap-1 strong mb-2 justify-content-around">
+    <div class="card col-2">
+        <div class="card-body">Date</div>
+    </div>
+    <div class="card col-2">
+        <div class="card-body">Account</div>
+    </div>
+    <div class="card col-1">
+        <div class="card-body">Entry</div>
+    </div>
+    <div class="card col-4">
+        <div class="card-body">Document</div>
+    </div>
+    <div class="card col-2">
+        <div class="card-body">Value</div>
+    </div>
+</div>
 {% for entry_row in entry_row_list %}
 <div class="row column-gap-1 my-1 justify-content-around">
     <div class="card col-2">
         <div class="card-body">{{ entry_row.date | date:"j M 'y" }}</div>
     </div>
-    <div class="card col-2">
+    <div class="card col-1">
+        <div class="card-body"><a href="{% url 'ledgers:details' entry_row.ledger.id %}" class="badge badge-pill">{{ entry_row.ledger.id }}</a></div>
+    </div>
+    <div class="card col-1">
+        <div class="card-body">
+            {% if entry_row.account.id %}
+            <a href="{% url 'accounts:details' entry_row.account.id %}" class="badge badge-pill">{{ entry_row.account.id }}</a>
+            {% else %}
+            <em>None</em>
+            {% endif %}
+        </div>
+    </div>
+    <div class="card col-1">
         <div class="card-body"><a href="{% url 'entries:details' entry_row.entry.id %}" class="badge badge-pill">{{ entry_row.entry.id }}</a></div>
     </div>
-    <div class="card col-5">
+    <div class="card col-4">
         <div class="card-body">{{ entry_row.document | default:'<em>No corresponding document.</em>' }}</div>
     </div>
     <div class="card col-2">
