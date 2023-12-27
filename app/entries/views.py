@@ -85,22 +85,27 @@ class EntryUpdate(generic.UpdateView):
         return reverse_lazy("entries:details", kwargs = { "pk": self.object.id })
 
     def post(self, request, *args, **kwargs):
+        logger.info(f"{request.POST=}")
         self.object = self.get_object()
 
         entryform = EntryForm(request.POST, instance = self.object)
         entryrow_formset = EntryRowUpdateFormSet(request.POST, instance = self.object)
 
         if entryform.is_valid() and entryrow_formset.is_valid():
+
             entryform.save()
             entryrow_formset.save()
 
             return redirect(self.get_success_url())
-
+        logger.info(f"\nAfter validation")
+        logger.info(f"{entryrow_formset[0].data=}")
         logger.info(f"Form invalid {entryform.errors} {entryrow_formset.errors} {entryrow_formset.non_form_errors()}")
         return self.form_invalid(entryform, entryrow_formset)
 
     def form_invalid(self, entryform, entryrow_formset):
         context = self.get_context_data(form = entryform, entryrow_formset = entryrow_formset)
+        logger.info(f"\nform invalid")
+        logger.info(f"{entryrow_formset[0].data=}")
 
         return self.render_to_response(context)
 
@@ -110,7 +115,6 @@ class EntryUpdate(generic.UpdateView):
         if entryrow_formset:
             kwargs["entryrow_formset"] = entryrow_formset
         else:
-            # Manually construct formset from entryrows
             kwargs["entryrow_formset"] = EntryRowUpdateFormSet(instance = self.object)
 
         return super().get_context_data(**kwargs)

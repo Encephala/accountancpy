@@ -65,7 +65,7 @@ class BaseEntryRowFormSet(BaseModelFormSet):
             sum_of_values += entryrow_form.cleaned_data["value"]
 
         if sum_of_values != 0:
-            raise ValidationError("The rows in this entry don't sum to € 0,-. (€ %(sum)s)",
+            raise ValidationError("The rows in this entry don't sum to € 0,-. (sum = € %(sum)s)",
                                 params = {"sum": sum_of_values}, code = "nonzero-sum")
 
 class InlineEntryRowFormSet(BaseInlineFormSet):
@@ -93,10 +93,10 @@ class InlineEntryRowFormSet(BaseInlineFormSet):
             sum_of_values += entryrow_form.cleaned_data["value"]
 
         if sum_of_values != 0:
-            raise ValidationError("The rows in this entry don't sum to € 0,-. (€ %(sum)s)",
+            raise ValidationError("The rows in this entry don't sum to € 0,-. (sum = € %(sum)s)",
                                 params = {"sum": sum_of_values}, code = "nonzero-sum")
 
 
 EntryRowFormSet = modelformset_factory(EntryRow, form = EntryRowForm, formset = BaseEntryRowFormSet)
 EntryRowUpdateFormSet = inlineformset_factory(Entry, EntryRow, form = EntryRowForm, formset = InlineEntryRowFormSet,
-                                              extra = 1)
+                                              can_delete = True, extra = 0)

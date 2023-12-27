@@ -9,8 +9,6 @@ class Entry(models.Model):
     journal = models.ForeignKey("journals.Journal", on_delete = models.PROTECT, blank = False)
     notes = models.TextField(blank = True)
 
-    # TODO: Validation that Entry is balanced
-
     def __str__(self):
         return str(self.id)
 
