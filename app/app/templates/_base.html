@@ -6,17 +6,108 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{% block title %}Accountancpy{% endblock title %}</title>
+    <title>{% block title %} Accountancpy {% endblock title %}</title>
     <link rel="icon" type="image/x-icon" href="{% static 'media/icon_ledger.svg' %}">
     <link rel="stylesheet" href="{% static 'animations.css' %}">
 
     <script src="{% static 'htmx-1.9.9.js' %}"></script> <!-- HTMX -->
     <script src="{% static 'tabler-1.0.0-beta17.min.js' %}"></script> <!-- Tabler JS -->
     <link rel="stylesheet" href="{% static 'tabler-1.0.0-beta17.min.css' %}"> <!-- Tabler CSS -->
+
+    <!-- CSS Variable definitions -->
+    <style>
+        :root {
+            --ledger-color: #A1EEBDD0;
+            --ledger-bg-color: #A1EEBD60;
+            --ledger-hover-color: #A1EEBDFF;
+            --account-color: #7BD3EAD0;
+            --account-bg-color: #7bd4ea50;
+            --account-hover-color: #7bd4eaFF;
+            --journal-color: #F6D6D6D0;
+            --journal-bg-color: #F6D6D680;
+            --journal-hover-color: #F6D6D6FF;
+            --entry-color: #F0F1B2D0;
+            --entry-bg-color: #F0F1B280;
+            --entry-hover-color: #EBECAB;
+        }
+    </style>
+
+    <style>
+        div.page {
+            background: var(--bg-color);
+            background: linear-gradient(var(--bg-color), var(--tblr-body-bg));
+        }
+
+        .card-body a {
+            font-size: 0.8rem;
+        }
+
+        .ledger-link {
+            background-color: var(--ledger-bg-color);
+            color: var(--tblr-card-color) !important;
+        }
+        .ledger-link:hover, .ledger-link:active {
+            background-color: var(--ledger-hover-color);
+        }
+
+        .account-link {
+            background-color: var(--account-bg-color);
+            color: var(--tblr-card-color) !important;
+        }
+        .account-link:hover, .account-link:active {
+            background-color: var(--account-hover-color);
+        }
+
+        .journal-link {
+            background-color: var(--journal-bg-color);
+            color: var(--tblr-card-color) !important;
+        }
+        .journal-link:hover, .journal-link:active {
+            background-color: var(--journal-hover-color);
+        }
+
+        .entry-link {
+            background-color: var(--entry-bg-color);
+            color: var(--tblr-card-color) !important;
+        }
+        .entry-link:hover, .entry-link:active {
+            background-color: var(--entry-hover-color);
+        }
+
+        #navbar-ledger {
+            color: var(--ledger-color);
+        }
+        #navbar-ledger:hover, #navbar-ledger:active {
+            color: var(--ledger-hover-color);
+        }
+
+        #navbar-account {
+            color: var(--account-color);
+        }
+        #navbar-account:hover, #navbar-account:active {
+            color: var(--account-hover-color);
+        }
+
+        #navbar-journal {
+            color: var(--journal-color);
+        }
+        #navbar-journal:hover, #navbar-journal:active {
+            color: var(--journal-hover-color);
+        }
+
+        #navbar-entry {
+            color: var(--entry-color);
+        }
+        #navbar-entry:hover, #navbar-entry:active {
+            color: var(--entry-hover-color);
+        }
+    </style>
 </head>
 
 <body hx-boost="true">
-<div class="page">
+<div class="page" style="
+    --bg-color: {% block bg-color %} var(--tblr-body-bg) {% endblock bg-color %};
+">
     <!-- Sidebar -->
     <aside class="navbar navbar-vertical navbar-expand-sm navbar-dark">
         <div class="container-fluid">
@@ -38,28 +129,28 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'ledgers:overview' %}">
+                <a class="nav-link" href="{% url 'ledgers:overview' %}" id="navbar-ledger">
                 <span class="nav-link-title">
                     Ledgers
                 </span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'accounts:overview' %}">
+                <a class="nav-link" href="{% url 'accounts:overview' %}" id="navbar-account">
                 <span class="nav-link-title">
                     Accounts
                 </span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'journals:overview' %}">
+                <a class="nav-link" href="{% url 'journals:overview' %}" id="navbar-journal">
                 <span class="nav-link-title">
                     Journals
                 </span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'entries:overview' %}">
+                <a class="nav-link" href="{% url 'entries:overview' %}" id="navbar-entry">
                 <span class="nav-link-title">
                     Entries
                 </span>

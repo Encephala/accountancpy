@@ -3,7 +3,7 @@
     {% for journal in journal_list %}
     <div class="col-xl-2 col-4 card">
         <div class="card-body">
-            <a href="{% url 'journals:details' journal.id %}" class="badge badge-pill">{{ journal.id }}</a>
+            <a href="{% url 'journals:details' journal.id %}" class="badge badge-pill journal-link">{{ journal.id }}</a>
         </div>
     </div>
     <div class="col-xl-3 col-7 card">

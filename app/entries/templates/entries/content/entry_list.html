@@ -2,12 +2,12 @@
 <div class="row column-gap-1 my-1 justify-content-around">
     <div class="card col-2">
         <div class="card-body">
-            <a href="{% url 'entries:details' entry.id %}" class="badge badge-pill">{{ entry.id }}</a>
+            <a href="{% url 'entries:details' entry.id %}" class="badge badge-pill entry-link">{{ entry.id }}</a>
         </div>
     </div>
     <div class="card col-2">
         <div class="card-body">
-            <a href="{% url 'journals:details' entry.journal.id %}" class="badge badge-pill">{{ entry.journal.id }}</a>
+            <a href="{% url 'journals:details' entry.journal.id %}" class="badge badge-pill journal-link">{{ entry.journal.id }}</a>
         </div>
     </div>
     <div class="card col-2">

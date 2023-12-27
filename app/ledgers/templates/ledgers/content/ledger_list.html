@@ -3,7 +3,7 @@
     {% for ledger in ledger_list %}
     <div class="col-xl-2 col-4 card">
         <div class="card-body">
-            <a href="{% url 'ledgers:details' ledger.id %}" class="badge badge-pill">{{ ledger.id }}</a>
+            <a href="{% url 'ledgers:details' ledger.id %}" class="badge badge-pill ledger-link">{{ ledger.id }}</a>
         </div>
     </div>
     <div class="col-xl-3 col-7 card">
