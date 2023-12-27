@@ -8,23 +8,11 @@ from ledgers.models import Ledger
 
 # Create your tests here.
 class EntriesViewsTest(TestCase):
-
     def setUp(self):
         self.journal1 = Journal(id = "journ1")
         self.journal2 = Journal(id = "journ2")
         self.journal1.save()
         self.journal2.save()
-
-        self.account1 = Account(id = "acc1", name = "Test account 1", is_creditor = True)
-        self.account2 = Account(id = "acc2", name = "Test account 2", is_creditor = False)
-        self.account1.save()
-        self.account2.save()
-
-        self.ledger1 = Ledger(id = "test1", name = "Test ledger 1", type = "INC")
-        self.ledger2 = Ledger(id = "test2", name = "Test ledger 2", type = "EXP")
-        self.ledger1.save()
-        self.ledger2.save()
-
 
     def test_entries_overview(self):
         response = self.client.get(reverse("entries:overview"))
@@ -64,6 +52,23 @@ class EntriesViewsTest(TestCase):
             [e1, e2]
         )
 
+
+class EntriesCRUDTest(TestCase):
+    def setUp(self):
+        self.journal1 = Journal(id = "journ1")
+        self.journal2 = Journal(id = "journ2")
+        self.journal1.save()
+        self.journal2.save()
+
+        self.account1 = Account(id = "acc1", name = "Test account 1", is_creditor = True)
+        self.account2 = Account(id = "acc2", name = "Test account 2", is_creditor = False)
+        self.account1.save()
+        self.account2.save()
+
+        self.ledger1 = Ledger(id = "test1", name = "Test ledger 1", type = "INC")
+        self.ledger2 = Ledger(id = "test2", name = "Test ledger 2", type = "EXP")
+        self.ledger1.save()
+        self.ledger2.save()
 
     def test_entries_create(self):
         data = {
@@ -164,7 +169,7 @@ class EntriesViewsTest(TestCase):
             'entryrow_set-2-ledger': ['test1'], 'entryrow_set-2-account': [''], 'entryrow_set-2-value': ['-3.00']
         }
 
-        response = self.client.post(reverse("entries:update", kwargs = {"pk": 1}), data)
+        response = self.client.post(reverse("entries:update", args = [1]), data)
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual(EntryRow.objects.count(), 3)
@@ -184,7 +189,7 @@ class EntriesViewsTest(TestCase):
             'entryrow_set-2-ledger': ['test1'], 'entryrow_set-2-account': [''], 'entryrow_set-2-value': ['-69.00']
         }
 
-        response = self.client.post(reverse("entries:update", kwargs = {"pk": 1}), data)
+        response = self.client.post(reverse("entries:update", args = [1]), data)
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual(EntryRow.objects.count(), 2)
@@ -221,7 +226,7 @@ class EntriesViewsTest(TestCase):
             'entryrow_set-2-ledger': ['test1'], 'entryrow_set-2-account': [''], 'entryrow_set-2-value': ['-3.00']
         }
 
-        response = self.client.post(reverse("entries:update", kwargs = {"pk": 1}), data)
+        response = self.client.post(reverse("entries:update", args = [1]), data)
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(EntryRow.objects.get(pk = 1).value, 69.00)
@@ -245,7 +250,7 @@ class EntriesViewsTest(TestCase):
 
         self.assertEqual(Entry.objects.count(), 1)
 
-        response = self.client.post(reverse("entries:delete", kwargs = {"pk": 1}))
+        response = self.client.post(reverse("entries:delete", args = [1]))
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual(Entry.objects.count(), 0)
