@@ -251,37 +251,89 @@ class EntriesViewsTest(TestCase):
         self.assertEqual(Entry.objects.count(), 0)
 
 
-class EntryRowViewsTest(TestCase):
-
+class EntryFilteredViewsTest(TestCase):
     def setUp(self):
         self.journal1 = Journal(id = "Test journal")
         self.journal2 = Journal(id = "Second test journal")
         self.journal1.save()
         self.journal2.save()
 
+        self.account1 = Account(id = "acc1", name = "Test account 1", is_creditor = True)
+        self.account2 = Account(id = "acc2", name = "Test account 2", is_creditor = False)
+        self.account1.save()
+        self.account2.save()
 
-    def test_entry_row_by_journal_other_journal(self):
-        e = Entry(journal = self.journal2, notes = "A testing entry")
-        e.save()
+        self.ledger1 = Ledger(id = "test1", name = "Test ledger 1", type = "INC")
+        self.ledger2 = Ledger(id = "test2", name = "Test ledger 2", type = "EXP")
+        self.ledger1.save()
+        self.ledger2.save()
+
+
+    def test_entry_by_journal(self):
+        e1 = Entry(journal = self.journal1, notes = "A testing entry")
+        e2 = Entry(journal = self.journal2, notes = "A testing entry")
+        e1.save()
+        e2.save()
 
         response = self.client.get(reverse("entries:journal_rows", args = [self.journal1.id]))
 
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(
             response.context["entry_list"],
-            []
+            [e1]
         )
 
-    def test_entry_row_by_journal_same_journal(self):
+    def test_entry_row_by_ledger(self):
         e = Entry(journal = self.journal1, notes = "A testing entry")
         e.save()
 
-        response = self.client.get(reverse("entries:journal_rows", args = [self.journal1.id]))
+        er1 = EntryRow(entry = e, ledger = self.ledger1, account = self.account1, value = 69)
+        er2 = EntryRow(entry = e, ledger = self.ledger2, account = self.account2, value = -69)
+        er1.save()
+        er2.save()
+
+        response = self.client.get(reverse("entries:ledger_rows", args = [self.ledger1.id]))
 
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(
-            response.context["entry_list"],
-            [e]
+            response.context["entry_row_list"],
+            [er1]
         )
 
-    # TODO: Tests voor by-entry, by-ledger, by-account etc.
+    def test_entry_row_by_entry(self):
+        e1 = Entry(journal = self.journal1, notes = "A testing entry")
+        e2 = Entry(journal = self.journal1, notes = "A second testing entry")
+        e1.save()
+        e2.save()
+
+        er1 = EntryRow(entry = e1, ledger = self.ledger1, account = self.account1, value = 69)
+        er2 = EntryRow(entry = e2, ledger = self.ledger1, account = self.account1, value = -69)
+        er1.save()
+        er2.save()
+
+        response = self.client.get(reverse("entries:entry_rows", args = [e1.id]))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertQuerysetEqual(
+            response.context["entry_row_list"],
+            [er1]
+        )
+
+    def test_entry_row_by_account(self):
+        e1 = Entry(journal = self.journal1, notes = "A testing entry")
+        e2 = Entry(journal = self.journal1, notes = "A second testing entry")
+        e1.save()
+        e2.save()
+
+        er1 = EntryRow(entry = e1, ledger = self.ledger1, account = self.account1, value = 69)
+        er2 = EntryRow(entry = e1, ledger = self.ledger2, account = self.account2, value = -69)
+        er1.save()
+        er2.save()
+
+        response = self.client.get(reverse("entries:account_rows", args = [self.account1.id]))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertQuerysetEqual(
+            response.context["entry_row_list"],
+            [er1]
+        )
