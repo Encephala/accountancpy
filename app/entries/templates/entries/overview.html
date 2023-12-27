@@ -5,26 +5,24 @@
 {% block page-title %} Overview of Entries {% endblock page-title %}
 
 {% block content %}
-<div class="container-xl">
-    <div class="row mb-1 column-gap-1 justify-content-around">
-        <div class="card col-2 strong">
-            <div class="card-body">ID</div>
-        </div>
-        <div class="card col-2 strong">
-            <div class="card-body">Journal</div>
-        </div>
-        <div class="card col-2 strong">
-            <div class="card-body">Number of rows</div>
-        </div>
-        <div class="card col-5 strong">
-            <div class="card-body">Notes</div>
-        </div>
+<div class="row mb-1 column-gap-1 justify-content-around">
+    <div class="card col-2 strong">
+        <div class="card-body">ID</div>
     </div>
+    <div class="card col-2 strong">
+        <div class="card-body">Journal</div>
+    </div>
+    <div class="card col-2 strong">
+        <div class="card-body">Number of rows</div>
+    </div>
+    <div class="card col-5 strong">
+        <div class="card-body">Notes</div>
+    </div>
+</div>
 
-    <div
-        hx-get="{% url 'entries:list' %}" hx-trigger="load" hx-target="this" hx-swap="outerHTML"
-        class="mx-auto" style="width: 100px">
-        <img src="{% static 'media/loading.gif' %}">
-    </div>
+<div
+    hx-get="{% url 'entries:list' %}" hx-trigger="load" hx-target="this" hx-swap="outerHTML"
+    class="mx-auto" style="width: 100px">
+    <img src="{% static 'media/loading.gif' %}">
 </div>
 {% endblock content %}
