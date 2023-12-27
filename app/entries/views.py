@@ -120,7 +120,9 @@ class EntryUpdate(generic.UpdateView):
         return super().get_context_data(**kwargs)
 
 class EntryDelete(generic.DeleteView):
-    pass
+    model = Entry
+    template_name = "entries/delete.html"
+    success_url = reverse_lazy("entries:overview")
 
 
 # HTMX endpoints

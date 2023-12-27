@@ -1,0 +1,58 @@
+{% extends "entries/_base.html" %}
+
+{% block page-title %} Delete Entry: {{ entry }} {% endblock %}
+
+{% block content %}
+<form action="{% url 'entries:delete' entry %}" method="POST">
+    {% csrf_token %}
+    <div class="container">
+        <div class="row row-cards mb-1 column-gap-1">
+            <div class="card card-body col-2 strong">ID</div>
+            <div class="card card-body col-4 strong">Journal</div>
+            <div class="card card-body col-4 strong">Notes</div>
+        </div>
+        <div class="row row-cards column-gap-1">
+            <div class="card card-body col-2">{{ entry.id }}</div>
+            <div class="card card-body col-4">{{ entry.journal.id }}</div>
+            <div class="card card-body col-4">{{ entry.notes | default:'<em>No notes.</em>' }}</div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="row column-gap-1 strong mb-2 justify-content-around">
+            <div class="card col-2">
+                <div class="card-body">Date</div>
+            </div>
+            <div class="card col-2">
+                <div class="card-body">Entry</div>
+            </div>
+            <div class="card col-5">
+                <div class="card-body">Document</div>
+            </div>
+            <div class="card col-2">
+                <div class="card-body">Value</div>
+            </div>
+        </div>
+
+        <div id="entry_rows_placeholder"
+            hx-target="this"
+            hx-swap="outerHTML"
+            hx-trigger="load"
+            hx-get="{% url 'entries:entry_rows' entry.id %}">
+        </div>
+
+        <div class="row row-cards">
+            <div class="card col-2 ms-auto">
+                <div class="card-body">
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <input class="form-check-input" type="checkbox" title="Confirm deletion." required>
+                        </span>
+                        <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Delete!">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock content %}
