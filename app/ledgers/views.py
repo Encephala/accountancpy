@@ -1,9 +1,12 @@
-from django.shortcuts import render
+import logging
+logger = logging.getLogger("django")
+
+from django.shortcuts import render, redirect
 from django.views import generic
 from django.urls import reverse_lazy
-from django import forms
 
-from django.db.models import Sum
+from django.db.models import Sum, ProtectedError
+from django.contrib import messages
 
 from .models import Ledger
 from .forms import LedgerForm
@@ -48,6 +51,18 @@ class LedgerDelete(generic.DeleteView):
     model = Ledger
     template_name = "ledgers/delete.html"
     success_url = reverse_lazy("ledgers:overview")
+
+    def post(self, request, *args, **kwargs):
+        try:
+            super().post(request, *args, **kwargs)
+        except ProtectedError as err:
+            messages.error(request, "Ledger is protected and cannot be deleted.")
+
+            context = self.get_context_data(**kwargs)
+            context["protected_objects"] = err.protected_objects
+            return self.render_to_response(context)
+
+        return redirect(self.get_success_url())
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
