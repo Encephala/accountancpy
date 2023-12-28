@@ -83,6 +83,11 @@ Create new Entry
                 // Insert into DOM
                 source_form.insertAdjacentElement("afterend", new_form);
 
+                var divider = document.querySelector(".divider.d-none").cloneNode();
+                divider.classList.remove("d-none");
+                divider.classList.add("d-xl-none");
+                new_form.insertAdjacentElement("beforebegin", divider);
+
                 // Update management form
                 var total_forms_element = document.getElementById("id_" + prefix + "-TOTAL_FORMS");
                 var number_of_rows = document.querySelectorAll(".form_entryrow").length;
@@ -113,6 +118,8 @@ Create new Entry
                         row.hidden = true;
                         row.querySelector(".delete input").checked = true;
                         row.querySelectorAll("input, select").forEach((element) => element.required = false);
+                        // Delete divider
+                        row.previousElementSibling.remove();
                     }, 150);
                 } else {
                     console.log("Why are you trying to hack the site >:(")
@@ -202,9 +209,15 @@ Create new Entry
                     </div>
                 </div>
             </div>
+            {% if not forloop.last %}
+            <!-- Hidden divider so we can clone it -->
+            <hr class="divider d-xl-none"></hr>
+            {% endif %}
             {% endfor %}
+            <!-- Hidden hr xo that we can copy it -->
+            <hr class="divider d-none"></hr>
             <div class="row row-cards">
-                <div class="card col-1 ms-auto">
+                <div class="card col-1 ms-auto" style="min-width: 70px;">
                     {% if is_update %}
                     <input type="submit" class="p-2 m-1 btn btn-ghost-cyan" value="Update!"></button>
                     {% else %}
