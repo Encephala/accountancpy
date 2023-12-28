@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.views import generic
 from django.urls import reverse_lazy
 
-from django.db.models import Sum, ProtectedError
+from django.db.models import ProtectedError
 from django.contrib import messages
 
 from .models import Ledger
@@ -24,7 +24,7 @@ class LedgerDetails(generic.DetailView):
     # Which leads me to wonder, can you call an object method in a templated file? would be banger
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["ledger_sum"] = context["object"].entryrow_set.aggregate(sum = Sum("value"))["sum"]
+        context["ledger_sum"] = context["object"].sum()
         return context
 
 
@@ -66,7 +66,7 @@ class LedgerDelete(generic.DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["ledger_sum"] = context["object"].entryrow_set.aggregate(sum = Sum("value"))["sum"]
+        context["ledger_sum"] = context["object"].sum()
         return context
 
 
