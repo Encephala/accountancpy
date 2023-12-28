@@ -21,7 +21,7 @@
 <div id="account_rows_placeholder"
     hx-target="this"
     hx-swap="outerHTML"
-    hx-get="{% url 'accounts:list' %}"
+    hx-get="{% url 'accounts:hx-list' %}"
     hx-trigger="load">
 </div>
 {% endblock content %}

@@ -25,7 +25,7 @@ class LedgersViewsTest(TestCase):
 
 
     def test_ledger_list_empty(self):
-        response = self.client.get(reverse("ledgers:list"))
+        response = self.client.get(reverse("ledgers:hx-list"))
 
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(
@@ -40,7 +40,7 @@ class LedgersViewsTest(TestCase):
 
         l1.save(), l2.save() # hehe this is bad code
 
-        response = self.client.get(reverse("ledgers:list"))
+        response = self.client.get(reverse("ledgers:hx-list"))
 
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(

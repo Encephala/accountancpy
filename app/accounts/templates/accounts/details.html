@@ -21,7 +21,7 @@
         hx-target="this"
         hx-swap="outerHTML"
         hx-trigger="load"
-        hx-get="{% url 'entries:account_rows' account.id %}">
+        hx-get="{% url 'entries:hx-account_rows' account.id %}">
     </div>
 </div>
 {% endblock content %}

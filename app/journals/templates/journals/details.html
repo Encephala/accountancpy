@@ -36,7 +36,7 @@
         hx-target="this"
         hx-swap="outerHTML"
         hx-trigger="load"
-        hx-get="{% url 'entries:journal_rows' journal.id %}">
+        hx-get="{% url 'entries:hx-journal_rows' journal.id %}">
     </div>
 </div>
 {% endblock content %}

@@ -32,7 +32,7 @@ class EntriesViewsTest(TestCase):
 
 
     def test_entries_list_empty(self):
-        response = self.client.get(reverse("entries:list"))
+        response = self.client.get(reverse("entries:hx-list"))
 
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(response.context["entry_list"], [])
@@ -44,7 +44,7 @@ class EntriesViewsTest(TestCase):
         e1.save()
         e2.save()
 
-        response = self.client.get(reverse("entries:list"))
+        response = self.client.get(reverse("entries:hx-list"))
 
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(
@@ -280,7 +280,7 @@ class EntryFilteredViewsTest(TestCase):
         e1.save()
         e2.save()
 
-        response = self.client.get(reverse("entries:journal_rows", args = [self.journal1.id]))
+        response = self.client.get(reverse("entries:hx-journal_rows", args = [self.journal1.id]))
 
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(
@@ -297,7 +297,7 @@ class EntryFilteredViewsTest(TestCase):
         er1.save()
         er2.save()
 
-        response = self.client.get(reverse("entries:ledger_rows", args = [self.ledger1.id]))
+        response = self.client.get(reverse("entries:hx-ledger_rows", args = [self.ledger1.id]))
 
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(
@@ -316,7 +316,7 @@ class EntryFilteredViewsTest(TestCase):
         er1.save()
         er2.save()
 
-        response = self.client.get(reverse("entries:entry_rows", args = [e1.id]))
+        response = self.client.get(reverse("entries:hx-entry_rows", args = [e1.id]))
 
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(
@@ -335,7 +335,7 @@ class EntryFilteredViewsTest(TestCase):
         er1.save()
         er2.save()
 
-        response = self.client.get(reverse("entries:account_rows", args = [self.account1.id]))
+        response = self.client.get(reverse("entries:hx-account_rows", args = [self.account1.id]))
 
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(
