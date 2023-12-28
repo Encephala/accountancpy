@@ -14,6 +14,11 @@ class JournalDetails(generic.DetailView):
     model = Journal
     template_name = "journals/details.html"
 
+class JournalList(generic.ListView):
+    model = Journal
+    template_name = "journals/content/list.html"
+    ordering = "id"
+
 
 class JournalCreate(generic.CreateView):
     model = Journal
@@ -38,9 +43,3 @@ class JournalDelete(generic.DeleteView):
     model = Journal
     template_name = "journals/delete.html"
     success_url = reverse_lazy("journals:overview")
-
-
-class JournalList(generic.ListView):
-    model = Journal
-    template_name = "journals/content/list.html"
-    ordering = "id"
