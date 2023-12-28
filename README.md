@@ -1,6 +1,11 @@
 # Accountancpy
 
-A destined-for-the-graveyard project to create simple personal bookkeepping software with a Python backend.
+A ~~destined-for-the-graveyard~~ project to create simple personal bookkeepping software with a Django backend.
+
+Inspired by [HTMX](https://htmx.org/)'s philosophy that simple solutions can be sufficient for neat things, Accountancpy is built with HTMX for interactivity and [Tabler](https://tabler.io/) for UI.
+
+It won't have deep accounting functionality, but the basics of loading expenses from the bank and assigning them to ledgers should be simple, quick and fun.
+
 
 ## Commit style
 
