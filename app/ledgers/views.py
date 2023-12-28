@@ -49,6 +49,11 @@ class LedgerDelete(generic.DeleteView):
     template_name = "ledgers/delete.html"
     success_url = reverse_lazy("ledgers:overview")
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["ledger_sum"] = context["object"].entryrow_set.aggregate(sum = Sum("value"))["sum"]
+        return context
+
 
 # HTMX endpoints
 class LedgersList(generic.ListView):

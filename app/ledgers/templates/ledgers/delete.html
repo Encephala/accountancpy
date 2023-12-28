@@ -5,28 +5,50 @@
 {% block content %}
 <form action="{% url 'ledgers:delete' ledger %}" method="POST">
     {% csrf_token %}
-    <div class="row row-cards mb-1 column-gap-1">
-        <div class="card card-body col-2 strong">ID</div>
-        <div class="card card-body col-4 strong">Name</div>
-        <div class="card card-body col-1 strong">Type</div>
-        <div class="card card-body col-4 strong">Notes</div>
-    </div>
-    <div class="row row-cards mb-1 column-gap-1">
-        <div class="card card-body col-2">{{ ledger.id }}</div>
-        <div class="card card-body col-4">{{ ledger.name }}</div>
-        <div class="card card-body col-1">{{ ledger.type }}</div>
-        <div class="card card-body col-4">{{ ledger.notes | default:'<em>No notes.</em>' }}</div>
+    <div class="container">
+        <div class="row row-cards mb-1 column-gap-1">
+            <div class="card card-body col-2 strong">ID</div>
+            <div class="card card-body col-4 strong">Name</div>
+            <div class="card card-body col-1 strong">Type</div>
+            <div class="card card-body col-4 strong">Notes</div>
+        </div>
+        <div class="row row-cards mb-1 column-gap-1">
+            <div class="card card-body col-2">{{ ledger.id }}</div>
+            <div class="card card-body col-4">{{ ledger.name }}</div>
+            <div class="card card-body col-1">{{ ledger.type }}</div>
+            <div class="card card-body col-4">{{ ledger.notes | default:'<em>No notes.</em>' }}</div>
+        </div>
+
+        <div class="row row-cards mb-3">
+            <div class="card col-2 ms-auto">
+                <div class="card-body">
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <input class="form-check-input" type="checkbox" title="Confirm deletion." required>
+                        </span>
+                        <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Delete!">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="row row-cards">
-        <div class="card col-2 ms-auto">
-            <div class="card-body">
-                <div class="input-group">
-                    <span class="input-group-text">
-                        <input class="form-check-input" type="checkbox" title="Confirm deletion." required>
-                    </span>
-                    <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Delete!">
-                </div>
+    <div class="container">
+        <div id="entry_row_placeholder"
+            hx-target="this"
+            hx-swap="outerHTML"
+            hx-trigger="load"
+            hx-get="{% url 'entries:hx-ledger_rows' ledger.id %}">
+        </div>
+
+        <div class="row column-gap-1 strong mt-2 justify-content-around">
+            <div class="col-2"></div>
+            <div class="col-1"></div>
+            <div class="col-1"></div>
+            <div class="col-1"></div>
+            <div class="col-4"></div>
+            <div class="card col-2 ml-auto">
+                <div class="card-body">€ {{ ledger_sum | default:0 | floatformat:2 }}</div>
             </div>
         </div>
     </div>

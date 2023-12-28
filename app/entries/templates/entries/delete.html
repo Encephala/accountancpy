@@ -11,37 +11,13 @@
             <div class="card card-body col-4 strong">Journal</div>
             <div class="card card-body col-4 strong">Notes</div>
         </div>
-        <div class="row row-cards column-gap-1">
+        <div class="row row-cards mb-1 column-gap-1">
             <div class="card card-body col-2">{{ entry.id }}</div>
             <div class="card card-body col-4">{{ entry.journal.id }}</div>
             <div class="card card-body col-4">{{ entry.notes | default:'<em>No notes.</em>' }}</div>
         </div>
-    </div>
 
-    <div class="container mt-4">
-        <div class="row column-gap-1 strong mb-2 justify-content-around">
-            <div class="card col-2">
-                <div class="card-body">Date</div>
-            </div>
-            <div class="card col-2">
-                <div class="card-body">Entry</div>
-            </div>
-            <div class="card col-5">
-                <div class="card-body">Document</div>
-            </div>
-            <div class="card col-2">
-                <div class="card-body">Value</div>
-            </div>
-        </div>
-
-        <div id="entry_rows_placeholder"
-            hx-target="this"
-            hx-swap="outerHTML"
-            hx-trigger="load"
-            hx-get="{% url 'entries:hx-entry_rows' entry.id %}">
-        </div>
-
-        <div class="row row-cards">
+        <div class="row row-cards mb-3">
             <div class="card col-2 ms-auto">
                 <div class="card-body">
                     <div class="input-group">
@@ -52,6 +28,15 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="entry_rows_placeholder"
+            hx-target="this"
+            hx-swap="outerHTML"
+            hx-trigger="load"
+            hx-get="{% url 'entries:hx-entry_rows' entry.id %}">
         </div>
     </div>
 </form>
