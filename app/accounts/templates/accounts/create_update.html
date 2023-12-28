@@ -1,0 +1,57 @@
+{% extends "accounts/_base.html" %}
+
+{% block page-title %}
+{% if is_update %}
+Update Account: {{ account.id }}
+{% else %}
+Create new Account
+{% endif %}
+{% endblock page-title %}
+
+{% block content %}
+<div class="container">
+    <div class="row row-cards mb-1 column-gap-1 justify-content-around">
+        <div class="card card-body col-2 strong">ID</div>
+        <div class="card card-body col-2 strong">Name</div>
+        <div class="card card-body col-2 strong">Type</div>
+        <div class="card card-body col-4 strong">Notes</div>
+    </div>
+
+    {% if is_update %}
+    <form action="{% url 'accounts:update' account %}" method="POST">
+    {% else %}
+    <form action="{% url 'accounts:create' %}" method="POST">
+    {% endif %}
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+        <div class="row row-cards mb-1 column-gap-1">
+            <div class="card card-body col-2 h-100">
+                {{ form.id.errors }}
+                {{ form.id }}
+            </div>
+            <div class="card card-body col-2 h-100">
+                {{ form.name.errors }}
+                {{ form.name }}
+            </div>
+            <div class="card card-body col-2 h-100">
+                {{ form.is_creditor.errors }}
+                {{ form.is_creditor }}
+            </div>
+            <div class="card card-body col-4">
+                {{ form.notes.errors }}
+                {{ form.notes }}
+            </div>
+        </div>
+
+        <div class="row row-cards">
+            <div class="card col-1 ms-auto">
+                {% if is_update %}
+                <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Update!">
+                {% else %}
+                <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Create!">
+                {% endif %}
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock content %}

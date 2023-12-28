@@ -1,0 +1,43 @@
+{% extends "accounts/_base.html" %}
+
+{% block page-title %} Delete Account: {{ account }} {% endblock %}
+
+{% block content %}
+<form action="{% url 'accounts:delete' account %}" method="POST">
+    {% csrf_token %}
+    <div class="container">
+        <div class="row row-cards mb-1 column-gap-1 justify-content-around">
+            <div class="card card-body col-2 strong">Name</div>
+            <div class="card card-body col-2 strong">Type</div>
+            <div class="card card-body col-4 strong">Notes</div>
+        </div>
+        <div class="row row-cards column-gap-1">
+            <div class="card card-body col-2">{{ account.id }}</div>
+            <div class="card card-body col-2">{{ account.is_creditor }}</div>
+            <div class="card card-body col-4">{{ account.notes | default:'<em>No notes.</em>' }}</div>
+        </div>
+
+        <div class="row row-cards mb-3">
+            <div class="card col-2 ms-auto">
+                <div class="card-body">
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <input class="form-check-input" type="checkbox" title="Confirm deletion." required>
+                        </span>
+                        <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Delete!">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="entry_rows_placeholder"
+            hx-target="this"
+            hx-swap="outerHTML"
+            hx-trigger="load"
+            hx-get="{% url 'entries:hx-account_rows' account.id %}">
+        </div>
+    </div>
+</form>
+{% endblock content %}
