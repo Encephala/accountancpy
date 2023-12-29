@@ -1,0 +1,40 @@
+---
+name: Build
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: self-hosted
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up python
+        run: |
+          sudo apt-get update
+          sudo apt-get install python3 python3-pip python3-venv -y
+          python3 -m venv venv
+
+      - name: Install dependencies
+        run: |
+          source venv/bin/activate
+          pip3 install -r requirements.txt
+          pip install coverage coverage-badge
+
+      - name: Generate coverage badge
+        working-directory: ./app
+        run: |
+          source ../venv/bin/activate
+          coverage run --source='.' --omit="*/migrations/*,app/*,manage.py" manage.py test
+          coverage-badge -o ../coverage.svg -f
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git add ../coverage.svg
+          git commit -m "doc: Update coverage badge"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
