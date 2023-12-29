@@ -10,7 +10,13 @@
         <div class="card-body">{{ account.name }}</div>
     </div>
     <div class="card col-2">
-        <div class="card-body">{{ account.is_creditor }}</div>
+        <div class="card-body">
+            {% if account.is_creditor %}
+            <span class="badge bg-red-lt">Creditor</span>
+            {% else %}
+            <span class="badge bg-lime-lt">Debtor</span>
+            {% endif %}
+        </div>
     </div>
     <div class="card col-4">
         <div class="card-body">{{ account.notes | default:'<em>No notes.</em>' }}</div>
