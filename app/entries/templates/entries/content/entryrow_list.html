@@ -1,5 +1,5 @@
 {% if entry_row_list %}
-<div class="row column-gap-1 strong mb-2 justify-content-around">
+<div class="row row-cards mb-1 justify-content-around strong">
     <div class="card col-1">
         <div class="card-body">Entry</div>
     </div>
@@ -20,7 +20,7 @@
     </div>
 </div>
 {% for entry_row in entry_row_list %}
-<div class="row column-gap-1 my-1 justify-content-around">
+<div class="row row-cards mb-1 justify-content-around">
     <div class="card col-1">
         <div class="card-body">
             <a href="{% url 'entries:details' entry_row.entry.id %}" class="badge badge-pill entry-link">{{ entry_row.entry.id }}</a>
@@ -53,7 +53,7 @@
 {% endfor %}
 
 {% else %}
-<div class="row">
+<div class="row row-cards">
     <div class="card">
         <div class="card-body">No entries found.</div>
     </div>

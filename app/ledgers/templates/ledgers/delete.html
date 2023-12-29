@@ -5,24 +5,45 @@
 {% block page-title %} Delete Ledger: {{ ledger }} {% endblock %}
 
 {% block content %}
-<form action="{% url 'ledgers:delete' ledger %}" method="POST">
-    {% csrf_token %}
-    <div class="container">
-        <div class="row row-cards mb-1 column-gap-1">
-            <div class="card card-body col-2 strong">ID</div>
-            <div class="card card-body col-4 strong">Name</div>
-            <div class="card card-body col-1 strong">Type</div>
-            <div class="card card-body col-4 strong">Notes</div>
+<div class="container mb-3">
+    <form action="{% url 'ledgers:delete' ledger %}" method="POST">
+        {% csrf_token %}
+        <div class="row row-cards mb-1 justify-content-around strong">
+            <div class="card col-2">
+                <div class="card-body">ID</div>
+            </div>
+            <div class="card col-3">
+                <div class="card-body">Name</div>
+            </div>
+            <div class="card col-2">
+                <div class="card-body">Type</div>
+            </div>
+            <div class="card col-4">
+                <div class="card-body">Notes</div>
+            </div>
         </div>
-        <div class="row row-cards mb-1 column-gap-1">
-            <div class="card card-body col-2">{{ ledger.id }}</div>
-            <div class="card card-body col-4">{{ ledger.name }}</div>
-            <div class="card card-body col-1">{{ ledger.type }}</div>
-            <div class="card card-body col-4">{{ ledger.notes | default:'<em>No notes.</em>' }}</div>
+        <div class="row row-cards mb-1 justify-content-around">
+            <div class="card col-2">
+                <div class="card-body">{{ ledger.id }}</div>
+            </div>
+            <div class="card col-3">
+                <div class="card-body">{{ ledger.name }}</div>
+            </div>
+            <div class="card col-2">
+                <div class="card-body">{{ ledger.type }}</div>
+            </div>
+            <div class="card col-4">
+                <div class="card-body">{{ ledger.notes | default:'<em>No notes.</em>' }}</div>
+            </div>
         </div>
 
-        <div class="row row-cards mb-3">
-            <div class="card col-2 ms-auto">
+        <div class="row row-cards mb-1 justify-content-around">
+            <!-- Hidden rows for alignment -->
+            <div class="col-6"></div>
+            <div class="col-1"></div>
+            <div class="col-1"></div>
+
+            <div class="card col-3">
                 <div class="card-body">
                     <div class="input-group">
                         <span class="input-group-text">
@@ -33,31 +54,33 @@
                 </div>
             </div>
         </div>
+    </form>
+</div>
+
+<div class="container">
+    <div id="entry_row_placeholder"
+        hx-target="this"
+        hx-swap="outerHTML"
+        hx-trigger="load"
+        hx-get="{% url 'entries:hx-ledger_rows' ledger.id %}">
     </div>
 
-    <div class="container">
-        <div id="entry_row_placeholder"
-            hx-target="this"
-            hx-swap="outerHTML"
-            hx-trigger="load"
-            hx-get="{% url 'entries:hx-ledger_rows' ledger.id %}">
-        </div>
+    <div class="row row-cards justify-content-around strong">
+        <!-- Hidden rows for alignment -->
+        <div class="col-5"></div>
+        <div class="col-1"></div>
+        <div class="col-1"></div>
+        <div class="col-1"></div>
+        <div class="col-1"></div>
 
-        <div class="row column-gap-1 strong mt-2 justify-content-around">
-            <div class="col-2"></div>
-            <div class="col-1"></div>
-            <div class="col-1"></div>
-            <div class="col-1"></div>
-            <div class="col-4"></div>
-            <div class="card col-2 ml-auto">
-                <div class="card-body">€ {{ ledger_sum | default:0 | floatformat:2 }}</div>
-            </div>
+        <div class="card col-2 ml-auto">
+            <div class="card-body">€ {{ ledger_sum | default:0 | floatformat:2 }}</div>
         </div>
     </div>
-</form>
+</div>
 
-<!-- Error toast -->
 {% if messages|length > 0 %}
+<!-- Error toast -->
 <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 11">
     {% for message in messages %}
     <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true"

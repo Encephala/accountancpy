@@ -3,22 +3,38 @@
 {% block page-title %} Ledger: {{ ledger.id }} {% endblock %}
 
 {% block content %}
-<div class="container-xl">
-    <div class="row row-cards mb-1 column-gap-1">
-        <div class="card card-body col-2 strong">ID</div>
-        <div class="card card-body col-4 strong">Name</div>
-        <div class="card card-body col-1 strong">Type</div>
-        <div class="card card-body col-4 strong">Notes</div>
+<div class="container">
+    <div class="row row-cards mb-1 justify-content-around strong">
+        <div class="card col-2">
+            <div class="card-body">ID</div>
+        </div>
+        <div class="card col-3">
+            <div class="card-body">Name</div>
+        </div>
+        <div class="card col-2">
+            <div class="card-body">Type</div>
+        </div>
+        <div class="card col-4">
+            <div class="card-body">Notes</div>
+        </div>
     </div>
-    <div class="row row-cards column-gap-1">
-        <div class="card card-body col-2">{{ ledger.id }}</div>
-        <div class="card card-body col-4">{{ ledger.name }}</div>
-        <div class="card card-body col-1">{{ ledger.type }}</div>
-        <div class="card card-body col-4">{{ ledger.notes | default:'<em>No notes.</em>' }}</div>
+    <div class="row row-cards mb-1 justify-content-around">
+        <div class="card col-2">
+            <div class="card-body">{{ ledger.id }}</div>
+        </div>
+        <div class="card col-3">
+            <div class="card-body">{{ ledger.name }}</div>
+        </div>
+        <div class="card col-2">
+            <div class="card-body">{{ ledger.type }}</div>
+        </div>
+        <div class="card col-4">
+            <div class="card-body">{{ ledger.notes | default:'<em>No notes.</em>' }}</div>
+        </div>
     </div>
 </div>
 
-<div class="container-xl mt-4">
+<div class="container mt-4">
     <div id="entry_row_placeholder"
         hx-target="this"
         hx-swap="outerHTML"
@@ -26,7 +42,7 @@
         hx-get="{% url 'entries:hx-ledger_rows' ledger.id %}">
     </div>
 
-    <div class="row column-gap-1 strong mt-2 justify-content-around">
+    <div class="row row-cards mb-1 justify-content-around strong">
         <div class="col-2"></div>
         <div class="col-1"></div>
         <div class="col-1"></div>
