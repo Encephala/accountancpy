@@ -28,6 +28,7 @@ jobs:
           python3 -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install ruff
+          pip install coverage
 
       - name: Lint files
         run: |
@@ -38,5 +39,6 @@ jobs:
       - name: Django tests
         run: |
           source ../venv/bin/activate
-          python3 manage.py test 2>&1 >> $GITHUB_STEP_SUMMARY
+          coverage run --source='.' --omit="*/migrations/*" manage.py test 2>&1 >> $GITHUB_STEP_SUMMARY
+          coverage report >> $GITHUB_STEP_SUMMARY
         working-directory: ./app
