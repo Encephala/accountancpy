@@ -11,16 +11,22 @@ Create new Ledger
 {% block content %}
 <div class="container">
     <div class="row row-cards mb-1 justify-content-around strong">
+        {% if not is_update %}
         <div class="card col-2">
             <div class="card-body">ID</div>
         </div>
+        {% endif %}
         <div class="card col-3">
             <div class="card-body">Name</div>
         </div>
         <div class="card col-2">
             <div class="card-body">Type</div>
         </div>
+        {% if is_update %}
+        <div class="card col-6">
+        {% else %}
         <div class="card col-4">
+        {% endif %}
             <div class="card-body">Notes</div>
         </div>
     </div>
@@ -33,12 +39,22 @@ Create new Ledger
     {% csrf_token %}
     {{ form.non_field_errors }}
         <div class="row row-cards mb-1 justify-content-around">
+            {% if is_update %}
+            {{ form.id.errors }}
+            <div class="card col-2 h-100" hidden>
+                <div class="card-body">
+                    {{ form.id }}
+                </div>
+            </div>
+            {% else %}
             <div class="card col-2 h-100">
                 <div class="card-body">
                     {{ form.id.errors }}
                     {{ form.id }}
                 </div>
             </div>
+            {% endif %}
+
             <div class="card col-3 h-100">
                 <div class="card-body">
                     {{ form.name.errors }}
@@ -51,7 +67,11 @@ Create new Ledger
                     {{ form.type }}
                 </div>
             </div>
+            {% if is_update %}
+            <div class="card col-6">
+            {% else %}
             <div class="card col-4">
+            {% endif %}
                 <div class="card-body">
                     {{ form.notes.errors }}
                     {{ form.notes }}
@@ -61,9 +81,14 @@ Create new Ledger
 
         <div class="row row-cards mb-1 justify-content-around">
             <!-- Hidden rows for alignment -->
+            {% if is_update %}
+            <div class="col-9"></div>
+            <div class="col-1"></div>
+            {% else %}
             <div class="col-8"></div>
             <div class="col-1"></div>
             <div class="col-1"></div>
+            {% endif %}
 
             <div class="card col-1">
                 {% if is_update %}
