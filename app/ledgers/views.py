@@ -59,7 +59,7 @@ class LedgerDelete(generic.DeleteView):
             messages.error(request, "Ledger is protected and cannot be deleted.")
 
             context = self.get_context_data(**kwargs)
-            context["protected_objects"] = err.protected_objects
+            context["protected_objects"] = set([row.entry for row in err.protected_objects])
             return self.render_to_response(context)
 
         return redirect(self.get_success_url())
