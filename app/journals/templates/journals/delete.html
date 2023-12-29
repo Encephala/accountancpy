@@ -1,5 +1,7 @@
 {% extends "journals/_base.html" %}
 
+{% load static %}
+
 {% block page-title %} Delete Journal: {{ journal }} {% endblock %}
 
 {% block content %}
@@ -78,4 +80,30 @@
         hx-get="{% url 'entries:hx-journal_rows' journal.id %}">
     </div>
 </div>
+
+{% if messages|length > 0 %}
+<!-- Error toast -->
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 11">
+    {% for message in messages %}
+    <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true"
+    data-bs-autohide="false" data-bs-toggle="toast">
+        <div class="toast-header">
+        <strong class="me-auto text-danger">Error</strong>
+        <button type="button" class="ms-2 btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            {{ message }}
+            <br>
+            {% for object in protected_objects %}
+            <a href="{% url 'entries:details' object %}" target="_blank">Entry: {{ object }}</a>
+            <img style="vertical-align: middle;" src="{% static 'media/feather/arrow-up-right.svg' %}"
+            width="18px" alt="arrow-up-right">
+            {% if not forloop.last %}<br>{% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
 {% endblock content %}

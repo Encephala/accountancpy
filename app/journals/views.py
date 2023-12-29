@@ -1,6 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect
 from django.views import generic
 from django.urls import reverse_lazy
+
+from django.db.models import ProtectedError
+from django.contrib import messages
 
 from .models import *
 from .forms import JournalForm
@@ -43,3 +46,15 @@ class JournalDelete(generic.DeleteView):
     model = Journal
     template_name = "journals/delete.html"
     success_url = reverse_lazy("journals:overview")
+
+    def post(self, request, *args, **kwargs):
+        try:
+            super().post(request, *args, **kwargs)
+        except ProtectedError as err:
+            messages.error(request, "Journal has entries and thus cannot be deleted.")
+
+            context = self.get_context_data(**kwargs)
+            context["protected_objects"] = err.protected_objects
+            return self.render_to_response(context)
+
+        return redirect(self.get_success_url())
