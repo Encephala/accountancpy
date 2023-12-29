@@ -5,6 +5,9 @@ from django.shortcuts import render, redirect
 from django.views import generic
 from django.urls import reverse_lazy
 
+from django.db.models import ProtectedError
+from django.contrib import messages
+
 from .models import *
 from .forms import AccountForm
 
@@ -47,3 +50,16 @@ class AccountDelete(generic.DeleteView):
     model = Account
     template_name = "accounts/delete.html"
     success_url = reverse_lazy("accounts:overview")
+
+    def post(self, request, *args, **kwargs):
+        try:
+            super().post(request, *args, **kwargs)
+        except ProtectedError as err:
+            messages.error(request, "Ledger is protected and cannot be deleted.")
+
+            context = self.get_context_data(**kwargs)
+            context["protected_objects"] = set([row.entry for row in err.protected_objects])
+            logger.info(f"{context['protected_objects']}")
+            return self.render_to_response(context)
+
+        return redirect(self.get_success_url())
