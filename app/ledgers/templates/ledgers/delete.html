@@ -9,38 +9,31 @@
     <form action="{% url 'ledgers:delete' ledger %}" method="POST">
         {% csrf_token %}
         <div class="row row-cards mb-1 justify-content-around strong">
-            <div class="card col-2">
-                <div class="card-body">ID</div>
-            </div>
             <div class="card col-3">
                 <div class="card-body">Name</div>
             </div>
             <div class="card col-2">
                 <div class="card-body">Type</div>
             </div>
-            <div class="card col-4">
+            <div class="card col-6">
                 <div class="card-body">Notes</div>
             </div>
         </div>
         <div class="row row-cards mb-1 justify-content-around">
-            <div class="card col-2">
-                <div class="card-body">{{ ledger.id }}</div>
-            </div>
             <div class="card col-3">
                 <div class="card-body">{{ ledger.name }}</div>
             </div>
             <div class="card col-2">
                 <div class="card-body">{{ ledger.type }}</div>
             </div>
-            <div class="card col-4">
+            <div class="card col-6">
                 <div class="card-body">{{ ledger.notes | default:'<em>No notes.</em>' }}</div>
             </div>
         </div>
 
         <div class="row row-cards mb-1 justify-content-around">
             <!-- Hidden rows for alignment -->
-            <div class="col-6"></div>
-            <div class="col-1"></div>
+            <div class="col-7"></div>
             <div class="col-1"></div>
 
             <div class="card col-3">

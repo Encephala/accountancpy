@@ -6,23 +6,17 @@
 <div class="container">
     <div class="row row-cards mb-1 justify-content-around strong">
         <div class="card col-2">
-            <div class="card-body">ID</div>
-        </div>
-        <div class="card col-4">
             <div class="card-body">Journal</div>
         </div>
-        <div class="card col-4">
+        <div class="card col-6">
             <div class="card-body">Notes</div>
         </div>
     </div>
     <div class="row row-cards mb-1 justify-content-around">
         <div class="card col-2">
-            <div class="card-body">{{ entry.id }}</div>
-        </div>
-        <div class="card col-4">
             <div class="card-body">{{ entry.journal.id }}</div>
         </div>
-        <div class="card col-4">
+        <div class="card col-6">
             <div class="card-body">{{ entry.notes | default:'<em>No notes.</em>' }}</div>
         </div>
     </div>
