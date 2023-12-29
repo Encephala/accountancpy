@@ -33,12 +33,19 @@
     </style>
 
     <style>
+        .navbar-brand-image {
+            height: 40px;
+        }
+        .navbar-brand-image:hover {
+            opacity: 0.7;
+        }
+
         div.page {
             background: var(--bg-color);
             background: linear-gradient(var(--bg-color), var(--tblr-body-bg));
         }
 
-        .card-body a {
+        .card-body a.badge {
             font-size: 0.8rem;
         }
 
@@ -117,19 +124,12 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <h1 class="navbar-brand navbar-brand-autodark">
-            <a href="#">
-            <img src="https://preview.tabler.io/static/logo-white.svg" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+            <a href="{% url 'landing' %}">
+                <img src="{% static 'media/feather/home.svg' %}" alt="Home" class="navbar-brand-image">
             </a>
         </h1>
         <div class="collapse navbar-collapse" id="sidebar-menu">
             <ul class="navbar-nav pt-lg-3">
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'landing' %}">
-                <span class="nav-link-title">
-                    Home
-                </span>
-                </a>
-            </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'ledgers:overview' %}" id="navbar-ledger">
                 <span class="nav-link-title">
