@@ -1,0 +1,35 @@
+---
+name: validate_on_push
+on:
+  [push, workflow_dispatch]
+
+jobs:
+  validate:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.12
+      - uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install ruff
+
+      - name: Lint files
+        run: |
+          ruff check 2>&1 >> $GITHUB_STEP_SUMMARY
+        working-directory: ./app
+
+      - name: Django tests
+        run: |
+          python3 manage.py test 2>&1 >> $GITHUB_STEP_SUMMARY
+        working-directory: ./app
