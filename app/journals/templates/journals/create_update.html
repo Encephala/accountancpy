@@ -9,46 +9,69 @@ Create new Journal
 {% endblock page-title %}
 
 {% block content %}
-<div class="row row-cards mb-1 column-gap-1">
-    <div class="card card-body col-2 strong">ID</div>
-    <div class="card card-body col-4 strong">Name</div>
-    <div class="card card-body col-1 strong">Type</div>
-    <div class="card card-body col-4 strong">Notes</div>
+<div class="container">
+    <div class="row row-cards mb-1 justify-content-around strong">
+        <div class="card col-2">
+            <div class="card-body">ID</div>
+        </div>
+        <div class="card col-3">
+            <div class="card-body">Name</div>
+        </div>
+        <div class="card col-2">
+            <div class="card-body">Type</div>
+        </div>
+        <div class="card col-4">
+            <div class="card-body">Notes</div>
+        </div>
+    </div>
+
+    {% if is_update %}
+    <form action="{% url 'journals:update' journal %}" method="POST">
+    {% else %}
+    <form action="{% url 'journals:create' %}" method="POST">
+    {% endif %}
+        {% csrf_token %}
+        <div class="row row-cards mb-1 justify-content-around">
+            <div class="card col-2 h-100">
+                <div class="card-body">
+                    {{ form.id.errors }}
+                    {{ form.id }}
+                </div>
+            </div>
+            <div class="card col-3 h-100">
+                <div class="card-body">
+                    {{ form.name.errors }}
+                    {{ form.name }}
+                </div>
+            </div>
+            <div class="card col-2 h-100">
+                <div class="card-body">
+                    {{ form.type.errors }}
+                    {{ form.type }}
+                </div>
+            </div>
+            <div class="card col-4">
+                <div class="card-body">
+                    {{ form.notes.errors }}
+                    {{ form.notes }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row row-cards mb-1 justify-content-around">
+            <!-- Hidden rows for alignment -->
+            <div class="col-8"></div>
+            <div class="col-1"></div>
+            <div class="col-1"></div>
+
+            <div class="card col-1">
+                {% if is_update %}
+                <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Update!">
+                {% else %}
+                <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Create!">
+                {% endif %}
+            </div>
+        </div>
+    </form>
 </div>
-
-{% if is_update %}
-<form action="{% url 'journals:update' journal %}" method="POST">
-{% else %}
-<form action="{% url 'journals:create' %}" method="POST">
-{% endif %}
-    {% csrf_token %}
-    <div class="row row-cards mb-1 column-gap-1">
-        <div class="card card-body col-2 h-100">
-            {{ form.id.errors }}
-            {{ form.id }}
-        </div>
-        <div class="card card-body col-4 h-100">
-            {{ form.name.errors }}
-            {{ form.name }}
-        </div>
-        <div class="card card-body col-1 h-100">
-            {{ form.type.errors }}
-            {{ form.type }}
-        </div>
-        <div class="card card-body col-4">
-            {{ form.notes.errors }}
-            {{ form.notes }}
-        </div>
-    </div>
-
-    <div class="row row-cards">
-        <div class="card col-1 ms-auto">
-            {% if is_update %}
-            <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Update!">
-            {% else %}
-            <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Create!">
-            {% endif %}
-        </div>
-    </div>
-</form>
 {% endblock content %}

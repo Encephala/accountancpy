@@ -1,6 +1,6 @@
 {% if journal_list %}
-<div class="row column-gap-1 my-1 justify-content-around">
-    {% for journal in journal_list %}
+{% for journal in journal_list %}
+<div class="row row-cards mb-1 justify-content-around">
     <div class="col-xl-2 col-4 card">
         <div class="card-body">
             <a href="{% url 'journals:details' journal.id %}" class="badge badge-pill journal-link">{{ journal.id }}</a>
@@ -9,14 +9,14 @@
     <div class="col-xl-3 col-7 card">
         <div class="card-body">{{ journal.name }}</div>
     </div>
-    <div class="col-xl-1 col-4 card">
+    <div class="col-xl-2 col-4 card">
         <div class="card-body">{{ journal.type }}</div>
     </div>
-    <div class="col-xl-5 col-7 card">
+    <div class="col-xl-4 col-7 card">
         <div class="card-body">{{ journal.notes | default:'<em>No notes.</em>' }}</div>
     </div>
-    {% endfor %}
 </div>
+{% endfor %}
 {% else %}
 <p>No journals available.</p>
 {% endif %}
