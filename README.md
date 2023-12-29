@@ -1,5 +1,8 @@
 # Accountancpy
 
+[![CI](https://github.com/Encephala/accountancpy/actions/workflows/validate_push.yml/badge.svg)](https://github.com/Encephala/accountancpy/actions/workflows/validate_push.yml)
+
+
 A ~~destined-for-the-graveyard~~ project to create simple personal bookkeepping software with a Django backend.
 
 Inspired by [HTMX](https://htmx.org/)'s philosophy that simple solutions can be sufficient for neat things, Accountancpy is built with HTMX for interactivity and [Tabler](https://tabler.io/) for UI.
