@@ -1,6 +1,7 @@
 # Accountancpy
 
 [![CI](https://github.com/Encephala/accountancpy/actions/workflows/validate_push.yml/badge.svg)](https://github.com/Encephala/accountancpy/actions/workflows/validate_push.yml)
+![Coverage](coverage.svg)
 
 
 A ~~destined-for-the-graveyard~~ project to create simple personal bookkeepping software with a Django backend.
