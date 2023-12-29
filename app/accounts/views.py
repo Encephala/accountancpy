@@ -55,7 +55,7 @@ class AccountDelete(generic.DeleteView):
         try:
             super().post(request, *args, **kwargs)
         except ProtectedError as err:
-            messages.error(request, "Ledger is protected and cannot be deleted.")
+            messages.error(request, "Account is protected and cannot be deleted.")
 
             context = self.get_context_data(**kwargs)
             context["protected_objects"] = set([row.entry for row in err.protected_objects])
