@@ -30,7 +30,8 @@ Create new Ledger
     {% else %}
     <form action="{% url 'ledgers:create' %}" method="POST">
     {% endif %}
-        {% csrf_token %}
+    {% csrf_token %}
+    {{ form.non_field_errors }}
         <div class="row row-cards mb-1 justify-content-around">
             <div class="card col-2 h-100">
                 <div class="card-body">
