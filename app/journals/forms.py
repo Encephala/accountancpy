@@ -16,3 +16,11 @@ class JournalForm(forms.ModelForm):
 
         # Smaller text for Notes
         self.fields["notes"].widget.attrs["class"] += " form-control-sm"
+
+    def clean_id(self):
+        id = self.cleaned_data["id"]
+
+        if id in ["create", "hx-list"]:
+            raise forms.ValidationError("That ID is a reserved name", code = "pk-reserved-name")
+
+        return id
