@@ -5,20 +5,29 @@
 {% block content %}
 <form action="{% url 'entries:delete' entry %}" method="POST">
     {% csrf_token %}
-    <div class="container">
-        <div class="row row-cards mb-1 column-gap-1">
-            <div class="card card-body col-2 strong">ID</div>
-            <div class="card card-body col-4 strong">Journal</div>
-            <div class="card card-body col-4 strong">Notes</div>
+    <div class="container mb-3">
+        <div class="row row-cards mb-1 justify-content-around strong">
+            <div class="card col-2">
+                <div class="card-body">Journal</div>
+            </div>
+            <div class="card col-4">
+                <div class="card-body">Notes</div>
+            </div>
         </div>
-        <div class="row row-cards mb-1 column-gap-1">
-            <div class="card card-body col-2">{{ entry.id }}</div>
-            <div class="card card-body col-4">{{ entry.journal.id }}</div>
-            <div class="card card-body col-4">{{ entry.notes | default:'<em>No notes.</em>' }}</div>
+        <div class="row row-cards mb-1 justify-content-around">
+            <div class="card col-2">
+                <div class="card-body">{{ entry.journal.id }}</div>
+            </div>
+            <div class="card col-4">
+                <div class="card-body">{{ entry.notes | default:'<em>No notes.</em>' }}</div>
+            </div>
         </div>
 
-        <div class="row row-cards mb-3">
-            <div class="card col-2 ms-auto">
+        <div class="row row-cards mb-1 justify-content-around">
+            <!-- Hidden rows for alignment -->
+            <div class="col-3"></div>
+
+            <div class="card col-3">
                 <div class="card-body">
                     <div class="input-group">
                         <span class="input-group-text">
@@ -30,14 +39,35 @@
             </div>
         </div>
     </div>
+</form>
 
-    <div class="container">
-        <div id="entry_rows_placeholder"
-            hx-target="this"
-            hx-swap="outerHTML"
-            hx-trigger="load"
-            hx-get="{% url 'entries:hx-entry_rows' entry.id %}">
+<div class="container">
+    <div class="row row-cards mb-1 justify-content-around strong">
+        <div class="card col-1">
+            <div class="card-body">Entry</div>
+        </div>
+        <div class="card col-2">
+            <div class="card-body">Date</div>
+        </div>
+        <div class="card col-1">
+            <div class="card-body">Ledger</div>
+        </div>
+        <div class="card col-1">
+            <div class="card-body">Account</div>
+        </div>
+        <div class="card col-4">
+            <div class="card-body">Document</div>
+        </div>
+        <div class="card col-2">
+            <div class="card-body">Value</div>
         </div>
     </div>
-</form>
+
+    <div id="entry_rows_placeholder"
+        hx-target="this"
+        hx-swap="outerHTML"
+        hx-trigger="load"
+        hx-get="{% url 'entries:hx-entry_rows' entry.id %}">
+    </div>
+</div>
 {% endblock content %}
