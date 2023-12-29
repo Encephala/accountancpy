@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 
-from .models import *
+from .models import Account
 
 # Create your tests here.
 class AccountsViewsTest(TestCase):

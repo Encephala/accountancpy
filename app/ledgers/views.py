@@ -1,5 +1,4 @@
 import logging
-logger = logging.getLogger("django")
 
 from django.shortcuts import render, redirect
 from django.views import generic
@@ -10,6 +9,8 @@ from django.contrib import messages
 
 from .models import Ledger
 from .forms import LedgerForm
+
+logger = logging.getLogger("django")
 
 # Create your views here.
 def overview(request):

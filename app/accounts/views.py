@@ -1,5 +1,4 @@
 import logging
-logger = logging.getLogger("django")
 
 from django.shortcuts import render, redirect
 from django.views import generic
@@ -8,8 +7,11 @@ from django.urls import reverse_lazy
 from django.db.models import ProtectedError
 from django.contrib import messages
 
-from .models import *
+from .models import Account
 from .forms import AccountForm
+
+logger = logging.getLogger("django")
+
 
 # Create your views here.
 def overview(request):

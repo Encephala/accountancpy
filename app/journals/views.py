@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.db.models import ProtectedError
 from django.contrib import messages
 
-from .models import *
+from .models import Journal
 from .forms import JournalForm
 
 # Create your views here.

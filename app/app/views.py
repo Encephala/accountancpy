@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseNotFound
-from django.template import loader
+from django.http import HttpResponse
 
 # Create your views here.
 def landing(request):

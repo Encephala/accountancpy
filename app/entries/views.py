@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import generic
 from django.urls import reverse_lazy
-from django.http import HttpResponse
 
 from .models import Entry, EntryRow
 from .forms import EntryForm, EntryRowFormSet, EntryRowUpdateFormSet

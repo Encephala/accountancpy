@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 
-from .models import *
+from .models import Journal
 
 # Create your tests here.
 class JournalsViewsTest(TestCase):
