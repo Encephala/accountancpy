@@ -4,15 +4,27 @@
 
 {% block content %}
 <div class="container">
-    <div class="row row-cards mb-1 column-gap-1 justify-content-around">
-        <div class="card card-body col-2 strong">Name</div>
-        <div class="card card-body col-2 strong">Type</div>
-        <div class="card card-body col-4 strong">Notes</div>
+    <div class="row row-cards mb-1 justify-content-around strong">
+        <div class="card col-3">
+            <div class="card-body">Name</div>
+        </div>
+        <div class="card col-2">
+            <div class="card-body">Type</div>
+        </div>
+        <div class="card col-4">
+            <div class="card-body">Notes</div>
+        </div>
     </div>
-    <div class="row row-cards column-gap-1">
-        <div class="card card-body col-2">{{ account.id }}</div>
-        <div class="card card-body col-2">{{ account.is_creditor }}</div>
-        <div class="card card-body col-4">{{ account.notes | default:'<em>No notes.</em>' }}</div>
+    <div class="row row-cards mb-1 justify-content-around">
+        <div class="card col-3">
+            <div class="card-body">{{ account.name }}</div>
+        </div>
+        <div class="card col-2">
+            <div class="card-body">{{ account.is_creditor }}</div>
+        </div>
+        <div class="card col-4">
+            <div class="card-body">{{ account.notes | default:'<em>No notes.</em>' }}</div>
+        </div>
     </div>
 </div>
 
