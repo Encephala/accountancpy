@@ -8,8 +8,8 @@ def landing(request):
 def empty(request):
     return HttpResponse("")
 
-def my_404(request):
-    return render(request, "404.html")
+def my_404(request, exception = None):
+    return render(request, "404.html", { "exception": exception })
 
 def favicon(request):
     return redirect("static/media/icon_ledger.svg", permanent = True)
