@@ -32,7 +32,7 @@ SECRET_KEY = 'django-insecure-(otqwt8*eb4tm=!5t*hr03)qb0i=%$j!o+y-k69jm@q#%s+iz%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -149,7 +149,6 @@ LOGGING = {
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
-            'filters': ['require_debug_true'],
         },
     },
     'loggers': {
