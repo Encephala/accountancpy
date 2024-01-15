@@ -10,7 +10,7 @@ from django.contrib import messages
 from .models import Ledger
 from .forms import LedgerForm
 
-from ..entries.models import EntryRow
+from entries.models import EntryRow
 
 logger = logging.getLogger("django")
 
