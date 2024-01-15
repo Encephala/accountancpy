@@ -1,6 +1,6 @@
 # Accountancpy
 
-[![CI](https://github.com/Encephala/accountancpy/actions/workflows/validate_push.yml/badge.svg)](https://github.com/Encephala/accountancpy/actions/workflows/validate_push.yml)
+[![Test/Lint](https://github.com/Encephala/accountancpy/actions/workflows/test.yml/badge.svg)](https://github.com/Encephala/accountancpy/actions/workflows/test.yml)
 ![Coverage](coverage.svg)
 
 
