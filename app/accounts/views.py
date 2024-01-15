@@ -10,6 +10,8 @@ from django.contrib import messages
 from .models import Account
 from .forms import AccountForm
 
+from ..entries.models import EntryRow
+
 logger = logging.getLogger("django")
 
 
@@ -60,7 +62,9 @@ class AccountDelete(generic.DeleteView):
             messages.error(request, "Account has rows and thus cannot be deleted.")
 
             context = self.get_context_data(**kwargs)
-            context["protected_objects"] = set([row.entry for row in err.protected_objects])
+            protected_objects: set[EntryRow] = err.protected_objects # type: ignore
+
+            context["protected_objects"] = set([row.entry for row in protected_objects])
             logger.info(f"{context['protected_objects']}")
             return self.render_to_response(context)
 

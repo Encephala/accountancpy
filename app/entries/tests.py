@@ -25,7 +25,7 @@ class EntriesViewsTest(TestCase):
         e = Entry(journal = self.journal1, notes = "A testing entry")
         e.save()
 
-        response = self.client.get(reverse("entries:details", args = [e.id]))
+        response = self.client.get(reverse("entries:details", args = [e.pk]))
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, e.journal.name)
@@ -316,7 +316,7 @@ class EntryFilteredViewsTest(TestCase):
         er1.save()
         er2.save()
 
-        response = self.client.get(reverse("entries:hx-entry_rows", args = [e1.id]))
+        response = self.client.get(reverse("entries:hx-entry_rows", args = [e1.pk]))
 
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(

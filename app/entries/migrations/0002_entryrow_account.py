@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='entryrow',
             name='account',
-            field=models.ForeignKey(blank=True, default='acc1', on_delete=django.db.models.deletion.PROTECT, to='accounts.account'),
+            field=models.ForeignKey(blank=True, default='acc1', on_delete=django.db.models.deletion.PROTECT, to='accounts.account'), # type: ignore
             preserve_default=False,
         ),
     ]

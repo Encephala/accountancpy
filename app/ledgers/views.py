@@ -10,6 +10,8 @@ from django.contrib import messages
 from .models import Ledger
 from .forms import LedgerForm
 
+from ..entries.models import EntryRow
+
 logger = logging.getLogger("django")
 
 # Create your views here.
@@ -60,7 +62,9 @@ class LedgerDelete(generic.DeleteView):
             messages.error(request, "Ledger has rows and thus cannot be deleted.")
 
             context = self.get_context_data(**kwargs)
-            context["protected_objects"] = set([row.entry for row in err.protected_objects])
+
+            protected_objects: set[EntryRow] = err.protected_objects # type: ignore
+            context["protected_objects"] = set([row.entry for row in protected_objects])
             return self.render_to_response(context)
 
         return redirect(self.get_success_url())

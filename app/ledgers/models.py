@@ -20,4 +20,4 @@ class Ledger(models.Model):
         return str(self.id)
 
     def sum(self):
-        return self.entryrow_set.aggregate(sum = models.Sum("value"))["sum"]
+        return self.entryrow_set.aggregate(sum = models.Sum("value"))["sum"] # type: ignore

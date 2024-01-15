@@ -23,8 +23,10 @@ class JournalsViewsTest(TestCase):
         j1 = Journal("Journal 1", names[0], "INC")
         j2 = Journal("Journal 2", names[1], "EXP")
 
-        j1.full_clean(), j2.full_clean() # hehe this is bad code
-        j1.save(), j2.save()
+        j1.full_clean()
+        j2.full_clean()
+        j1.save()
+        j2.save()
 
         response = self.client.get(reverse("journals:hx-list"))
 

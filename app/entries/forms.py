@@ -59,7 +59,7 @@ class BaseEntryRowFormSet(BaseModelFormSet):
         sum_of_values = 0
 
         for entryrow_form in self.forms:
-            if self.can_delete and self._should_delete_form(entryrow_form):
+            if self.can_delete and self._should_delete_form(entryrow_form): # type: ignore
                 continue
 
             sum_of_values += entryrow_form.cleaned_data["value"]
@@ -87,7 +87,7 @@ class InlineEntryRowFormSet(BaseInlineFormSet):
         sum_of_values = 0
 
         for entryrow_form in self.forms:
-            if self.can_delete and self._should_delete_form(entryrow_form):
+            if self.can_delete and self._should_delete_form(entryrow_form): # type: ignore
                 continue
 
             sum_of_values += entryrow_form.cleaned_data["value"]

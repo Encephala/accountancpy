@@ -23,8 +23,10 @@ class AccountsViewsTest(TestCase):
         a1 = Account("Account 1", names[0], True)
         a2 = Account("Account 2", names[1], False)
 
-        a1.full_clean(), a2.full_clean() # hehe this is bad code
-        a1.save(), a2.save()
+        a1.full_clean()
+        a2.full_clean()
+        a1.save()
+        a2.save()
 
         response = self.client.get(reverse("accounts:hx-list"))
 

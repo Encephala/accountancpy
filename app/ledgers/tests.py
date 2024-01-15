@@ -23,8 +23,10 @@ class LedgersViewsTest(TestCase):
         l1 = Ledger("ledger 1", names[0], "ASS")
         l2 = Ledger("ledger 2", names[1], "INC")
 
-        l1.full_clean(), l2.full_clean() # hehe this is bad code
-        l1.save(), l2.save()
+        l1.full_clean()
+        l2.full_clean() # hehe this is bad code
+        l1.save()
+        l2.save()
 
         response = self.client.get(reverse("ledgers:hx-list"))
 
