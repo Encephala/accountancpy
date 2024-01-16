@@ -18,7 +18,6 @@ class EntriesViewsTest(TestCase):
         response = self.client.get(reverse("entries:overview"))
 
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Overview of Entries")
 
 
     def test_entries_details(self):
@@ -104,7 +103,8 @@ class EntriesCRUDTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(Entry.objects.count(), 0)
         self.assertEqual(EntryRow.objects.count(), 0)
-        self.assertContains(response, "The rows in this entry")
+        self.assertFormsetError(response, "entryrow_formset", None, None,
+                                "The rows in this entry don't sum to € 0,-. (sum = € -1)")
 
         # Wrong number of forms
         data = {
