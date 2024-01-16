@@ -3,10 +3,10 @@ name: "CodeQL"
 
 on:
   push:
-    paths: /app
+    paths: /app/**
 
   pull_request:
-    paths: /app
+    paths: /app/**
 
 jobs:
   analyze:
