@@ -36,3 +36,12 @@ class LedgersViewsTest(TestCase):
             [l1, l2],
             ordered = False
         )
+
+    def test_update_view(self):
+        l1 = Ledger("Journal 1", "A testing Journal", "INC")
+        l1.full_clean()
+        l1.save()
+
+        response = self.client.get(reverse("ledgers:update", args = [l1.id]))
+
+        self.assertTrue(response.context["is_update"])

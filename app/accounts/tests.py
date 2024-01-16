@@ -36,3 +36,12 @@ class AccountsViewsTest(TestCase):
             [a1, a2],
             ordered = False
         )
+
+    def test_update_view(self):
+        a1 = Account("Account 1", "A testing Account", True)
+        a1.full_clean()
+        a1.save()
+
+        response = self.client.get(reverse("accounts:update", args = [a1.id]))
+
+        self.assertTrue(response.context["is_update"])

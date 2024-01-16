@@ -36,3 +36,12 @@ class JournalsViewsTest(TestCase):
             [j1, j2],
             ordered = False
         )
+
+    def test_update_view(self):
+        j1 = Journal("Journal 1", "A testing Journal", "INC")
+        j1.full_clean()
+        j1.save()
+
+        response = self.client.get(reverse("journals:update", args = [j1.id]))
+
+        self.assertTrue(response.context["is_update"])
