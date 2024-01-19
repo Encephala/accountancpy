@@ -3,16 +3,18 @@ name: "CodeQL"
 
 on:
   push:
-    paths: /app/**
+    paths:
+      - app/**
 
   pull_request:
-    paths: /app/**
+    paths:
+      - app/**
 
 jobs:
   analyze:
     name: Analyze
     runs-on: self-hosted
-    timeout-minutes: ${{ (matrix.language == 'swift' && 120) || 360 }}
+    timeout-minutes: 360
     permissions:
       actions: read
       contents: read
