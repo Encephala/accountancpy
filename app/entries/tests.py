@@ -113,8 +113,6 @@ class EntriesCRUDTest(TestCase):
              'form-1-account': 'acc2', 'form-1-value': '-2'
         }
 
-        response = self.client.post(reverse("entries:create"), data)
-
         formset = EntryRowFormSet(data)
 
         self.assertFormSetError(formset, None, None, "The rows in this entry don't sum to € 0,-. (sum = € 2)") # type: ignore
