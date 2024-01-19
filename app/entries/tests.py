@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 from .models import Entry, EntryRow
+from .forms import EntryRowFormSet, EntryRowUpdateFormSet
 from journals.models import Journal
 from accounts.models import Account
 from ledgers.models import Ledger
@@ -90,37 +91,33 @@ class EntriesCRUDTest(TestCase):
     def test_entries_create_fails(self):
         # Data doesn't sum to 0
         data = {
-            'journal': ['journ1'], 'notes': [''], 'form-TOTAL_FORMS': ['2'],
-             'form-INITIAL_FORMS': ['0'], 'form-MIN_NUM_FORMS': ['0'], 'form-MAX_NUM_FORMS': ['1000'],
-             'form-0-id': [''], 'form-0-date': ['2023-12-27'], 'initial-form-0-date': ['2023-12-27', '', ''],
-             'form-0-ledger': ['test1'], 'form-0-account': ['acc1'], 'form-0-value': ['2'], 'form-1-id': [''],
-             'form-1-DELETE': [''], 'form-1-date': ['2023-12-27'], 'form-1-ledger': ['test2'],
-             'form-1-account': ['acc2'], 'form-1-value': ['-3']
+            'journal': 'journ1', 'notes': '', 'form-TOTAL_FORMS': '2',
+            'form-INITIAL_FORMS': '0', 'form-MIN_NUM_FORMS': '0', 'form-MAX_NUM_FORMS': '1000',
+            'form-0-id': '', 'form-0-date': '2023-12-27', 'initial-form-0-date': '2023-12-27',
+            'form-0-ledger': 'test1', 'form-0-account': 'acc1', 'form-0-value': '2', 'form-1-id': '',
+            'form-1-DELETE': '', 'form-1-date': '2023-12-27', 'form-1-ledger': 'test2',
+            'form-1-account': 'acc2', 'form-1-value': '-3'
         }
 
-        response = self.client.post(reverse("entries:create"), data)
+        formset = EntryRowFormSet(data)
 
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(Entry.objects.count(), 0)
-        self.assertEqual(EntryRow.objects.count(), 0)
-        self.assertFormsetError(response, "entryrow_formset", None, None,
-                                "The rows in this entry don't sum to € 0,-. (sum = € -1)")
+        self.assertFormSetError(formset, None, None, "The rows in this entry don't sum to € 0,-. (sum = € -1)") # type: ignore
 
         # Wrong number of forms
         data = {
-            'journal': ['journ1'], 'notes': [''], 'form-TOTAL_FORMS': ['1'],
-             'form-INITIAL_FORMS': ['0'], 'form-MIN_NUM_FORMS': ['0'], 'form-MAX_NUM_FORMS': ['1000'],
-             'form-0-id': [''], 'form-0-date': ['2023-12-27'], 'initial-form-0-date': ['2023-12-27', '', ''],
-             'form-0-ledger': ['test1'], 'form-0-account': ['acc1'], 'form-0-value': ['2'], 'form-1-id': [''],
-             'form-1-DELETE': [''], 'form-1-date': ['2023-12-27'], 'form-1-ledger': ['test2'],
-             'form-1-account': ['acc2'], 'form-1-value': ['-2']
+            'journal': 'journ1', 'notes': '', 'form-TOTAL_FORMS': '1',
+             'form-INITIAL_FORMS': '0', 'form-MIN_NUM_FORMS': '0', 'form-MAX_NUM_FORMS': '1000',
+             'form-0-id': '', 'form-0-date': '2023-12-27', 'initial-form-0-date': '2023-12-27',
+             'form-0-ledger': 'test1', 'form-0-account': 'acc1', 'form-0-value': '2', 'form-1-id': '',
+             'form-1-DELETE': '', 'form-1-date': '2023-12-27', 'form-1-ledger': 'test2',
+             'form-1-account': 'acc2', 'form-1-value': '-2'
         }
 
         response = self.client.post(reverse("entries:create"), data)
 
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(Entry.objects.count(), 0)
-        self.assertEqual(EntryRow.objects.count(), 0)
+        formset = EntryRowFormSet(data)
+
+        self.assertFormSetError(formset, None, None, "The rows in this entry don't sum to € 0,-. (sum = € 2)") # type: ignore
 
         # Missing data
         data = {
@@ -135,6 +132,7 @@ class EntriesCRUDTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(Entry.objects.count(), 0)
         self.assertEqual(EntryRow.objects.count(), 0)
+        self.assertEqual(response.context["entryrow_formset"].errors[1]["date"], ["This field is required."])
 
 
     def test_entries_update(self):
@@ -214,23 +212,23 @@ class EntriesCRUDTest(TestCase):
 
         # Data doesn't sum to 0
         data = {
-            'journal': ['journ2'], 'notes': [''], 'entryrow_set-TOTAL_FORMS': ['3'],
-            'entryrow_set-INITIAL_FORMS': ['3'], 'entryrow_set-MIN_NUM_FORMS': ['0'],
-            'entryrow_set-MAX_NUM_FORMS': ['1000'], 'entryrow_set-0-id': ['1'],
-            'entryrow_set-0-date': ['2023-12-27'], 'initial-entryrow_set-0-date': ['2023-12-27'],
-            'entryrow_set-0-ledger': ['test1'], 'entryrow_set-0-account': [''], 'entryrow_set-0-value': ['12345'],
-            'entryrow_set-1-id': ['2'], 'entryrow_set-1-date': ['2023-12-27'],
-            'initial-entryrow_set-1-date': ['2023-12-27'], 'entryrow_set-1-ledger': ['test2'],
-            'entryrow_set-1-account': [''], 'entryrow_set-1-value': ['2.00'], 'entryrow_set-2-id': ['3'],
-            'entryrow_set-2-date': ['2023-12-27'], 'initial-entryrow_set-2-date': ['2023-12-27'],
-            'entryrow_set-2-ledger': ['test1'], 'entryrow_set-2-account': [''], 'entryrow_set-2-value': ['-3.00']
+            'journal': 'journ2', 'notes': '', 'entryrow_set-TOTAL_FORMS': '3',
+            'entryrow_set-INITIAL_FORMS': '3', 'entryrow_set-MIN_NUM_FORMS': '0',
+            'entryrow_set-MAX_NUM_FORMS': '1000', 'entryrow_set-0-id': '1',
+            'entryrow_set-0-date': '2023-12-27', 'initial-entryrow_set-0-date': '2023-12-27',
+            'entryrow_set-0-ledger': 'test1', 'entryrow_set-0-account': '', 'entryrow_set-0-value': '12345',
+            'entryrow_set-1-id': '2', 'entryrow_set-1-date': '2023-12-27',
+            'initial-entryrow_set-1-date': '2023-12-27', 'entryrow_set-1-ledger': 'test2',
+            'entryrow_set-1-account': '', 'entryrow_set-1-value': '2.00', 'entryrow_set-2-id': '3',
+            'entryrow_set-2-date': '2023-12-27', 'initial-entryrow_set-2-date': '2023-12-27',
+            'entryrow_set-2-ledger': 'test1', 'entryrow_set-2-account': '', 'entryrow_set-2-value': '-3.00'
         }
 
-        response = self.client.post(reverse("entries:update", args = [1]), data)
+        formset = EntryRowUpdateFormSet(data)
 
-        self.assertEqual(response.status_code, 200)
         self.assertEqual(EntryRow.objects.get(pk = 1).value, 69.00)
-        self.assertContains(response, "The rows in this entry")
+        self.assertFormSetError(formset, None, None, "The rows in this entry don't sum to € 0,-. (sum = € 12344.00)") # type: ignore
+
 
 
     def test_entries_delete(self):
