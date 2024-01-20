@@ -43,11 +43,11 @@ class EntryCreate(generic.CreateView):
     def post(self, request, *args, **kwargs):
         self.object = None
 
-        entryform = EntryForm(request.POST)
+        entry_form = EntryForm(request.POST)
         entryrow_formset = EntryRowFormSet(request.POST)
 
-        if entryform.is_valid() and entryrow_formset.is_valid():
-            entry = entryform.save()
+        if entry_form.is_valid() and entryrow_formset.is_valid():
+            entry = entry_form.save()
 
             entryrow_instances = entryrow_formset.save(commit = False)
 
@@ -57,10 +57,10 @@ class EntryCreate(generic.CreateView):
 
             return redirect(self.get_success_url())
 
-        return self.form_invalid(entryform, entryrow_formset)
+        return self.form_invalid(entry_form, entryrow_formset)
 
-    def form_invalid(self, entryform, entryrow_formset):
-        context = self.get_context_data(form = entryform, entryrow_formset = entryrow_formset)
+    def form_invalid(self, entry_form, entryrow_formset):
+        context = self.get_context_data(form = entry_form, entryrow_formset = entryrow_formset)
 
         return self.render_to_response(context)
 
@@ -86,19 +86,19 @@ class EntryUpdate(generic.UpdateView):
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
 
-        entryform = EntryForm(request.POST, instance = self.object)
+        entry_form = EntryForm(request.POST, instance = self.object)
         entryrow_formset = EntryRowUpdateFormSet(request.POST, instance = self.object)
 
-        if entryform.is_valid() and entryrow_formset.is_valid():
-            entryform.save()
+        if entry_form.is_valid() and entryrow_formset.is_valid():
+            entry_form.save()
             entryrow_formset.save()
 
             return redirect(self.get_success_url())
 
-        return self.form_invalid(entryform, entryrow_formset)
+        return self.form_invalid(entry_form, entryrow_formset)
 
-    def form_invalid(self, entryform, entryrow_formset):
-        context = self.get_context_data(form = entryform, entryrow_formset = entryrow_formset)
+    def form_invalid(self, entry_form, entryrow_formset):
+        context = self.get_context_data(form = entry_form, entryrow_formset = entryrow_formset)
 
         return self.render_to_response(context)
 
