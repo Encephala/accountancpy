@@ -13,13 +13,6 @@ updates:
       prefix: dep
 
   - package-ecosystem: docker
-    directory: /.devcontainer
-    schedule:
-      interval: weekly
-    commit-message:
-      prefix: dep
-
-  - package-ecosystem: docker
     directory: /
     schedule:
       interval: weekly
