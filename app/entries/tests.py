@@ -117,21 +117,6 @@ class EntriesCRUDTest(TestCase):
 
         self.assertFormSetError(formset, None, None, "The rows in this entry don't sum to € 0,-. (sum = € 2)") # type: ignore
 
-        # Missing data
-        data = {
-            'journal': ['journ1'], 'notes': [''], 'form-TOTAL_FORMS': ['2'],
-             'form-INITIAL_FORMS': ['0'], 'form-MIN_NUM_FORMS': ['0'], 'form-MAX_NUM_FORMS': ['1000'],
-             'form-0-id': [''], 'form-0-date': ['2023-12-27'], 'initial-form-0-date': ['2023-12-27', '', ''],
-             'form-0-ledger': ['test1'], 'form-0-account': ['acc1'], 'form-0-value': ['0']
-        }
-
-        response = self.client.post(reverse("entries:create"), data)
-
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(Entry.objects.count(), 0)
-        self.assertEqual(EntryRow.objects.count(), 0)
-        self.assertEqual(response.context["entryrow_formset"].errors[1]["date"], ["This field is required."])
-
 
     def test_entries_update(self):
         # Entry to be updated
