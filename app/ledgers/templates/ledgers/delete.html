@@ -4,6 +4,26 @@
 
 {% block page-title %} Delete Ledger: {{ ledger }} {% endblock %}
 
+{% block navbar-extra %}
+<div class="vr"></div>
+
+<li class="nav-item">
+    <a class="nav-link navbar-ledger" href="{% url 'ledgers:details' ledger %}">
+    <span class="nav-link-title">
+        Details
+    </span>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link navbar-ledger" href="{% url 'ledgers:update' ledger %}">
+    <span class="nav-link-title">
+        Update
+    </span>
+    </a>
+</li>
+{% endblock %}
+
 {% block content %}
 <div class="container mb-3">
     <form action="{% url 'ledgers:delete' ledger %}" method="POST">

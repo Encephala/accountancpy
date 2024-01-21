@@ -2,6 +2,26 @@
 
 {% block page-title %} Entry: {{ entry.id }} {% endblock %}
 
+{% block navbar-extra %}
+<div class="vr"></div>
+
+<li class="nav-item">
+    <a class="nav-link navbar-entry" href="{% url 'entries:update' entry %}">
+    <span class="nav-link-title">
+        Update
+    </span>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link navbar-entry" href="{% url 'entries:delete' entry %}">
+    <span class="nav-link-title">
+        Delete
+    </span>
+    </a>
+</li>
+{% endblock %}
+
 {% block content %}
 <div class="container">
     <div class="row row-cards mb-1 justify-content-around strong">

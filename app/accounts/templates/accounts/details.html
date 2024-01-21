@@ -2,6 +2,26 @@
 
 {% block page-title %} Account: {{ account.id }} {% endblock %}
 
+{% block navbar-extra %}
+<div class="vr"></div>
+
+<li class="nav-item">
+    <a class="nav-link navbar-account" href="{% url 'accounts:update' account %}">
+    <span class="nav-link-title">
+        Update
+    </span>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link navbar-account" href="{% url 'accounts:delete' account %}">
+    <span class="nav-link-title">
+        Delete
+    </span>
+    </a>
+</li>
+{% endblock %}
+
 {% block content %}
 <div class="container">
     <div class="row row-cards mb-1 justify-content-around strong">

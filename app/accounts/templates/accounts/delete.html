@@ -4,6 +4,26 @@
 
 {% block page-title %} Delete Account: {{ account }} {% endblock %}
 
+{% block navbar-extra %}
+<div class="vr"></div>
+
+<li class="nav-item">
+    <a class="nav-link navbar-account" href="{% url 'accounts:details' account %}">
+    <span class="nav-link-title">
+        Details
+    </span>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link navbar-account" href="{% url 'accounts:update' account %}">
+    <span class="nav-link-title">
+        Update
+    </span>
+    </a>
+</li>
+{% endblock %}
+
 {% block content %}
 <div class="container">
     <form action="{% url 'accounts:delete' account %}" method="POST">
