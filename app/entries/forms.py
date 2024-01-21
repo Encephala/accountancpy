@@ -46,7 +46,7 @@ class BaseEntryRowFormSet(BaseModelFormSet):
 
         for entryrow_form in self.forms:
             # Force non-edited rows to still be validated
-            entryrow_form.empty_permitted = False
+            entryrow_form.empty_permitted = True
 
             # Render the HTML required attribute
             entryrow_form.use_required_attribute = True
@@ -59,6 +59,9 @@ class BaseEntryRowFormSet(BaseModelFormSet):
         sum_of_values = 0
 
         for entryrow_form in self.forms:
+            if entryrow_form.empty_permitted and not entryrow_form.has_changed():
+                continue
+
             if self.can_delete and self._should_delete_form(entryrow_form): # type: ignore
                 continue
 
@@ -74,6 +77,7 @@ class InlineEntryRowFormSet(BaseInlineFormSet):
 
         for entryrow_form in self.forms:
             # Force non-edited rows to still be validated
+            # so that the clean method below works
             entryrow_form.empty_permitted = False
 
             # Render the HTML required attribute
@@ -87,6 +91,9 @@ class InlineEntryRowFormSet(BaseInlineFormSet):
         sum_of_values = 0
 
         for entryrow_form in self.forms:
+            if entryrow_form.empty_permitted and not entryrow_form.has_changed():
+                continue
+
             if self.can_delete and self._should_delete_form(entryrow_form): # type: ignore
                 continue
 

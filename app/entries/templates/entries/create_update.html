@@ -91,10 +91,19 @@ Create new Entry
             row.classList.add("fade-out");
             setTimeout(() => {
                 row.hidden = true;
-                row.querySelector(".delete input").checked = true;
-                row.querySelectorAll("input, select").forEach((element) => element.required = false);
                 // Delete divider
                 row.previousElementSibling.remove();
+
+                {% if entryrow_formset.can_delete %}
+                row.querySelector(".delete input").checked = true;
+                row.querySelectorAll("input, select").forEach((element) => element.required = false);
+                {% else %}
+                // Make form empty (default values) so that Django filters it
+                row.querySelectorAll("input, select").forEach((element) => {
+                    element.value = "";
+                    element.required = false;
+                });
+                {% endif %}
             }, 150);
         } else {
             console.log("Why are you trying to hack the site >:(")
