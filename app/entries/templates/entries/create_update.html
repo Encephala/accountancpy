@@ -123,14 +123,14 @@ Create new Entry
         <div class="row row-cards mb-1 justify-content-around">
             <div class="card col-2 h-100">
                 <div class="card-body">
-                    {{ form.journal.errors }}
                     {{ form.journal }}
+                    {{ form.journal.errors }}
                 </div>
             </div>
             <div class="card col-6">
                 <div class="card-body">
-                    {{ form.notes.errors }}
                     {{ form.notes }}
+                    {{ form.notes.errors }}
                 </div>
             </div>
         </div>
@@ -198,34 +198,34 @@ Create new Entry
                 </div>
                 <div class="card col-5 col-xl-2 date">
                     <div class="card-body">
-                        {{ form.date.errors }}
                         {{ form.date }}
+                        {{ form.date.errors }}
                     </div>
                 </div>
                 <div class="card col-3 col-xl-1 ledger">
                     <div class="card-body">
-                        {{ form.ledger.errors }}
                         {{ form.ledger }}
+                        {{ form.ledger.errors }}
                     </div>
                 </div>
                 <div class="card col-3 col-xl-1 account">
                     <div class="card-body">
-                        {{ form.account.errors }}
                         {{ form.account }}
+                        {{ form.account.errors }}
                     </div>
                 </div>
                 <div class="card col-6 col-xl-4 document">
                     <div class="card-body">
-                        {{ form.document.errors }}
                         {{ form.document }}
+                        {{ form.document.errors }}
                     </div>
                 </div>
                 <div class="card col-6 col-xl-2 value"
                 onkeydown="tab_pressed(event)"
                 >
                     <div class="card-body">
-                        {{ form.value.errors }}
                         {{ form.value }}
+                        {{ form.value.errors }}
                     </div>
                 </div>
             </div>

@@ -49,22 +49,22 @@ Create new Account
             {% else %}
             <div class="card col-2 h-100">
                 <div class="card-body">
-                    {{ form.id.errors }}
                     {{ form.id }}
+                    {{ form.id.errors }}
                 </div>
             </div>
             {% endif %}
 
             <div class="card col-3 h-100">
                 <div class="card-body">
-                    {{ form.name.errors }}
                     {{ form.name }}
+                    {{ form.name.errors }}
                 </div>
             </div>
             <div class="card col-2 h-100">
                 <div class="card-body">
-                    {{ form.is_creditor.errors }}
                     {{ form.is_creditor }}
+                    {{ form.is_creditor.errors }}
                 </div>
             </div>
             {% if is_update %}
@@ -73,8 +73,8 @@ Create new Account
             <div class="card col-4">
             {% endif %}
                 <div class="card-body">
-                    {{ form.notes.errors }}
                     {{ form.notes }}
+                    {{ form.notes.errors }}
                 </div>
             </div>
         </div>
