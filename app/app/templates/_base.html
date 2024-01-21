@@ -206,8 +206,12 @@
     <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true"
     data-bs-autohide="false" data-bs-toggle="toast">
         <div class="toast-header">
-        <strong class="me-auto text-danger">Error</strong>
-        <button type="button" class="ms-2 btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            <img src="{% static 'media/feather/alert-circle.svg' %}" class="mx-1" alt="Alert circle"
+            style="height: var(--tblr-toast-font-size);
+            /* Set color to --tblr-danger-rgb */
+            filter: invert(38%) sepia(84%) saturate(3822%) hue-rotate(342deg) brightness(90%) contrast(85%);">
+            <strong class="me-auto text-danger">Error</strong>
+            <button type="button" class="ms-2 btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body">
             {{ message }}
