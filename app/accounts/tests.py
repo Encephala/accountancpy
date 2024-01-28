@@ -3,25 +3,24 @@ from django.urls import reverse
 
 from .models import Account
 
+
 # Create your tests here.
 class AccountsViewsTest(TestCase):
-
     # Create account and see if it's in the rendered list
     def test_account_details(self):
-        a1 = Account("test", "a testing Account", True)
+        a1 = Account("test", "a testing Account", is_creditor=True)
         a1.full_clean()
         a1.save()
 
-        response = self.client.get(reverse("accounts:details", args = [a1.id]))
+        response = self.client.get(reverse("accounts:details", args=[a1.id]))
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, a1.name)
 
-
     def test_account_list_populated(self):
         names = ["A testing Account", "A second one"]
-        a1 = Account("Account 1", names[0], True)
-        a2 = Account("Account 2", names[1], False)
+        a1 = Account("Account 1", names[0], is_creditor=True)
+        a2 = Account("Account 2", names[1], is_creditor=False)
 
         a1.full_clean()
         a2.full_clean()
@@ -31,17 +30,13 @@ class AccountsViewsTest(TestCase):
         response = self.client.get(reverse("accounts:hx-list"))
 
         self.assertEqual(response.status_code, 200)
-        self.assertQuerysetEqual(
-            response.context["account_list"],
-            [a1, a2],
-            ordered = False
-        )
+        self.assertQuerysetEqual(response.context["account_list"], [a1, a2], ordered=False)
 
     def test_update_view(self):
-        a1 = Account("Account 1", "A testing Account", True)
+        a1 = Account("Account 1", "A testing Account", is_creditor=True)
         a1.full_clean()
         a1.save()
 
-        response = self.client.get(reverse("accounts:update", args = [a1.id]))
+        response = self.client.get(reverse("accounts:update", args=[a1.id]))
 
         self.assertTrue(response.context["is_update"])

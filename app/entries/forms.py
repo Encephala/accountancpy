@@ -1,17 +1,23 @@
+import logging
+
 from django import forms
-from django.forms import BaseModelFormSet, modelformset_factory, BaseInlineFormSet, inlineformset_factory,\
-    ValidationError
+from django.forms import (
+    BaseInlineFormSet,
+    BaseModelFormSet,
+    ValidationError,
+    inlineformset_factory,
+    modelformset_factory,
+)
 
 from .models import Entry, EntryRow
 
-import logging
 logger = logging.getLogger("django")
 
 
 class EntryForm(forms.ModelForm):
     class Meta:
         model = Entry
-        fields = "__all__"
+        fields = ["journal", "notes"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -27,9 +33,10 @@ class EntryForm(forms.ModelForm):
 class EntryRowForm(forms.ModelForm):
     class Meta:
         model = EntryRow
-        exclude = ["entry"]
+        # Excludes "entry" field
+        fields = ["date", "ledger", "account", "document", "value"]
         widgets = {
-            "date": forms.DateInput(attrs = {"type":"date"}),
+            "date": forms.DateInput(attrs={"type": "date"}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -62,14 +69,19 @@ class BaseEntryRowFormSet(BaseModelFormSet):
             if entryrow_form.empty_permitted and not entryrow_form.has_changed():
                 continue
 
-            if self.can_delete and self._should_delete_form(entryrow_form): # type: ignore
+            if self.can_delete and self._should_delete_form(entryrow_form):
                 continue
 
             sum_of_values += entryrow_form.cleaned_data["value"]
 
         if sum_of_values != 0:
-            raise ValidationError("The rows in this entry don't sum to € 0,-. (sum = € %(sum)s)",
-                                params = {"sum": sum_of_values}, code = "nonzero-sum")
+            error_msg = "The rows in this entry don't sum to € 0,-. (sum = € %(sum)s)"
+            raise ValidationError(
+                error_msg,
+                params={"sum": sum_of_values},
+                code="nonzero-sum",
+            )
+
 
 class InlineEntryRowFormSet(BaseInlineFormSet):
     def __init__(self, *args, **kwargs):
@@ -94,16 +106,26 @@ class InlineEntryRowFormSet(BaseInlineFormSet):
             if entryrow_form.empty_permitted and not entryrow_form.has_changed():
                 continue
 
-            if self.can_delete and self._should_delete_form(entryrow_form): # type: ignore
+            if self.can_delete and self._should_delete_form(entryrow_form):
                 continue
 
             sum_of_values += entryrow_form.cleaned_data["value"]
 
         if sum_of_values != 0:
-            raise ValidationError("The rows in this entry don't sum to € 0,-. (sum = € %(sum)s)",
-                                params = {"sum": sum_of_values}, code = "nonzero-sum")
+            error_msg = "The rows in this entry don't sum to € 0,-. (sum = € %(sum)s)"
+            raise ValidationError(
+                error_msg,
+                params={"sum": sum_of_values},
+                code="nonzero-sum",
+            )
 
 
-EntryRowFormSet = modelformset_factory(EntryRow, form = EntryRowForm, formset = BaseEntryRowFormSet)
-EntryRowUpdateFormSet = inlineformset_factory(Entry, EntryRow, form = EntryRowForm, formset = InlineEntryRowFormSet,
-                                              can_delete = True, extra = 0)
+EntryRowFormSet = modelformset_factory(EntryRow, form=EntryRowForm, formset=BaseEntryRowFormSet)
+EntryRowUpdateFormSet = inlineformset_factory(
+    Entry,
+    EntryRow,
+    form=EntryRowForm,
+    formset=InlineEntryRowFormSet,
+    can_delete=True,
+    extra=0,
+)

@@ -1,16 +1,18 @@
 import logging
 
-from django.shortcuts import render, redirect
-from django.views import generic
-from django.urls import reverse_lazy
+from typing import TYPE_CHECKING
 
-from django.db.models import ProtectedError
 from django.contrib import messages
+from django.db.models import ProtectedError
+from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
+from django.views import generic
 
-from .models import Account
+if TYPE_CHECKING:
+    from entries.models import EntryRow
+
 from .forms import AccountForm
-
-from entries.models import EntryRow
+from .models import Account
 
 logger = logging.getLogger("django")
 
@@ -62,10 +64,10 @@ class AccountDelete(generic.DeleteView):
             messages.error(request, "Account has rows and thus cannot be deleted.")
 
             context = self.get_context_data(**kwargs)
-            protected_objects: set[EntryRow] = err.protected_objects # type: ignore
+            protected_objects: set[EntryRow] = err.protected_objects  # type: ignore reportGeneralTypeIssues
 
-            context["protected_objects"] = set([row.entry for row in protected_objects])
-            logger.info(f"{context['protected_objects']}")
+            context["protected_objects"] = {row.entry for row in protected_objects}
+            logger.info("%s", context["protected_objects"])
             return self.render_to_response(context)
 
         return redirect(self.get_success_url())

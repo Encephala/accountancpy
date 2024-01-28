@@ -2,10 +2,11 @@ from django import forms
 
 from .models import Ledger
 
+
 class LedgerForm(forms.ModelForm):
     class Meta:
         model = Ledger
-        fields = "__all__"
+        fields = ["id", "name", "type", "notes"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -18,9 +19,10 @@ class LedgerForm(forms.ModelForm):
         self.fields["notes"].widget.attrs["class"] += " form-control-sm"
 
     def clean_id(self):
-        id = self.cleaned_data["id"]
+        pk = self.cleaned_data["id"]
 
-        if id in ["create", "hx-list"]:
-            raise forms.ValidationError("That ID is a reserved name", code = "pk-reserved-name")
+        if pk in ["create", "hx-list"]:
+            error_msg = "That ID is a reserved name"
+            raise forms.ValidationError(error_msg, code="pk-reserved-name")
 
-        return id
+        return pk

@@ -1,12 +1,12 @@
-from django.shortcuts import render, redirect
-from django.views import generic
-from django.urls import reverse_lazy
-
-from django.db.models import ProtectedError
 from django.contrib import messages
+from django.db.models import ProtectedError
+from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
+from django.views import generic
 
-from .models import Journal
 from .forms import JournalForm
+from .models import Journal
+
 
 # Create your views here.
 def overview(request):
@@ -16,6 +16,7 @@ def overview(request):
 class JournalDetails(generic.DetailView):
     model = Journal
     template_name = "journals/details.html"
+
 
 class JournalList(generic.ListView):
     model = Journal

@@ -1,4 +1,5 @@
 import logging
+from typing import TYPE_CHECKING
 
 from django.shortcuts import render, redirect
 from django.views import generic
@@ -10,9 +11,11 @@ from django.contrib import messages
 from .models import Ledger
 from .forms import LedgerForm
 
-from entries.models import EntryRow
+if TYPE_CHECKING:
+    from entries.models import EntryRow
 
 logger = logging.getLogger("django")
+
 
 # Create your views here.
 def overview(request):
@@ -63,8 +66,8 @@ class LedgerDelete(generic.DeleteView):
 
             context = self.get_context_data(**kwargs)
 
-            protected_objects: set[EntryRow] = err.protected_objects # type: ignore
-            context["protected_objects"] = set([row.entry for row in protected_objects])
+            protected_objects: set[EntryRow] = err.protected_objects  # type: ignore reportGeneralTypeIssues
+            context["protected_objects"] = {row.entry for row in protected_objects}
             return self.render_to_response(context)
 
         return redirect(self.get_success_url())
@@ -84,5 +87,3 @@ class LedgersList(generic.ListView):
     def get_queryset(self):
         """Return first 50 Ledgers."""
         return Ledger.objects.all()[:50]
-
-

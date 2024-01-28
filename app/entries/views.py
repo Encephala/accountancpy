@@ -1,14 +1,15 @@
-from django.shortcuts import render, redirect
-from django.views import generic
-from django.urls import reverse_lazy
-
-from .models import Entry, EntryRow
-from .forms import EntryForm, EntryRowFormSet, EntryRowUpdateFormSet
+import logging
 
 from django.db.models import Count
+from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
+from django.views import generic
 
-import logging
+from .forms import EntryForm, EntryRowFormSet, EntryRowUpdateFormSet
+from .models import Entry, EntryRow
+
 logger = logging.getLogger("django")
+
 
 # Create your views here.
 def overview(request):
@@ -28,7 +29,7 @@ class EntryList(generic.ListView):
     # Annotate entries with num_rows
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["entry_list"] = self.get_queryset().annotate(num_rows = Count("entryrow"))
+        context["entry_list"] = self.get_queryset().annotate(num_rows=Count("entryrow"))
         return context
 
 
@@ -40,7 +41,7 @@ class EntryCreate(generic.CreateView):
     def get_success_url(self):
         return reverse_lazy("entries:overview")
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):  # noqa: ARG002
         self.object = None
 
         entry_form = EntryForm(request.POST)
@@ -49,7 +50,7 @@ class EntryCreate(generic.CreateView):
         if entry_form.is_valid() and entryrow_formset.is_valid():
             entry = entry_form.save()
 
-            entryrow_instances = entryrow_formset.save(commit = False)
+            entryrow_instances = entryrow_formset.save(commit=False)
 
             for instance in entryrow_instances:
                 instance.entry = entry
@@ -60,17 +61,17 @@ class EntryCreate(generic.CreateView):
         return self.form_invalid(entry_form, entryrow_formset)
 
     def form_invalid(self, entry_form, entryrow_formset):
-        context = self.get_context_data(form = entry_form, entryrow_formset = entryrow_formset)
+        context = self.get_context_data(form=entry_form, entryrow_formset=entryrow_formset)
 
         return self.render_to_response(context)
 
-    def get_context_data(self, entryrow_formset = None, **kwargs):
+    def get_context_data(self, entryrow_formset=None, **kwargs):
         kwargs["is_update"] = False
 
         if entryrow_formset:
             kwargs["entryrow_formset"] = entryrow_formset
         else:
-            kwargs["entryrow_formset"] = EntryRowFormSet(queryset = EntryRow.objects.none())
+            kwargs["entryrow_formset"] = EntryRowFormSet(queryset=EntryRow.objects.none())
 
         return super().get_context_data(**kwargs)
 
@@ -81,13 +82,13 @@ class EntryUpdate(generic.UpdateView):
     form_class = EntryForm
 
     def get_success_url(self):
-        return reverse_lazy("entries:details", kwargs = { "pk": self.object.pk })
+        return reverse_lazy("entries:details", kwargs={"pk": self.object.pk})
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):  # noqa: ARG002
         self.object = self.get_object()
 
-        entry_form = EntryForm(request.POST, instance = self.object)
-        entryrow_formset = EntryRowUpdateFormSet(request.POST, instance = self.object)
+        entry_form = EntryForm(request.POST, instance=self.object)
+        entryrow_formset = EntryRowUpdateFormSet(request.POST, instance=self.object)
 
         if entry_form.is_valid() and entryrow_formset.is_valid():
             entry_form.save()
@@ -98,19 +99,20 @@ class EntryUpdate(generic.UpdateView):
         return self.form_invalid(entry_form, entryrow_formset)
 
     def form_invalid(self, entry_form, entryrow_formset):
-        context = self.get_context_data(form = entry_form, entryrow_formset = entryrow_formset)
+        context = self.get_context_data(form=entry_form, entryrow_formset=entryrow_formset)
 
         return self.render_to_response(context)
 
-    def get_context_data(self, entryrow_formset = None, **kwargs):
+    def get_context_data(self, entryrow_formset=None, **kwargs):
         kwargs["is_update"] = True
 
         if entryrow_formset:
             kwargs["entryrow_formset"] = entryrow_formset
         else:
-            kwargs["entryrow_formset"] = EntryRowUpdateFormSet(instance = self.object)
+            kwargs["entryrow_formset"] = EntryRowUpdateFormSet(instance=self.object)
 
         return super().get_context_data(**kwargs)
+
 
 class EntryDelete(generic.DeleteView):
     model = Entry
@@ -126,7 +128,7 @@ class EntryRowByLedger(generic.ListView):
     ordering = "id"
 
     def get_queryset(self):
-        return EntryRow.objects.filter(ledger = self.kwargs["pk"])
+        return EntryRow.objects.filter(ledger=self.kwargs["pk"])
 
 
 class EntryRowByEntry(generic.ListView):
@@ -136,7 +138,7 @@ class EntryRowByEntry(generic.ListView):
     ordering = "id"
 
     def get_queryset(self):
-        return EntryRow.objects.filter(entry = self.kwargs["pk"])
+        return EntryRow.objects.filter(entry=self.kwargs["pk"])
 
 
 class EntryRowByAccount(generic.ListView):
@@ -146,7 +148,7 @@ class EntryRowByAccount(generic.ListView):
     ordering = "id"
 
     def get_queryset(self):
-        return EntryRow.objects.filter(account = self.kwargs["pk"])
+        return EntryRow.objects.filter(account=self.kwargs["pk"])
 
 
 class EntryByJournal(generic.ListView):
@@ -157,8 +159,8 @@ class EntryByJournal(generic.ListView):
     # Annotate entries with num_rows
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["entry_list"] = self.get_queryset().annotate(num_rows = Count("entryrow"))
+        context["entry_list"] = self.get_queryset().annotate(num_rows=Count("entryrow"))
         return context
 
     def get_queryset(self):
-        return Entry.objects.filter(journal = self.kwargs["pk"])
+        return Entry.objects.filter(journal=self.kwargs["pk"])
