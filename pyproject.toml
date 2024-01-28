@@ -1,0 +1,30 @@
+[tool.ruff]
+extend-exclude = ["migrations"]
+
+line-length = 120
+
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["ALL"]
+
+# TODO: Enable "A" linting
+# TODO: Re-enable S105
+# Env var in compose file for prod,
+# idk what good dev solution is
+ignore = [
+    "A",      # Shadowing Python builtins
+    "I",      # Import sorting
+    "ANN",    # Annotations
+    "S105",   # Possible hardcoded password
+    "CPY",    # Copyright
+    "PT",     # Pytest
+    "D1",     # Missing docstring
+    "D203",   # Prefer D211, no blank line before class docstring
+    "D212",   # Multi-line docstring summary should start at the first line
+    "COM812", # Missing trailing comma
+    "TD002",  # Missing TODO author
+    "TD003",  # Missing TODO issue link
+    "FIX",    # TODO in file
+    "RUF012", # Mutable class attributes should be annotated
+]
