@@ -69,7 +69,7 @@ class BaseEntryRowFormSet(BaseModelFormSet):
             if entryrow_form.empty_permitted and not entryrow_form.has_changed():
                 continue
 
-            if self.can_delete and self._should_delete_form(entryrow_form):
+            if self.can_delete and self._should_delete_form(entryrow_form):  # type: ignore reportGeneralTypeIssues
                 continue
 
             sum_of_values += entryrow_form.cleaned_data["value"]
@@ -106,7 +106,7 @@ class InlineEntryRowFormSet(BaseInlineFormSet):
             if entryrow_form.empty_permitted and not entryrow_form.has_changed():
                 continue
 
-            if self.can_delete and self._should_delete_form(entryrow_form):
+            if self.can_delete and self._should_delete_form(entryrow_form):  # type: ignore reportGeneralTypeIssues
                 continue
 
             sum_of_values += entryrow_form.cleaned_data["value"]

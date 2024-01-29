@@ -21,6 +21,7 @@ class EntryRow(models.Model):
     account = models.ForeignKey("accounts.Account", on_delete=models.PROTECT, null=True, blank=True)
     document = models.FileField(upload_to=upload_path, blank=True)
     value = models.DecimalField(max_digits=99, decimal_places=2, blank=False)
+    reconciled = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.pk)
