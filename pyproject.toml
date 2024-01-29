@@ -8,12 +8,10 @@ target-version = "py311"
 [tool.ruff.lint]
 select = ["ALL"]
 
-# TODO: Enable "A" linting
 # TODO: Re-enable S105
 # Env var in compose file for prod,
 # idk what good dev solution is
 ignore = [
-    "A",      # Shadowing Python builtins
     "I",      # Import sorting
     "ANN",    # Annotations
     "S105",   # Possible hardcoded password
