@@ -1,7 +1,7 @@
 # Accountancpy
 
 [![Test/Lint](https://github.com/Encephala/accountancpy/actions/workflows/test.yml/badge.svg)](https://github.com/Encephala/accountancpy/actions/workflows/test.yml)
-![Coverage](coverage.svg)
+![Coverage](media/coverage.svg)
 
 
 A ~~destined-for-the-graveyard~~ project to create simple personal bookkeepping software with a Django backend.
