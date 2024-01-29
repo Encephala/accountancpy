@@ -6,69 +6,69 @@
 <div class="vr"></div>
 
 <li class="nav-item">
-    <a class="nav-link navbar-entry" href="{% url 'entries:update' entry %}">
-    <span class="nav-link-title">
-        Update
-    </span>
-    </a>
+  <a class="nav-link navbar-entry" href="{% url 'entries:update' entry %}">
+  <span class="nav-link-title">
+    Update
+  </span>
+  </a>
 </li>
 
 <li class="nav-item">
-    <a class="nav-link navbar-entry" href="{% url 'entries:delete' entry %}">
-    <span class="nav-link-title">
-        Delete
-    </span>
-    </a>
+  <a class="nav-link navbar-entry" href="{% url 'entries:delete' entry %}">
+  <span class="nav-link-title">
+    Delete
+  </span>
+  </a>
 </li>
 {% endblock %}
 
 {% block content %}
 <div class="container">
-    <div class="row row-cards mb-1 justify-content-around strong">
-        <div class="card col-2">
-            <div class="card-body">Journal</div>
-        </div>
-        <div class="card col-6">
-            <div class="card-body">Notes</div>
-        </div>
+  <div class="row row-cards mb-1 justify-content-around strong">
+    <div class="card col-2">
+      <div class="card-body">Journal</div>
     </div>
-    <div class="row row-cards mb-1 justify-content-around">
-        <div class="card col-2">
-            <div class="card-body">{{ entry.journal.id }}</div>
-        </div>
-        <div class="card col-6">
-            <div class="card-body">{{ entry.notes | default:'<em>No notes.</em>' }}</div>
-        </div>
+    <div class="card col-6">
+      <div class="card-body">Notes</div>
     </div>
+  </div>
+  <div class="row row-cards mb-1 justify-content-around">
+    <div class="card col-2">
+      <div class="card-body">{{ entry.journal.id }}</div>
+    </div>
+    <div class="card col-6">
+      <div class="card-body">{{ entry.notes | default:'<em>No notes.</em>' }}</div>
+    </div>
+  </div>
 </div>
 
 <div class="container mt-4">
-    <div class="row row-cards mb-1 justify-content-around strong">
-        <div class="card col-1">
-            <div class="card-body">Entry</div>
-        </div>
-        <div class="card col-2">
-            <div class="card-body">Date</div>
-        </div>
-        <div class="card col-1">
-            <div class="card-body">Ledger</div>
-        </div>
-        <div class="card col-1">
-            <div class="card-body">Account</div>
-        </div>
-        <div class="card col-4">
-            <div class="card-body">Document</div>
-        </div>
-        <div class="card col-2">
-            <div class="card-body">Value</div>
-        </div>
+  <div class="row row-cards mb-1 justify-content-around strong">
+    <div class="card col-1">
+      <div class="card-body">Entry</div>
     </div>
+    <div class="card col-2">
+      <div class="card-body">Date</div>
+    </div>
+    <div class="card col-1">
+      <div class="card-body">Ledger</div>
+    </div>
+    <div class="card col-1">
+      <div class="card-body">Account</div>
+    </div>
+    <div class="card col-4">
+      <div class="card-body">Document</div>
+    </div>
+    <div class="card col-2">
+      <div class="card-body">Value</div>
+    </div>
+  </div>
 
-    <div id="entry_rows_placeholder"
-        hx-target="this"
-        hx-swap="outerHTML"
-        hx-trigger="load"
-        hx-get="{% url 'entries:hx-entry_rows' entry.id %}">
-    </div>
+  <div id="entry_rows_placeholder"
+    hx-target="this"
+    hx-swap="outerHTML"
+    hx-trigger="load"
+    hx-get="{% url 'entries:hx-entry_rows' entry.id %}">
+  </div>
 </div>
 {% endblock content %}

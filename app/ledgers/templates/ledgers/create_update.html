@@ -13,113 +13,113 @@ Create new Ledger
 <div class="vr"></div>
 
 <li class="nav-item">
-    <a class="nav-link navbar-ledger" href="{% url 'ledgers:details' ledger %}">
-    <span class="nav-link-title">
-        Details
-    </span>
-    </a>
+  <a class="nav-link navbar-ledger" href="{% url 'ledgers:details' ledger %}">
+  <span class="nav-link-title">
+    Details
+  </span>
+  </a>
 </li>
 
 <li class="nav-item">
-    <a class="nav-link navbar-ledger" href="{% url 'ledgers:delete' ledger %}">
-    <span class="nav-link-title">
-        Delete
-    </span>
-    </a>
+  <a class="nav-link navbar-ledger" href="{% url 'ledgers:delete' ledger %}">
+  <span class="nav-link-title">
+    Delete
+  </span>
+  </a>
 </li>
 {% endif %}
 {% endblock %}
 
 {% block content %}
 <div class="container">
-    <div class="row row-cards mb-1 justify-content-around strong">
-        {% if not is_update %}
-        <div class="card col-2">
-            <div class="card-body">ID</div>
+  <div class="row row-cards mb-1 justify-content-around strong">
+    {% if not is_update %}
+    <div class="card col-2">
+      <div class="card-body">ID</div>
+    </div>
+    {% endif %}
+    <div class="card col-3">
+      <div class="card-body">Name</div>
+    </div>
+    <div class="card col-2">
+      <div class="card-body">Type</div>
+    </div>
+    {% if is_update %}
+    <div class="card col-6">
+    {% else %}
+    <div class="card col-4">
+    {% endif %}
+      <div class="card-body">Notes</div>
+    </div>
+  </div>
+
+  {% if is_update %}
+  <form action="{% url 'ledgers:update' ledger %}" method="POST">
+  {% else %}
+  <form action="{% url 'ledgers:create' %}" method="POST">
+  {% endif %}
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+    <div class="row row-cards mb-1 justify-content-around">
+      {% if is_update %}
+      {{ form.id.errors }}
+      <div class="card col-2 h-100" hidden>
+        <div class="card-body">
+          {{ form.id }}
         </div>
-        {% endif %}
-        <div class="card col-3">
-            <div class="card-body">Name</div>
+      </div>
+      {% else %}
+      <div class="card col-2 h-100">
+        <div class="card-body">
+          {{ form.id }}
+          {{ form.id.errors }}
         </div>
-        <div class="card col-2">
-            <div class="card-body">Type</div>
+      </div>
+      {% endif %}
+
+      <div class="card col-3 h-100">
+        <div class="card-body">
+          {{ form.name }}
+          {{ form.name.errors }}
         </div>
-        {% if is_update %}
-        <div class="card col-6">
-        {% else %}
-        <div class="card col-4">
-        {% endif %}
-            <div class="card-body">Notes</div>
+      </div>
+      <div class="card col-2 h-100">
+        <div class="card-body">
+          {{ form.type }}
+          {{ form.type.errors }}
         </div>
+      </div>
+      {% if is_update %}
+      <div class="card col-6">
+      {% else %}
+      <div class="card col-4">
+      {% endif %}
+        <div class="card-body">
+          {{ form.notes }}
+          {{ form.notes.errors }}
+        </div>
+      </div>
     </div>
 
-    {% if is_update %}
-    <form action="{% url 'ledgers:update' ledger %}" method="POST">
-    {% else %}
-    <form action="{% url 'ledgers:create' %}" method="POST">
-    {% endif %}
-    {% csrf_token %}
-    {{ form.non_field_errors }}
-        <div class="row row-cards mb-1 justify-content-around">
-            {% if is_update %}
-            {{ form.id.errors }}
-            <div class="card col-2 h-100" hidden>
-                <div class="card-body">
-                    {{ form.id }}
-                </div>
-            </div>
-            {% else %}
-            <div class="card col-2 h-100">
-                <div class="card-body">
-                    {{ form.id }}
-                    {{ form.id.errors }}
-                </div>
-            </div>
-            {% endif %}
+    <div class="row row-cards mb-1 justify-content-around">
+      <!-- Hidden rows for alignment -->
+      {% if is_update %}
+      <div class="col-9"></div>
+      <div class="col-1"></div>
+      {% else %}
+      <div class="col-8"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      {% endif %}
 
-            <div class="card col-3 h-100">
-                <div class="card-body">
-                    {{ form.name }}
-                    {{ form.name.errors }}
-                </div>
-            </div>
-            <div class="card col-2 h-100">
-                <div class="card-body">
-                    {{ form.type }}
-                    {{ form.type.errors }}
-                </div>
-            </div>
-            {% if is_update %}
-            <div class="card col-6">
-            {% else %}
-            <div class="card col-4">
-            {% endif %}
-                <div class="card-body">
-                    {{ form.notes }}
-                    {{ form.notes.errors }}
-                </div>
-            </div>
-        </div>
-
-        <div class="row row-cards mb-1 justify-content-around">
-            <!-- Hidden rows for alignment -->
-            {% if is_update %}
-            <div class="col-9"></div>
-            <div class="col-1"></div>
-            {% else %}
-            <div class="col-8"></div>
-            <div class="col-1"></div>
-            <div class="col-1"></div>
-            {% endif %}
-
-            <div class="card col-1">
-                {% if is_update %}
-                <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Update!">
-                {% else %}
-                <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Create!">
-                {% endif %}
-            </div>
-        </div>
-    </form>
+      <div class="card col-1">
+        {% if is_update %}
+        <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Update!">
+        {% else %}
+        <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Create!">
+        {% endif %}
+      </div>
+    </div>
+  </form>
 </div>
 {% endblock content %}

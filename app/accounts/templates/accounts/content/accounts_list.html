@@ -1,26 +1,26 @@
 {% if account_list %}
 {% for account in account_list %}
 <div class="row row-cards mb-1 justify-content-around">
-    <div class="card col-2">
-        <div class="card-body">
-            <a href="{% url 'accounts:details' account.id %}" class="badge badge-pill account-link">{{ account.id }}</a>
-        </div>
+  <div class="card col-2">
+    <div class="card-body">
+      <a href="{% url 'accounts:details' account.id %}" class="badge badge-pill account-link">{{ account.id }}</a>
     </div>
-    <div class="card col-3">
-        <div class="card-body">{{ account.name }}</div>
+  </div>
+  <div class="card col-3">
+    <div class="card-body">{{ account.name }}</div>
+  </div>
+  <div class="card col-2">
+    <div class="card-body">
+      {% if account.is_creditor %}
+      <span class="badge bg-red-lt">Creditor</span>
+      {% else %}
+      <span class="badge bg-lime-lt">Debtor</span>
+      {% endif %}
     </div>
-    <div class="card col-2">
-        <div class="card-body">
-            {% if account.is_creditor %}
-            <span class="badge bg-red-lt">Creditor</span>
-            {% else %}
-            <span class="badge bg-lime-lt">Debtor</span>
-            {% endif %}
-        </div>
-    </div>
-    <div class="card col-4">
-        <div class="card-body">{{ account.notes | default:'<em>No notes.</em>' }}</div>
-    </div>
+  </div>
+  <div class="card col-4">
+    <div class="card-body">{{ account.notes | default:'<em>No notes.</em>' }}</div>
+  </div>
 </div>
 {% endfor %}
 

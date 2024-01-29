@@ -6,69 +6,69 @@
 <div class="vr"></div>
 
 <li class="nav-item">
-    <a class="nav-link navbar-journal" href="{% url 'journals:update' journal %}">
-    <span class="nav-link-title">
-        Update
-    </span>
-    </a>
+  <a class="nav-link navbar-journal" href="{% url 'journals:update' journal %}">
+  <span class="nav-link-title">
+    Update
+  </span>
+  </a>
 </li>
 
 <li class="nav-item">
-    <a class="nav-link navbar-journal" href="{% url 'journals:delete' journal %}">
-    <span class="nav-link-title">
-        Delete
-    </span>
-    </a>
+  <a class="nav-link navbar-journal" href="{% url 'journals:delete' journal %}">
+  <span class="nav-link-title">
+    Delete
+  </span>
+  </a>
 </li>
 {% endblock %}
 
 {% block content %}
 <div class="container">
-    <div class="row row-cards mb-1 justify-content-around strong">
-        <div class="card col-3">
-            <div class="card-body">Name</div>
-        </div>
-        <div class="card col-2">
-            <div class="card-body">Type</div>
-        </div>
-        <div class="card col-6">
-            <div class="card-body">Notes</div>
-        </div>
+  <div class="row row-cards mb-1 justify-content-around strong">
+    <div class="card col-3">
+      <div class="card-body">Name</div>
     </div>
-    <div class="row row-cards mb-1 justify-content-around">
-        <div class="card col-3">
-            <div class="card-body">{{ journal.name }}</div>
-        </div>
-        <div class="card col-2">
-            <div class="card-body">{{ journal.type }}</div>
-        </div>
-        <div class="card col-6">
-            <div class="card-body">{{ journal.notes }}</div>
-        </div>
+    <div class="card col-2">
+      <div class="card-body">Type</div>
     </div>
+    <div class="card col-6">
+      <div class="card-body">Notes</div>
+    </div>
+  </div>
+  <div class="row row-cards mb-1 justify-content-around">
+    <div class="card col-3">
+      <div class="card-body">{{ journal.name }}</div>
+    </div>
+    <div class="card col-2">
+      <div class="card-body">{{ journal.type }}</div>
+    </div>
+    <div class="card col-6">
+      <div class="card-body">{{ journal.notes }}</div>
+    </div>
+  </div>
 </div>
 
 <div class="container mt-4">
-    <div class="row row-cards mb-1 justify-content-around strong">
-        <div class="card col-2">
-            <div class="card-body">Entry</div>
-        </div>
-        <div class="card col-2">
-            <div class="card-body">Journal</div>
-        </div>
-        <div class="card col-2">
-            <div class="card-body">Number of rows</div>
-        </div>
-        <div class="card col-5">
-            <div class="card-body">Notes</div>
-        </div>
+  <div class="row row-cards mb-1 justify-content-around strong">
+    <div class="card col-2">
+      <div class="card-body">Entry</div>
     </div>
+    <div class="card col-2">
+      <div class="card-body">Journal</div>
+    </div>
+    <div class="card col-2">
+      <div class="card-body">Number of rows</div>
+    </div>
+    <div class="card col-5">
+      <div class="card-body">Notes</div>
+    </div>
+  </div>
 
-    <div id="entry_rows_placeholder"
-        hx-target="this"
-        hx-swap="outerHTML"
-        hx-trigger="load"
-        hx-get="{% url 'entries:hx-journal_rows' journal.id %}">
-    </div>
+  <div id="entry_rows_placeholder"
+    hx-target="this"
+    hx-swap="outerHTML"
+    hx-trigger="load"
+    hx-get="{% url 'entries:hx-journal_rows' journal.id %}">
+  </div>
 </div>
 {% endblock content %}

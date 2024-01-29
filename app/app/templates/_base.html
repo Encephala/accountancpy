@@ -3,273 +3,273 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{% block title %} Accountancpy {% endblock title %}</title>
-    <link rel="icon" type="image/x-icon" href="{% static 'media/icon_ledger.svg' %}">
-    <link rel="stylesheet" href="{% static 'animations.css' %}">
+  <title>{% block title %} Accountancpy {% endblock title %}</title>
+  <link rel="icon" type="image/x-icon" href="{% static 'media/icon_ledger.svg' %}">
+  <link rel="stylesheet" href="{% static 'animations.css' %}">
 
-    <script src="{% static 'htmx-1.9.9.js' %}"></script> <!-- HTMX -->
-    <script src="{% static 'tabler-1.0.0-beta17.min.js' %}"></script> <!-- Tabler JS -->
-    <link rel="stylesheet" href="{% static 'tabler-1.0.0-beta17.min.css' %}"> <!-- Tabler CSS -->
+  <script src="{% static 'htmx-1.9.9.js' %}"></script> <!-- HTMX -->
+  <script src="{% static 'tabler-1.0.0-beta17.min.js' %}"></script> <!-- Tabler JS -->
+  <link rel="stylesheet" href="{% static 'tabler-1.0.0-beta17.min.css' %}"> <!-- Tabler CSS -->
 
-    <!-- CSS Variable definitions -->
-    <style>
-        :root {
-            --ledger-color: #A1EEBDD0;
-            --ledger-bg-color: #A1EEBD60;
-            --ledger-hover-color: #A1EEBDFF;
-            --account-color: #7BD3EAD0;
-            --account-bg-color: #7bd4ea50;
-            --account-hover-color: #7bd4eaFF;
-            --journal-color: #F6D6D6D0;
-            --journal-bg-color: #F6D6D680;
-            --journal-hover-color: #F6D6D6FF;
-            --entry-color: #F0F1B2D0;
-            --entry-bg-color: #F0F1B280;
-            --entry-hover-color: #EBECAB;
-        }
-    </style>
+  <!-- CSS Variable definitions -->
+  <style>
+    :root {
+      --ledger-color: #A1EEBDD0;
+      --ledger-bg-color: #A1EEBD60;
+      --ledger-hover-color: #A1EEBDFF;
+      --account-color: #7BD3EAD0;
+      --account-bg-color: #7bd4ea50;
+      --account-hover-color: #7bd4eaFF;
+      --journal-color: #F6D6D6D0;
+      --journal-bg-color: #F6D6D680;
+      --journal-hover-color: #F6D6D6FF;
+      --entry-color: #F0F1B2D0;
+      --entry-bg-color: #F0F1B280;
+      --entry-hover-color: #EBECAB;
+    }
+  </style>
 
-    <style>
-        .navbar-brand-image {
-            height: 2.5rem;
-        }
-        .navbar-brand-image:hover {
-            opacity: 0.7;
-        }
+  <style>
+    .navbar-brand-image {
+      height: 2.5rem;
+    }
+    .navbar-brand-image:hover {
+      opacity: 0.7;
+    }
 
-        div.page {
-            background: var(--bg-color);
-            background: linear-gradient(var(--bg-color), var(--tblr-body-bg));
-        }
+    div.page {
+      background: var(--bg-color);
+      background: linear-gradient(var(--bg-color), var(--tblr-body-bg));
+    }
 
-        .card-body a.badge {
-            font-size: 0.8rem;
-        }
+    .card-body a.badge {
+      font-size: 0.8rem;
+    }
 
-        .ledger-link {
-            background-color: var(--ledger-bg-color);
-            color: var(--tblr-card-color) !important;
-        }
-        .ledger-link:hover, .ledger-link:active {
-            background-color: var(--ledger-hover-color);
-        }
+    .ledger-link {
+      background-color: var(--ledger-bg-color);
+      color: var(--tblr-card-color) !important;
+    }
+    .ledger-link:hover, .ledger-link:active {
+      background-color: var(--ledger-hover-color);
+    }
 
-        .account-link {
-            background-color: var(--account-bg-color);
-            color: var(--tblr-card-color) !important;
-        }
-        .account-link:hover, .account-link:active {
-            background-color: var(--account-hover-color);
-        }
+    .account-link {
+      background-color: var(--account-bg-color);
+      color: var(--tblr-card-color) !important;
+    }
+    .account-link:hover, .account-link:active {
+      background-color: var(--account-hover-color);
+    }
 
-        .journal-link {
-            background-color: var(--journal-bg-color);
-            color: var(--tblr-card-color) !important;
-        }
-        .journal-link:hover, .journal-link:active {
-            background-color: var(--journal-hover-color);
-        }
+    .journal-link {
+      background-color: var(--journal-bg-color);
+      color: var(--tblr-card-color) !important;
+    }
+    .journal-link:hover, .journal-link:active {
+      background-color: var(--journal-hover-color);
+    }
 
-        .entry-link {
-            background-color: var(--entry-bg-color);
-            color: var(--tblr-card-color) !important;
-        }
-        .entry-link:hover, .entry-link:active {
-            background-color: var(--entry-hover-color);
-        }
+    .entry-link {
+      background-color: var(--entry-bg-color);
+      color: var(--tblr-card-color) !important;
+    }
+    .entry-link:hover, .entry-link:active {
+      background-color: var(--entry-hover-color);
+    }
 
-        .navbar-ledger {
-            color: var(--ledger-color) !important;
-        }
-        .navbar-ledger:hover, .navbar-ledger:active {
-            color: var(--ledger-hover-color) !important;
-        }
+    .navbar-ledger {
+      color: var(--ledger-color) !important;
+    }
+    .navbar-ledger:hover, .navbar-ledger:active {
+      color: var(--ledger-hover-color) !important;
+    }
 
-        .navbar-account {
-            color: var(--account-color) !important;
-        }
-        .navbar-account:hover, .navbar-account:active {
-            color: var(--account-hover-color) !important;
-        }
+    .navbar-account {
+      color: var(--account-color) !important;
+    }
+    .navbar-account:hover, .navbar-account:active {
+      color: var(--account-hover-color) !important;
+    }
 
-        .navbar-journal {
-            color: var(--journal-color) !important;
-        }
-        .navbar-journal:hover, .navbar-journal:active {
-            color: var(--journal-hover-color) !important;
-        }
+    .navbar-journal {
+      color: var(--journal-color) !important;
+    }
+    .navbar-journal:hover, .navbar-journal:active {
+      color: var(--journal-hover-color) !important;
+    }
 
-        .navbar-entry {
-            color: var(--entry-color) !important;
-        }
-        .navbar-entry:hover, .navbar-entry:active {
-            color: var(--entry-hover-color) !important;
-        }
-    </style>
+    .navbar-entry {
+      color: var(--entry-color) !important;
+    }
+    .navbar-entry:hover, .navbar-entry:active {
+      color: var(--entry-hover-color) !important;
+    }
+  </style>
 
-    {% block extra-head %}{% endblock extra-head %}
+  {% block extra-head %}{% endblock extra-head %}
 </head>
 
 <body hx-boost="true">
 <div class="page" style="
-    --bg-color: {% block bg-color %} var(--tblr-body-bg) {% endblock bg-color %};
+  --bg-color: {% block bg-color %} var(--tblr-body-bg) {% endblock bg-color %};
 ">
-    <header class="navbar navbar-expand navbar-dark d-print-none">
-        <div class="container-xl justify-content-start">
-            <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-                <a href="{% url 'landing' %}">
-                    <img src="{% static 'media/feather/home.svg' %}" alt="Home" class="navbar-brand-image">
-                </a>
-            </h1>
+  <header class="navbar navbar-expand navbar-dark d-print-none">
+    <div class="container-xl justify-content-start">
+      <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+        <a href="{% url 'landing' %}">
+          <img src="{% static 'media/feather/home.svg' %}" alt="Home" class="navbar-brand-image">
+        </a>
+      </h1>
 
-            <div class="vr"></div>
+      <div class="vr"></div>
 
-            <ul class="navbar-nav pl-lg-3">
-                <li class="nav-item">
-                    <a class="nav-link navbar-ledger" href="{% url 'ledgers:overview' %}">
-                    <span class="nav-link-title">
-                        Ledgers
-                    </span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link navbar-account" href="{% url 'accounts:overview' %}">
-                    <span class="nav-link-title">
-                        Accounts
-                    </span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link navbar-journal" href="{% url 'journals:overview' %}">
-                    <span class="nav-link-title">
-                        Journals
-                    </span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link navbar-entry" href="{% url 'entries:overview' %}">
-                    <span class="nav-link-title">
-                        Entries
-                    </span>
-                    </a>
-                </li>
+      <ul class="navbar-nav pl-lg-3">
+        <li class="nav-item">
+          <a class="nav-link navbar-ledger" href="{% url 'ledgers:overview' %}">
+          <span class="nav-link-title">
+            Ledgers
+          </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link navbar-account" href="{% url 'accounts:overview' %}">
+          <span class="nav-link-title">
+            Accounts
+          </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link navbar-journal" href="{% url 'journals:overview' %}">
+          <span class="nav-link-title">
+            Journals
+          </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link navbar-entry" href="{% url 'entries:overview' %}">
+          <span class="nav-link-title">
+            Entries
+          </span>
+          </a>
+        </li>
 
-                {% block navbar-extra %} {% endblock %}
-            </ul>
-        </div>
-    </header>
+        {% block navbar-extra %} {% endblock %}
+      </ul>
+    </div>
+  </header>
 
-    <!-- Navbar -->
-    <!-- <aside class="navbar navbar-vertical navbar-expand-sm navbar-dark">
-        <div class="container-fluid">
-        <button class="navbar-toggler" type="button">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <h1 class="navbar-brand navbar-brand-autodark">
-            <a href="{% url 'landing' %}">
-                <img src="{% static 'media/feather/home.svg' %}" alt="Home" class="navbar-brand-image">
-            </a>
-        </h1>
-        <div class="collapse navbar-collapse" id="sidebar-menu">
-            <ul class="navbar-nav pt-lg-3">
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'ledgers:overview' %}" id="navbar-ledger">
-                <span class="nav-link-title">
-                    Ledgers
-                </span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'accounts:overview' %}" id="navbar-account">
-                <span class="nav-link-title">
-                    Accounts
-                </span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'journals:overview' %}" id="navbar-journal">
-                <span class="nav-link-title">
-                    Journals
-                </span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'entries:overview' %}" id="navbar-entry">
-                <span class="nav-link-title">
-                    Entries
-                </span>
-                </a>
-            </li>
-            </ul>
-        </div>
-        </div>
-    </aside> -->
-
-    <!-- Body -->
-    <div class="page-wrapper">
-        <div class="page-header d-print-none">
-        <div class="container-xl">
-            <div class="row g-2 align-items-center">
-            <div class="col">
-                <h2 class="page-title">
-                    {% block page-title %}
-                    Generic template page for Accountancpy
-                    {% endblock page-title %}
-                </h2>
-            </div>
-            </div>
-        </div>
-        </div>
-        <div class="page-body">
-        <div class="container-xl">
-            {% block content %}
-            <div class="row">
-                <div class="col-4">
-                    <div class="card card-body">
-                        hoi ik ben een kaart
-                    </div>
-                </div>
-                <div class="col-4">
-                    <a class="card card-body btn btn-cyan" href="/nonexistent/">
-                        hoi ik ben een link
-                    </a>
-                </div>
-            </div>
-            {% endblock content %}
-        </div>
-        </div>
+  <!-- Navbar -->
+  <!-- <aside class="navbar navbar-vertical navbar-expand-sm navbar-dark">
+    <div class="container-fluid">
+    <button class="navbar-toggler" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <h1 class="navbar-brand navbar-brand-autodark">
+      <a href="{% url 'landing' %}">
+        <img src="{% static 'media/feather/home.svg' %}" alt="Home" class="navbar-brand-image">
+      </a>
+    </h1>
+    <div class="collapse navbar-collapse" id="sidebar-menu">
+      <ul class="navbar-nav pt-lg-3">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'ledgers:overview' %}" id="navbar-ledger">
+        <span class="nav-link-title">
+          Ledgers
+        </span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'accounts:overview' %}" id="navbar-account">
+        <span class="nav-link-title">
+          Accounts
+        </span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'journals:overview' %}" id="navbar-journal">
+        <span class="nav-link-title">
+          Journals
+        </span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'entries:overview' %}" id="navbar-entry">
+        <span class="nav-link-title">
+          Entries
+        </span>
+        </a>
+      </li>
+      </ul>
     </div>
     </div>
+  </aside> -->
+
+  <!-- Body -->
+  <div class="page-wrapper">
+    <div class="page-header d-print-none">
+    <div class="container-xl">
+      <div class="row g-2 align-items-center">
+      <div class="col">
+        <h2 class="page-title">
+          {% block page-title %}
+          Generic template page for Accountancpy
+          {% endblock page-title %}
+        </h2>
+      </div>
+      </div>
+    </div>
+    </div>
+    <div class="page-body">
+    <div class="container-xl">
+      {% block content %}
+      <div class="row">
+        <div class="col-4">
+          <div class="card card-body">
+            hoi ik ben een kaart
+          </div>
+        </div>
+        <div class="col-4">
+          <a class="card card-body btn btn-cyan" href="/nonexistent/">
+            hoi ik ben een link
+          </a>
+        </div>
+      </div>
+      {% endblock content %}
+    </div>
+    </div>
+  </div>
+  </div>
 
 {% if messages|length > 0 %}
 <!-- Error toast -->
 <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 11">
-    {% for message in messages %}
-    <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true"
-    data-bs-autohide="false" data-bs-toggle="toast">
-        <div class="toast-header">
-            <img src="{% static 'media/feather/alert-circle.svg' %}" class="mx-1" alt="Alert circle"
-            style="height: var(--tblr-toast-font-size);
-            /* Set color to --tblr-danger-rgb */
-            filter: invert(38%) sepia(84%) saturate(3822%) hue-rotate(342deg) brightness(90%) contrast(85%);">
-            <strong class="me-auto text-danger">Error</strong>
-            <button type="button" class="ms-2 btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body">
-            {{ message }}
-            <br>
-            {% for object in protected_objects %}
-            <a href="{% url 'entries:details' object %}" target="_blank">Entry: {{ object }}</a>
-            <img style="vertical-align: middle;" src="{% static 'media/feather/arrow-up-right.svg' %}"
-            width="18px" alt="arrow-up-right">
-            {% if not forloop.last %}<br>{% endif %}
-            {% endfor %}
-        </div>
+  {% for message in messages %}
+  <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true"
+  data-bs-autohide="false" data-bs-toggle="toast">
+    <div class="toast-header">
+      <img src="{% static 'media/feather/alert-circle.svg' %}" class="mx-1" alt="Alert circle"
+      style="height: var(--tblr-toast-font-size);
+      /* Set color to --tblr-danger-rgb */
+      filter: invert(38%) sepia(84%) saturate(3822%) hue-rotate(342deg) brightness(90%) contrast(85%);">
+      <strong class="me-auto text-danger">Error</strong>
+      <button type="button" class="ms-2 btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
-    {% endfor %}
+    <div class="toast-body">
+      {{ message }}
+      <br>
+      {% for object in protected_objects %}
+      <a href="{% url 'entries:details' object %}" target="_blank">Entry: {{ object }}</a>
+      <img style="vertical-align: middle;" src="{% static 'media/feather/arrow-up-right.svg' %}"
+      width="18px" alt="arrow-up-right">
+      {% if not forloop.last %}<br>{% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
 </div>
 {% endif %}
 

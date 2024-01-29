@@ -8,105 +8,105 @@
 <div class="vr"></div>
 
 <li class="nav-item">
-    <a class="nav-link navbar-ledger" href="{% url 'ledgers:details' ledger %}">
-        <span class="nav-link-title">
-            Details
-        </span>
-    </a>
+  <a class="nav-link navbar-ledger" href="{% url 'ledgers:details' ledger %}">
+    <span class="nav-link-title">
+      Details
+    </span>
+  </a>
 </li>
 
 <li class="nav-item">
-    <a class="nav-link navbar-ledger" href="{% url 'ledgers:update' ledger %}">
-        <span class="nav-link-title">
-            Update
-        </span>
-    </a>
+  <a class="nav-link navbar-ledger" href="{% url 'ledgers:update' ledger %}">
+    <span class="nav-link-title">
+      Update
+    </span>
+  </a>
 </li>
 {% endblock %}
 
 {% block content %}
 <div class="container mb-3">
-    <form action="{% url 'ledgers:delete' ledger %}" method="POST">
-        {% csrf_token %}
-        <div class="row row-cards mb-1 justify-content-around strong">
-            <div class="card col-3">
-                <div class="card-body">Name</div>
-            </div>
-            <div class="card col-2">
-                <div class="card-body">Type</div>
-            </div>
-            <div class="card col-6">
-                <div class="card-body">Notes</div>
-            </div>
-        </div>
-        <div class="row row-cards mb-1 justify-content-around">
-            <div class="card col-3">
-                <div class="card-body">{{ ledger.name }}</div>
-            </div>
-            <div class="card col-2">
-                <div class="card-body">{{ ledger.type }}</div>
-            </div>
-            <div class="card col-6">
-                <div class="card-body">{{ ledger.notes | default:'<em>No notes.</em>' }}</div>
-            </div>
-        </div>
+  <form action="{% url 'ledgers:delete' ledger %}" method="POST">
+    {% csrf_token %}
+    <div class="row row-cards mb-1 justify-content-around strong">
+      <div class="card col-3">
+        <div class="card-body">Name</div>
+      </div>
+      <div class="card col-2">
+        <div class="card-body">Type</div>
+      </div>
+      <div class="card col-6">
+        <div class="card-body">Notes</div>
+      </div>
+    </div>
+    <div class="row row-cards mb-1 justify-content-around">
+      <div class="card col-3">
+        <div class="card-body">{{ ledger.name }}</div>
+      </div>
+      <div class="card col-2">
+        <div class="card-body">{{ ledger.type }}</div>
+      </div>
+      <div class="card col-6">
+        <div class="card-body">{{ ledger.notes | default:'<em>No notes.</em>' }}</div>
+      </div>
+    </div>
 
-        <div class="row row-cards mb-1 justify-content-around">
-            <!-- Hidden rows for alignment -->
-            <div class="col-7"></div>
-            <div class="col-1"></div>
+    <div class="row row-cards mb-1 justify-content-around">
+      <!-- Hidden rows for alignment -->
+      <div class="col-7"></div>
+      <div class="col-1"></div>
 
-            <div class="card col-3">
-                <div class="card-body">
-                    <div class="input-group">
-                        <span class="input-group-text">
-                            <input class="form-check-input" type="checkbox" title="Confirm deletion." required>
-                        </span>
-                        <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Delete!">
-                    </div>
-                </div>
-            </div>
+      <div class="card col-3">
+        <div class="card-body">
+          <div class="input-group">
+            <span class="input-group-text">
+              <input class="form-check-input" type="checkbox" title="Confirm deletion." required>
+            </span>
+            <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Delete!">
+          </div>
         </div>
-    </form>
+      </div>
+    </div>
+  </form>
 </div>
 
 <div class="container">
-    <div class="row row-cards mb-1 justify-content-around strong">
-        <div class="card col-1">
-            <div class="card-body">Entry</div>
-        </div>
-        <div class="card col-2">
-            <div class="card-body">Date</div>
-        </div>
-        <div class="card col-1">
-            <div class="card-body">Ledger</div>
-        </div>
-        <div class="card col-1">
-            <div class="card-body">Account</div>
-        </div>
-        <div class="card col-4">
-            <div class="card-body">Document</div>
-        </div>
-        <div class="card col-2">
-            <div class="card-body">Value</div>
-        </div>
+  <div class="row row-cards mb-1 justify-content-around strong">
+    <div class="card col-1">
+      <div class="card-body">Entry</div>
     </div>
-
-    <div id="entry_row_placeholder" hx-target="this" hx-swap="outerHTML" hx-trigger="load"
-        hx-get="{% url 'entries:hx-ledger_rows' ledger.id %}">
+    <div class="card col-2">
+      <div class="card-body">Date</div>
     </div>
-
-    <div class="row row-cards justify-content-around strong">
-        <!-- Hidden rows for alignment -->
-        <div class="col-5"></div>
-        <div class="col-1"></div>
-        <div class="col-1"></div>
-        <div class="col-1"></div>
-        <div class="col-1"></div>
-
-        <div class="card col-2 ml-auto">
-            <div class="card-body">€ {{ ledger.calculate_sum | default:0 | floatformat:2 }}</div>
-        </div>
+    <div class="card col-1">
+      <div class="card-body">Ledger</div>
     </div>
+    <div class="card col-1">
+      <div class="card-body">Account</div>
+    </div>
+    <div class="card col-4">
+      <div class="card-body">Document</div>
+    </div>
+    <div class="card col-2">
+      <div class="card-body">Value</div>
+    </div>
+  </div>
+
+  <div id="entry_row_placeholder" hx-target="this" hx-swap="outerHTML" hx-trigger="load"
+    hx-get="{% url 'entries:hx-ledger_rows' ledger.id %}">
+  </div>
+
+  <div class="row row-cards justify-content-around strong">
+    <!-- Hidden rows for alignment -->
+    <div class="col-5"></div>
+    <div class="col-1"></div>
+    <div class="col-1"></div>
+    <div class="col-1"></div>
+    <div class="col-1"></div>
+
+    <div class="card col-2 ml-auto">
+      <div class="card-body">€ {{ ledger.calculate_sum | default:0 | floatformat:2 }}</div>
+    </div>
+  </div>
 </div>
 {% endblock content %}

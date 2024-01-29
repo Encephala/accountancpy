@@ -15,122 +15,122 @@ Create new Entry
 <div class="vr"></div>
 
 <li class="nav-item">
-    <a class="nav-link navbar-entry" href="{% url 'entries:details' entry %}">
-    <span class="nav-link-title">
-        Details
-    </span>
-    </a>
+  <a class="nav-link navbar-entry" href="{% url 'entries:details' entry %}">
+  <span class="nav-link-title">
+    Details
+  </span>
+  </a>
 </li>
 
 <li class="nav-item">
-    <a class="nav-link navbar-entry" href="{% url 'entries:delete' entry %}">
-    <span class="nav-link-title">
-        Delete
-    </span>
-    </a>
+  <a class="nav-link navbar-entry" href="{% url 'entries:delete' entry %}">
+  <span class="nav-link-title">
+    Delete
+  </span>
+  </a>
 </li>
 {% endif %}
 {% endblock %}
 
 {% block content %}
 <script>
-    var index = {{ entryrow_formset | length }};
-    var prefix = "{{ entryrow_formset.prefix }}";
+  var index = {{ entryrow_formset | length }};
+  var prefix = "{{ entryrow_formset.prefix }}";
 
-    function add_row(source_index) {
-        // Copy value of `index` to a local variable so it stays fixed
-        var current_index = index;
+  function add_row(source_index) {
+    // Copy value of `index` to a local variable so it stays fixed
+    var current_index = index;
 
-        var source_form = document.getElementById("form_entryrow-" + source_index);
+    var source_form = document.getElementById("form_entryrow-" + source_index);
 
-        // Update form
-        var new_form = source_form.cloneNode(true);
-        new_form.id = "form_entryrow-" + current_index;
-        new_form.dataset.index = current_index;
-        new_form.querySelectorAll("input, select").forEach((element) => element.value = "");
-        new_form.querySelector("div.date input").value = source_form.querySelector("div.date input").value;
+    // Update form
+    var new_form = source_form.cloneNode(true);
+    new_form.id = "form_entryrow-" + current_index;
+    new_form.dataset.index = current_index;
+    new_form.querySelectorAll("input, select").forEach((element) => element.value = "");
+    new_form.querySelector("div.date input").value = source_form.querySelector("div.date input").value;
 
-        // Update buttons
-        var delete_button = new_form.querySelector(".delete-button");
-        delete_button.onclick = function() { delete_row(current_index); };
-        delete_button.disabled = false;
+    // Update buttons
+    var delete_button = new_form.querySelector(".delete-button");
+    delete_button.onclick = function() { delete_row(current_index); };
+    delete_button.disabled = false;
 
-        var add_button = new_form.querySelector(".add-button");
-        add_button.onclick = function() { add_row(current_index) };
+    var add_button = new_form.querySelector(".add-button");
+    add_button.onclick = function() { add_row(current_index) };
 
-        // Update form elements
-        new_form.querySelector(".id input").setAttribute("name", prefix + "-" + current_index + "-id");
-        new_form.querySelector(".id input").setAttribute("id", "id_" + prefix + "-" + current_index + "-id");
-        new_form.querySelector(".delete input").setAttribute("name", prefix + "-" + current_index + "-DELETE");
-        new_form.querySelector(".delete input").setAttribute("id", "id_" + prefix + "-" + current_index + "-DELETE");
-        // Needed because cloneNode causes the `value` attribute to be set to none which breaks functionality,
-        // as if the attribute doesn't exist, the default value is 'on' (in Chrome anyways)
-        new_form.querySelector(".delete input").removeAttribute("value");
-        new_form.querySelector(".date input").setAttribute("name", prefix + "-" + current_index + "-date");
-        new_form.querySelector(".date input").setAttribute("id", "id_" + prefix + "-" + current_index + "-date");
-        new_form.querySelector(".ledger select").setAttribute("name", prefix + "-" + current_index + "-ledger");
-        new_form.querySelector(".ledger select").setAttribute("id", "id_" + prefix + "-" + current_index + "-ledger");
-        new_form.querySelector(".account select").setAttribute("name", prefix + "-" + current_index + "-account");
-        new_form.querySelector(".account select").setAttribute("id", "id_" + prefix + "-" + current_index + "-account");
-        new_form.querySelector(".document input").setAttribute("name", prefix + "-" + current_index + "-document");
-        new_form.querySelector(".document input").setAttribute("id", "id_" + prefix + "-" + current_index + "-document");
-        new_form.querySelector(".value input").setAttribute("name", prefix + "-" + current_index + "-value");
-        new_form.querySelector(".value input").setAttribute("id", "id_" + prefix + "-" + current_index + "-value");
+    // Update form elements
+    new_form.querySelector(".id input").setAttribute("name", prefix + "-" + current_index + "-id");
+    new_form.querySelector(".id input").setAttribute("id", "id_" + prefix + "-" + current_index + "-id");
+    new_form.querySelector(".delete input").setAttribute("name", prefix + "-" + current_index + "-DELETE");
+    new_form.querySelector(".delete input").setAttribute("id", "id_" + prefix + "-" + current_index + "-DELETE");
+    // Needed because cloneNode causes the `value` attribute to be set to none which breaks functionality,
+    // as if the attribute doesn't exist, the default value is 'on' (in Chrome anyways)
+    new_form.querySelector(".delete input").removeAttribute("value");
+    new_form.querySelector(".date input").setAttribute("name", prefix + "-" + current_index + "-date");
+    new_form.querySelector(".date input").setAttribute("id", "id_" + prefix + "-" + current_index + "-date");
+    new_form.querySelector(".ledger select").setAttribute("name", prefix + "-" + current_index + "-ledger");
+    new_form.querySelector(".ledger select").setAttribute("id", "id_" + prefix + "-" + current_index + "-ledger");
+    new_form.querySelector(".account select").setAttribute("name", prefix + "-" + current_index + "-account");
+    new_form.querySelector(".account select").setAttribute("id", "id_" + prefix + "-" + current_index + "-account");
+    new_form.querySelector(".document input").setAttribute("name", prefix + "-" + current_index + "-document");
+    new_form.querySelector(".document input").setAttribute("id", "id_" + prefix + "-" + current_index + "-document");
+    new_form.querySelector(".value input").setAttribute("name", prefix + "-" + current_index + "-value");
+    new_form.querySelector(".value input").setAttribute("id", "id_" + prefix + "-" + current_index + "-value");
 
-        // Insert into DOM
-        source_form.insertAdjacentElement("afterend", new_form);
+    // Insert into DOM
+    source_form.insertAdjacentElement("afterend", new_form);
 
-        var divider = document.querySelector(".divider.d-none").cloneNode();
-        divider.classList.remove("d-none");
-        divider.classList.add("d-xl-none");
-        new_form.insertAdjacentElement("beforebegin", divider);
+    var divider = document.querySelector(".divider.d-none").cloneNode();
+    divider.classList.remove("d-none");
+    divider.classList.add("d-xl-none");
+    new_form.insertAdjacentElement("beforebegin", divider);
 
-        // Update management form
-        var total_forms_element = document.getElementById("id_" + prefix + "-TOTAL_FORMS");
-        var number_of_rows = document.querySelectorAll(".form_entryrow").length;
-        total_forms_element.setAttribute("value", number_of_rows);
+    // Update management form
+    var total_forms_element = document.getElementById("id_" + prefix + "-TOTAL_FORMS");
+    var number_of_rows = document.querySelectorAll(".form_entryrow").length;
+    total_forms_element.setAttribute("value", number_of_rows);
 
-        index++;
+    index++;
+  }
+
+  // Only add a new row if tab was pressed on the final input on the page
+  function tab_pressed(event) {
+    if (event.key === "Tab") {
+      var forms = Array.from(document.querySelectorAll("#entryrow_container .form_entryrow")).filter(
+        (element) => !element.hidden
+      )
+      var last_form = forms[forms.length - 1];
+      if (event.srcElement == last_form.querySelector(".value input")) {
+        add_row(last_form.dataset.index);
+      }
     }
+  }
 
-    // Only add a new row if tab was pressed on the final input on the page
-    function tab_pressed(event) {
-        if (event.key === "Tab") {
-            var forms = Array.from(document.querySelectorAll("#entryrow_container .form_entryrow")).filter(
-                (element) => !element.hidden
-            )
-            var last_form = forms[forms.length - 1];
-            if (event.srcElement == last_form.querySelector(".value input")) {
-                add_row(last_form.dataset.index);
-            }
-        }
+  function delete_row(index) {
+    if (!(index === 0)) {
+      var row = document.getElementById("form_entryrow-" + index)
+      row.classList.remove("fade-in");
+      row.classList.add("fade-out");
+      setTimeout(() => {
+        row.hidden = true;
+        // Delete divider
+        row.previousElementSibling.remove();
+
+        {% if entryrow_formset.can_delete %}
+        row.querySelector(".delete input").checked = true;
+        row.querySelectorAll("input, select").forEach((element) => element.required = false);
+        {% else %}
+        // Make form empty (default values) so that Django filters it
+        row.querySelectorAll("input, select").forEach((element) => {
+          element.value = "";
+          element.required = false;
+        });
+        {% endif %}
+      }, 150);
+    } else {
+      console.log("Why are you trying to hack the site >:(")
     }
-
-    function delete_row(index) {
-        if (!(index === 0)) {
-            var row = document.getElementById("form_entryrow-" + index)
-            row.classList.remove("fade-in");
-            row.classList.add("fade-out");
-            setTimeout(() => {
-                row.hidden = true;
-                // Delete divider
-                row.previousElementSibling.remove();
-
-                {% if entryrow_formset.can_delete %}
-                row.querySelector(".delete input").checked = true;
-                row.querySelectorAll("input, select").forEach((element) => element.required = false);
-                {% else %}
-                // Make form empty (default values) so that Django filters it
-                row.querySelectorAll("input, select").forEach((element) => {
-                    element.value = "";
-                    element.required = false;
-                });
-                {% endif %}
-            }, 150);
-        } else {
-            console.log("Why are you trying to hack the site >:(")
-        }
-    }
+  }
 </script>
 
 {{ form.non_field_errors }}
@@ -141,149 +141,149 @@ Create new Entry
 <form id="form" action="{% url 'entries:create' %}" method="POST">
 {% endif %}
 {% csrf_token %}
-    <div class="container mb-3">
-        <div class="row row-cards mb-1 justify-content-around strong">
-            <div class="card col-2">
-                <div class="card-body">Journal</div>
-            </div>
-            <div class="card col-6">
-                <div class="card-body">Notes</div>
-            </div>
-        </div>
-
-        <div class="row row-cards mb-1 justify-content-around">
-            <div class="card col-2 h-100">
-                <div class="card-body">
-                    {{ form.journal }}
-                    {{ form.journal.errors }}
-                </div>
-            </div>
-            <div class="card col-6">
-                <div class="card-body">
-                    {{ form.notes }}
-                    {{ form.notes.errors }}
-                </div>
-            </div>
-        </div>
+  <div class="container mb-3">
+    <div class="row row-cards mb-1 justify-content-around strong">
+      <div class="card col-2">
+        <div class="card-body">Journal</div>
+      </div>
+      <div class="card col-6">
+        <div class="card-body">Notes</div>
+      </div>
     </div>
 
-    <div class="container" id="entryrow_container">
-        <div class="row row-cards mb-1 justify-content-around sticky-top strong">
-            <div class="col-1"></div>
+    <div class="row row-cards mb-1 justify-content-around">
+      <div class="card col-2 h-100">
+        <div class="card-body">
+          {{ form.journal }}
+          {{ form.journal.errors }}
+        </div>
+      </div>
+      <div class="card col-6">
+        <div class="card-body">
+          {{ form.notes }}
+          {{ form.notes.errors }}
+        </div>
+      </div>
+    </div>
+  </div>
 
-            <div class="card col-5 col-xl-2 date">
-                <div class="card-body">Date</div>
+  <div class="container" id="entryrow_container">
+    <div class="row row-cards mb-1 justify-content-around sticky-top strong">
+      <div class="col-1"></div>
+
+      <div class="card col-5 col-xl-2 date">
+        <div class="card-body">Date</div>
+      </div>
+      <div class="card col-3 col-xl-1 ledger">
+        <div class="card-body">Ledger</div>
+      </div>
+      <div class="card col-3 col-xl-1 account">
+        <div class="card-body">Account</div>
+      </div>
+      <div class="card col-6 col-xl-4 document">
+        <div class="card-body">Document</div>
+      </div>
+      <div class="card col-6 col-xl-2 value">
+        <div class="card-body">Value</div>
+      </div>
+    </div>
+
+    {{ entryrow_formset.non_form_errors }}
+    {{ entryrow_formset.management_form }}
+    {% for form in entryrow_formset %}
+    <div class="form_entryrow fade-in slide" id="form_entryrow-{{ forloop.counter0 }}"
+    data-index="{{ forloop.counter0 }}" {% if form.DELETE.value %} hidden {% endif %}>
+      <div class="row row-cards mb-1 justify-content-around">
+        <div class="card col-1 col-xl-1">
+          <div class="card-body">
+            <div class="row justify-content-around">
+              <button class="btn btn-ghost-cyan p-0 rounded-circle delete-button" type="button"
+              style="width: 25px; height: 25px;"
+              tabindex="-1"
+              {% if forloop.counter0 == 0 %} disabled {% endif %}
+              onclick="delete_row({{ forloop.counter0 }})"
+              >
+                <img src="{% static 'media/feather/x-circle.svg' %}">
+              </button>
+
+              <button class="btn btn-ghost-cyan p-0 rounded-circle add-button" type="button"
+              style="width: 25px; height: 25px;"
+              tabindex="-1"
+              onclick="add_row({{ forloop.counter0 }})"
+              >
+                <img src="{% static 'media/feather/plus-circle.svg' %}">
+              </button>
             </div>
-            <div class="card col-3 col-xl-1 ledger">
-                <div class="card-body">Ledger</div>
-            </div>
-            <div class="card col-3 col-xl-1 account">
-                <div class="card-body">Account</div>
-            </div>
-            <div class="card col-6 col-xl-4 document">
-                <div class="card-body">Document</div>
-            </div>
-            <div class="card col-6 col-xl-2 value">
-                <div class="card-body">Value</div>
-            </div>
+          </div>
         </div>
 
-        {{ entryrow_formset.non_form_errors }}
-        {{ entryrow_formset.management_form }}
-        {% for form in entryrow_formset %}
-        <div class="form_entryrow fade-in slide" id="form_entryrow-{{ forloop.counter0 }}"
-        data-index="{{ forloop.counter0 }}" {% if form.DELETE.value %} hidden {% endif %}>
-            <div class="row row-cards mb-1 justify-content-around">
-                <div class="card col-1 col-xl-1">
-                    <div class="card-body">
-                        <div class="row justify-content-around">
-                            <button class="btn btn-ghost-cyan p-0 rounded-circle delete-button" type="button"
-                            style="width: 25px; height: 25px;"
-                            tabindex="-1"
-                            {% if forloop.counter0 == 0 %} disabled {% endif %}
-                            onclick="delete_row({{ forloop.counter0 }})"
-                            >
-                                <img src="{% static 'media/feather/x-circle.svg' %}">
-                            </button>
-
-                            <button class="btn btn-ghost-cyan p-0 rounded-circle add-button" type="button"
-                            style="width: 25px; height: 25px;"
-                            tabindex="-1"
-                            onclick="add_row({{ forloop.counter0 }})"
-                            >
-                                <img src="{% static 'media/feather/plus-circle.svg' %}">
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                {{ form.non_field_errors }}
-                {{ form.id.errors }}
-                <div hidden class="id">
-                    {{ form.id }}
-                </div>
-                <div hidden class="delete">
-                    {% if entryrow_formset.can_delete %} {{ form.DELETE }}
-                    {% else %} <input> <!-- Placeholder to make the JS not error out in the create view -->
-                    {% endif %}
-                </div>
-                <div class="card col-5 col-xl-2 date">
-                    <div class="card-body">
-                        {{ form.date }}
-                        {{ form.date.errors }}
-                    </div>
-                </div>
-                <div class="card col-3 col-xl-1 ledger">
-                    <div class="card-body">
-                        {{ form.ledger }}
-                        {{ form.ledger.errors }}
-                    </div>
-                </div>
-                <div class="card col-3 col-xl-1 account">
-                    <div class="card-body">
-                        {{ form.account }}
-                        {{ form.account.errors }}
-                    </div>
-                </div>
-                <div class="card col-6 col-xl-4 document">
-                    <div class="card-body">
-                        {{ form.document }}
-                        {{ form.document.errors }}
-                    </div>
-                </div>
-                <div class="card col-6 col-xl-2 value"
-                onkeydown="tab_pressed(event)"
-                >
-                    <div class="card-body">
-                        {{ form.value }}
-                        {{ form.value.errors }}
-                    </div>
-                </div>
-            </div>
+        {{ form.non_field_errors }}
+        {{ form.id.errors }}
+        <div hidden class="id">
+          {{ form.id }}
         </div>
-        {% if not forloop.last %}
-        <hr class="divider d-xl-none"></hr>
+        <div hidden class="delete">
+          {% if entryrow_formset.can_delete %} {{ form.DELETE }}
+          {% else %} <input> <!-- Placeholder to make the JS not error out in the create view -->
+          {% endif %}
+        </div>
+        <div class="card col-5 col-xl-2 date">
+          <div class="card-body">
+            {{ form.date }}
+            {{ form.date.errors }}
+          </div>
+        </div>
+        <div class="card col-3 col-xl-1 ledger">
+          <div class="card-body">
+            {{ form.ledger }}
+            {{ form.ledger.errors }}
+          </div>
+        </div>
+        <div class="card col-3 col-xl-1 account">
+          <div class="card-body">
+            {{ form.account }}
+            {{ form.account.errors }}
+          </div>
+        </div>
+        <div class="card col-6 col-xl-4 document">
+          <div class="card-body">
+            {{ form.document }}
+            {{ form.document.errors }}
+          </div>
+        </div>
+        <div class="card col-6 col-xl-2 value"
+        onkeydown="tab_pressed(event)"
+        >
+          <div class="card-body">
+            {{ form.value }}
+            {{ form.value.errors }}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% if not forloop.last %}
+    <hr class="divider d-xl-none"></hr>
+    {% endif %}
+    {% endfor %}
+    <div class="row row-cards mb-1 justify-content-around">
+      <!-- Hidden rows for alignment -->
+      <div class="col-6"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col-1"></div>
+
+      <div class="card col-1">
+        {% if is_update %}
+        <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Update!">
+        {% else %}
+        <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Create!">
         {% endif %}
-        {% endfor %}
-        <div class="row row-cards mb-1 justify-content-around">
-            <!-- Hidden rows for alignment -->
-            <div class="col-6"></div>
-            <div class="col-1"></div>
-            <div class="col-1"></div>
-            <div class="col-1"></div>
-            <div class="col-1"></div>
-
-            <div class="card col-1">
-                {% if is_update %}
-                <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Update!">
-                {% else %}
-                <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Create!">
-                {% endif %}
-            </div>
-        </div>
-
-        <!-- Hidden hr so that we can copy it -->
-        <hr class="divider d-none"></hr>
+      </div>
     </div>
+
+    <!-- Hidden hr so that we can copy it -->
+    <hr class="divider d-none"></hr>
+  </div>
 </form>
 {% endblock content %}

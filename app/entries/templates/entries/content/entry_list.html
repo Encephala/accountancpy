@@ -1,20 +1,20 @@
 {% for entry in entry_list %}
 <div class="row row-cards mb-1 justify-content-around">
-    <div class="card col-2">
-        <div class="card-body">
-            <a href="{% url 'entries:details' entry.id %}" class="badge badge-pill entry-link">{{ entry.id }}</a>
-        </div>
+  <div class="card col-2">
+    <div class="card-body">
+      <a href="{% url 'entries:details' entry.id %}" class="badge badge-pill entry-link">{{ entry.id }}</a>
     </div>
-    <div class="card col-2">
-        <div class="card-body">
-            <a href="{% url 'journals:details' entry.journal.id %}" class="badge badge-pill journal-link">{{ entry.journal.id }}</a>
-        </div>
+  </div>
+  <div class="card col-2">
+    <div class="card-body">
+      <a href="{% url 'journals:details' entry.journal.id %}" class="badge badge-pill journal-link">{{ entry.journal.id }}</a>
     </div>
-    <div class="card col-2">
-        <div class="card-body">{{ entry.num_rows }}</div>
-    </div>
-    <div class="card col-5">
-        <div class="card-body">{{ entry.notes | default:'<em>No notes.</em>' }}</div>
-    </div>
+  </div>
+  <div class="card col-2">
+    <div class="card-body">{{ entry.num_rows }}</div>
+  </div>
+  <div class="card col-5">
+    <div class="card-body">{{ entry.notes | default:'<em>No notes.</em>' }}</div>
+  </div>
 </div>
 {% endfor %}

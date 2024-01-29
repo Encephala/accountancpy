@@ -1,41 +1,41 @@
 {% if entry_row_list %}
 {% for entry_row in entry_row_list %}
 <div class="row row-cards mb-1 justify-content-around">
-    <div class="card col-1">
-        <div class="card-body">
-            <a href="{% url 'entries:details' entry_row.entry.id %}" class="badge badge-pill entry-link">{{ entry_row.entry.id }}</a>
-        </div>
+  <div class="card col-1">
+    <div class="card-body">
+      <a href="{% url 'entries:details' entry_row.entry.id %}" class="badge badge-pill entry-link">{{ entry_row.entry.id }}</a>
     </div>
-    <div class="card col-2">
-        <div class="card-body">{{ entry_row.date | date:"j M 'y" }}</div>
+  </div>
+  <div class="card col-2">
+    <div class="card-body">{{ entry_row.date | date:"j M 'y" }}</div>
+  </div>
+  <div class="card col-1">
+    <div class="card-body">
+      <a href="{% url 'ledgers:details' entry_row.ledger.id %}" class="badge badge-pill ledger-link">{{ entry_row.ledger.id }}</a>
     </div>
-    <div class="card col-1">
-        <div class="card-body">
-            <a href="{% url 'ledgers:details' entry_row.ledger.id %}" class="badge badge-pill ledger-link">{{ entry_row.ledger.id }}</a>
-        </div>
+  </div>
+  <div class="card col-1">
+    <div class="card-body">
+      {% if entry_row.account.id %}
+      <a href="{% url 'accounts:details' entry_row.account.id %}" class="badge badge-pill account-link">{{ entry_row.account.id }}</a>
+      {% else %}
+      <em>None</em>
+      {% endif %}
     </div>
-    <div class="card col-1">
-        <div class="card-body">
-            {% if entry_row.account.id %}
-            <a href="{% url 'accounts:details' entry_row.account.id %}" class="badge badge-pill account-link">{{ entry_row.account.id }}</a>
-            {% else %}
-            <em>None</em>
-            {% endif %}
-        </div>
-    </div>
-    <div class="card col-4">
-        <div class="card-body">{{ entry_row.document | default:'<em>No corresponding document.</em>' }}</div>
-    </div>
-    <div class="card col-2">
-        <div class="card-body">€ {{ entry_row.value | floatformat:2 }}</div>
-    </div>
+  </div>
+  <div class="card col-4">
+    <div class="card-body">{{ entry_row.document | default:'<em>No corresponding document.</em>' }}</div>
+  </div>
+  <div class="card col-2">
+    <div class="card-body">€ {{ entry_row.value | floatformat:2 }}</div>
+  </div>
 </div>
 {% endfor %}
 
 {% else %}
 <div class="row row-cards">
-    <div class="card">
-        <div class="card-body">No entries found.</div>
-    </div>
+  <div class="card">
+    <div class="card-body">No entries found.</div>
+  </div>
 </div>
 {% endif %}

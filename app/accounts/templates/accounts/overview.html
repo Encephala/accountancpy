@@ -6,36 +6,36 @@
 <div class="vr"></div>
 
 <li class="nav-item">
-    <a class="nav-link navbar-account" href="{% url 'accounts:create' %}">
-    <span class="nav-link-title">
-        Create
-    </span>
-    </a>
+  <a class="nav-link navbar-account" href="{% url 'accounts:create' %}">
+  <span class="nav-link-title">
+    Create
+  </span>
+  </a>
 </li>
 {% endblock %}
 
 {% block content %}
 <div class="container">
-    <div class="row row-cards mb-1 justify-content-around strong">
-        <div class="card col-2">
-            <div class="card-body">ID</div>
-        </div>
-        <div class="card col-3">
-            <div class="card-body">Name</div>
-        </div>
-        <div class="card col-2">
-            <div class="card-body">Type</div>
-        </div>
-        <div class="card col-4">
-            <div class="card-body">Notes</div>
-        </div>
+  <div class="row row-cards mb-1 justify-content-around strong">
+    <div class="card col-2">
+      <div class="card-body">ID</div>
     </div>
+    <div class="card col-3">
+      <div class="card-body">Name</div>
+    </div>
+    <div class="card col-2">
+      <div class="card-body">Type</div>
+    </div>
+    <div class="card col-4">
+      <div class="card-body">Notes</div>
+    </div>
+  </div>
 
-    <div id="account_rows_placeholder"
-        hx-target="this"
-        hx-swap="outerHTML"
-        hx-get="{% url 'accounts:hx-list' %}"
-        hx-trigger="load">
-    </div>
+  <div id="account_rows_placeholder"
+    hx-target="this"
+    hx-swap="outerHTML"
+    hx-get="{% url 'accounts:hx-list' %}"
+    hx-trigger="load">
+  </div>
 </div>
 {% endblock content %}

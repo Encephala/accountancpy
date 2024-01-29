@@ -1,20 +1,20 @@
 {% if ledger_list %}
 {% for ledger in ledger_list %}
 <div class="row row-cards mb-1 justify-content-around">
-    <div class="col-xl-2 col-4 card">
-        <div class="card-body">
-            <a href="{% url 'ledgers:details' ledger.id %}" class="badge badge-pill ledger-link">{{ ledger.id }}</a>
-        </div>
+  <div class="col-xl-2 col-4 card">
+    <div class="card-body">
+      <a href="{% url 'ledgers:details' ledger.id %}" class="badge badge-pill ledger-link">{{ ledger.id }}</a>
     </div>
-    <div class="col-xl-3 col-7 card">
-        <div class="card-body">{{ ledger.name }}</div>
-    </div>
-    <div class="col-xl-2 col-4 card">
-        <div class="card-body">{{ ledger.type }}</div>
-    </div>
-    <div class="col-xl-4 col-7 card">
-        <div class="card-body">{{ ledger.notes | default:'<em>No notes.</em>' }}</div>
-    </div>
+  </div>
+  <div class="col-xl-3 col-7 card">
+    <div class="card-body">{{ ledger.name }}</div>
+  </div>
+  <div class="col-xl-2 col-4 card">
+    <div class="card-body">{{ ledger.type }}</div>
+  </div>
+  <div class="col-xl-4 col-7 card">
+    <div class="card-body">{{ ledger.notes | default:'<em>No notes.</em>' }}</div>
+  </div>
 </div>
 {% endfor %}
 {% else %}
