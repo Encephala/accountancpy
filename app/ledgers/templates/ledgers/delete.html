@@ -9,17 +9,17 @@
 
 <li class="nav-item">
     <a class="nav-link navbar-ledger" href="{% url 'ledgers:details' ledger %}">
-    <span class="nav-link-title">
-        Details
-    </span>
+        <span class="nav-link-title">
+            Details
+        </span>
     </a>
 </li>
 
 <li class="nav-item">
     <a class="nav-link navbar-ledger" href="{% url 'ledgers:update' ledger %}">
-    <span class="nav-link-title">
-        Update
-    </span>
+        <span class="nav-link-title">
+            Update
+        </span>
     </a>
 </li>
 {% endblock %}
@@ -92,10 +92,7 @@
         </div>
     </div>
 
-    <div id="entry_row_placeholder"
-        hx-target="this"
-        hx-swap="outerHTML"
-        hx-trigger="load"
+    <div id="entry_row_placeholder" hx-target="this" hx-swap="outerHTML" hx-trigger="load"
         hx-get="{% url 'entries:hx-ledger_rows' ledger.id %}">
     </div>
 
@@ -108,7 +105,7 @@
         <div class="col-1"></div>
 
         <div class="card col-2 ml-auto">
-            <div class="card-body">€ {{ ledger_sum | default:0 | floatformat:2 }}</div>
+            <div class="card-body">€ {{ ledger.calculate_sum | default:0 | floatformat:2 }}</div>
         </div>
     </div>
 </div>

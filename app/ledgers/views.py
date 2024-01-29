@@ -26,13 +26,6 @@ class LedgerDetails(generic.DetailView):
     model = Ledger
     template_name = "ledgers/details.html"
 
-    # This should probably be a method like entryrow_sum rather than this hacked context_data
-    # Which leads me to wonder, can you call an object method in a templated file? would be banger
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["ledger_sum"] = context["object"].sum()
-        return context
-
 
 class LedgerCreate(generic.CreateView):
     model = Ledger
@@ -71,11 +64,6 @@ class LedgerDelete(generic.DeleteView):
             return self.render_to_response(context)
 
         return redirect(self.get_success_url())
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["ledger_sum"] = context["object"].sum()
-        return context
 
 
 # HTMX endpoints
