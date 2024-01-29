@@ -1,6 +1,6 @@
-{% extends 'accounts/_base.html' %}
+{% extends "accounts/_base.html" %}
 
-{% block page-title %} Account: {{ account.id }} {% endblock %}
+{% block page-title %} Account: {{ account.id }} {% endblock page-title %}
 
 {% block navbar-extra %}
 <div class="vr"></div>
@@ -20,7 +20,7 @@
   </span>
   </a>
 </li>
-{% endblock %}
+{% endblock mavbar-extra %}
 
 {% block content %}
 <div class="container">

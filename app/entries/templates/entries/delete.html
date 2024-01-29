@@ -1,6 +1,6 @@
 {% extends "entries/_base.html" %}
 
-{% block page-title %} Delete Entry: {{ entry }} {% endblock %}
+{% block page-title %} Delete Entry: {{ entry }} {% endblock page-title %}
 
 {% block navbar-extra %}
 <div class="vr"></div>
@@ -20,10 +20,10 @@
   </span>
   </a>
 </li>
-{% endblock %}
+{% endblock navbar-extra %}
 
 {% block content %}
-<form action="{% url 'entries:delete' entry %}" method="POST">
+<form action="{% url 'entries:delete' entry %}" method="post">
   {% csrf_token %}
   <div class="container mb-3">
     <div class="row row-cards mb-1 justify-content-around strong">
@@ -51,9 +51,9 @@
         <div class="card-body">
           <div class="input-group">
             <span class="input-group-text">
-              <input class="form-check-input" type="checkbox" title="Confirm deletion." required>
+              <input class="form-check-input" type="checkbox" title="Confirm deletion." required/>
             </span>
-            <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Delete!">
+            <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Delete!"/>
           </div>
         </div>
       </div>

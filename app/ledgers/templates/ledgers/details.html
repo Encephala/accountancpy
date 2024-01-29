@@ -1,6 +1,6 @@
 {% extends "ledgers/_base.html" %}
 
-{% block page-title %} Ledger: {{ ledger.id }} {% endblock %}
+{% block page-title %} Ledger: {{ ledger.id }} {% endblock page-title %}
 
 {% block navbar-extra %}
 <div class="vr"></div>
@@ -20,7 +20,7 @@
     </span>
   </a>
 </li>
-{% endblock %}
+{% endblock navbar-extra %}
 
 {% block content %}
 <div class="container">

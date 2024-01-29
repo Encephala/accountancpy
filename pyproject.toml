@@ -26,3 +26,10 @@ ignore = [
     "FIX",    # TODO in file
     "RUF012", # Mutable class attributes should be annotated
 ]
+
+[tool.djlint]
+ignore = "H021,H025"
+include = "H017,H035"
+profile = "django"
+use_gitignore = true
+max_line_length = 120

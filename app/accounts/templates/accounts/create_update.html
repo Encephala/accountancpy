@@ -28,7 +28,7 @@ Create new Account
   </a>
 </li>
 {% endif %}
-{% endblock %}
+{% endblock navbar-extra %}
 
 {% block content %}
 <div class="container">
@@ -54,9 +54,9 @@ Create new Account
   </div>
 
   {% if is_update %}
-  <form action="{% url 'accounts:update' account %}" method="POST">
+  <form action="{% url 'accounts:update' account %}" method="post">
   {% else %}
-  <form action="{% url 'accounts:create' %}" method="POST">
+  <form action="{% url 'accounts:create' %}" method="post">
   {% endif %}
   {% csrf_token %}
   {{ form.non_field_errors }}
@@ -114,9 +114,9 @@ Create new Account
 
       <div class="card col-1">
         {% if is_update %}
-        <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Update!">
+        <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Update!"/>
         {% else %}
-        <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Create!">
+        <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Create!"/>
         {% endif %}
       </div>
     </div>

@@ -3,16 +3,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="Personal bookkeeping"/>
+  <meta name="keywords" content=""/>
 
   <title>{% block title %} Accountancpy {% endblock title %}</title>
-  <link rel="icon" type="image/x-icon" href="{% static 'media/icon_ledger.svg' %}">
-  <link rel="stylesheet" href="{% static 'animations.css' %}">
+  <link rel="icon" type="image/x-icon" href="{% static 'media/icon_ledger.svg' %}"/>
+  <link rel="stylesheet" href="{% static 'animations.css' %}"/>
 
   <script src="{% static 'htmx-1.9.9.js' %}"></script> <!-- HTMX -->
   <script src="{% static 'tabler-1.0.0-beta17.min.js' %}"></script> <!-- Tabler JS -->
-  <link rel="stylesheet" href="{% static 'tabler-1.0.0-beta17.min.css' %}"> <!-- Tabler CSS -->
+  <link rel="stylesheet" href="{% static 'tabler-1.0.0-beta17.min.css' %}"/> <!-- Tabler CSS -->
 
   <!-- CSS Variable definitions -->
   <style>
@@ -121,7 +123,8 @@
     <div class="container-xl justify-content-start">
       <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
         <a href="{% url 'landing' %}">
-          <img src="{% static 'media/feather/home.svg' %}" alt="Home" class="navbar-brand-image">
+          <img src="{% static 'media/feather/home.svg' %}" alt="Home" class="navbar-brand-image"
+          width="2.5rem" height="2.5rem"/>
         </a>
       </h1>
 
@@ -157,7 +160,7 @@
           </a>
         </li>
 
-        {% block navbar-extra %} {% endblock %}
+        {% block navbar-extra %} {% endblock navbar-extra %}
       </ul>
     </div>
   </header>
@@ -226,18 +229,6 @@
     <div class="page-body">
     <div class="container-xl">
       {% block content %}
-      <div class="row">
-        <div class="col-4">
-          <div class="card card-body">
-            hoi ik ben een kaart
-          </div>
-        </div>
-        <div class="col-4">
-          <a class="card card-body btn btn-cyan" href="/nonexistent/">
-            hoi ik ben een link
-          </a>
-        </div>
-      </div>
       {% endblock content %}
     </div>
     </div>
@@ -252,20 +243,21 @@
   data-bs-autohide="false" data-bs-toggle="toast">
     <div class="toast-header">
       <img src="{% static 'media/feather/alert-circle.svg' %}" class="mx-1" alt="Alert circle"
-      style="height: var(--tblr-toast-font-size);
-      /* Set color to --tblr-danger-rgb */
-      filter: invert(38%) sepia(84%) saturate(3822%) hue-rotate(342deg) brightness(90%) contrast(85%);">
+      height="var(--tblr-toast-font-size)"
+      width="var(--tblr-toast-font-size)"
+      style="/* Set color to --tblr-danger-rgb */
+      filter: invert(38%) sepia(84%) saturate(3822%) hue-rotate(342deg) brightness(90%) contrast(85%);"/>
       <strong class="me-auto text-danger">Error</strong>
       <button type="button" class="ms-2 btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
     <div class="toast-body">
       {{ message }}
-      <br>
+      <br/>
       {% for object in protected_objects %}
       <a href="{% url 'entries:details' object %}" target="_blank">Entry: {{ object }}</a>
       <img style="vertical-align: middle;" src="{% static 'media/feather/arrow-up-right.svg' %}"
-      width="18px" alt="arrow-up-right">
-      {% if not forloop.last %}<br>{% endif %}
+      width="18px" height="18px" alt="arrow-up-right"/>
+      {% if not forloop.last %}<br/>{% endif %}
       {% endfor %}
     </div>
   </div>

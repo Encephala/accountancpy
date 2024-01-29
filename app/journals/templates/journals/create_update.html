@@ -28,7 +28,7 @@ Create new Journal
   </a>
 </li>
 {% endif %}
-{% endblock %}
+{% endblock navbar-extra %}
 
 {% block content %}
 <div class="container">
@@ -54,9 +54,9 @@ Create new Journal
   </div>
 
   {% if is_update %}
-  <form action="{% url 'journals:update' journal %}" method="POST">
+  <form action="{% url 'journals:update' journal %}" method="post">
   {% else %}
-  <form action="{% url 'journals:create' %}" method="POST">
+  <form action="{% url 'journals:create' %}" method="post">
   {% endif %}
     {% csrf_token %}
     <div class="row row-cards mb-1 justify-content-around">
@@ -113,9 +113,9 @@ Create new Journal
 
       <div class="card col-1">
         {% if is_update %}
-        <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Update!">
+        <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Update!"/>
         {% else %}
-        <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Create!">
+        <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Create!"/>
         {% endif %}
       </div>
     </div>

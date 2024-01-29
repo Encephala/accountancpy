@@ -30,7 +30,7 @@ Create new Entry
   </a>
 </li>
 {% endif %}
-{% endblock %}
+{% endblock navbar-extra %}
 
 {% block content %}
 <script>
@@ -136,9 +136,9 @@ Create new Entry
 {{ form.non_field_errors }}
 {{ form.non_form_errors }}
 {% if is_update %}
-<form id="form" action="{% url 'entries:update' entry %}" method="POST">
+<form id="form" action="{% url 'entries:update' entry %}" method="post">
 {% else %}
-<form id="form" action="{% url 'entries:create' %}" method="POST">
+<form id="form" action="{% url 'entries:create' %}" method="post">
 {% endif %}
 {% csrf_token %}
   <div class="container mb-3">
@@ -203,7 +203,8 @@ Create new Entry
               {% if forloop.counter0 == 0 %} disabled {% endif %}
               onclick="delete_row({{ forloop.counter0 }})"
               >
-                <img src="{% static 'media/feather/x-circle.svg' %}">
+                <img src="{% static 'media/feather/x-circle.svg' %}"
+                width="20px" height="20px" alt="Circle with X inside"/>
               </button>
 
               <button class="btn btn-ghost-cyan p-0 rounded-circle add-button" type="button"
@@ -211,7 +212,8 @@ Create new Entry
               tabindex="-1"
               onclick="add_row({{ forloop.counter0 }})"
               >
-                <img src="{% static 'media/feather/plus-circle.svg' %}">
+                <img src="{% static 'media/feather/plus-circle.svg' %}"
+                width="20px" height="20px" alt="Circle with X inside"/>
               </button>
             </div>
           </div>
@@ -224,7 +226,7 @@ Create new Entry
         </div>
         <div hidden class="delete">
           {% if entryrow_formset.can_delete %} {{ form.DELETE }}
-          {% else %} <input> <!-- Placeholder to make the JS not error out in the create view -->
+          {% else %} <input/> <!-- Placeholder to make the JS not error out in the create view -->
           {% endif %}
         </div>
         <div class="card col-5 col-xl-2 date">
@@ -262,7 +264,7 @@ Create new Entry
       </div>
     </div>
     {% if not forloop.last %}
-    <hr class="divider d-xl-none"></hr>
+    <hr class="divider d-xl-none"/>
     {% endif %}
     {% endfor %}
     <div class="row row-cards mb-1 justify-content-around">
@@ -275,15 +277,15 @@ Create new Entry
 
       <div class="card col-1">
         {% if is_update %}
-        <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Update!">
+        <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Update!"/>
         {% else %}
-        <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Create!">
+        <input class="p-2 m-1 btn btn-ghost-cyan" type="submit" value="Create!"/>
         {% endif %}
       </div>
     </div>
 
     <!-- Hidden hr so that we can copy it -->
-    <hr class="divider d-none"></hr>
+    <hr class="divider d-none"/>
   </div>
 </form>
 {% endblock content %}
