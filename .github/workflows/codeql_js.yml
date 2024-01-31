@@ -1,5 +1,5 @@
 ---
-name: "CodeQL"
+name: "CodeQL JS"
 
 on:
   push:
