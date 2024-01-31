@@ -12,11 +12,11 @@
   <link rel="icon" type="image/x-icon" href="{% static 'media/icon_ledger.svg' %}"/>
   <link rel="stylesheet" href="{% static 'animations.css' %}"/>
 
-  <script src="{% static 'htmx-1.9.9.js' %}"></script> <!-- HTMX -->
-  <script src="{% static 'tabler-1.0.0-beta17.min.js' %}"></script> <!-- Tabler JS -->
-  <link rel="stylesheet" href="{% static 'tabler-1.0.0-beta17.min.css' %}"/> <!-- Tabler CSS -->
+  <script src="{% static 'htmx-1.9.9.js' %}"></script> {% comment %} HTMX {% endcomment %}
+  <script src="{% static 'tabler-1.0.0-beta17.min.js' %}"></script> {% comment %} Tabler JS {% endcomment %}
+  <link rel="stylesheet" href="{% static 'tabler-1.0.0-beta17.min.css' %}"/> {% comment %} Tabler CSS {% endcomment %}
 
-  <!-- CSS Variable definitions -->
+  {% comment %} CSS Variable definitions {% endcomment %}
   <style>
     :root {
       --ledger-color: #A1EEBDD0;
@@ -165,7 +165,7 @@
     </div>
   </header>
 
-  <!-- Body -->
+  {% comment %} Body {% endcomment %}
   <div class="page-wrapper">
     <div class="page-header d-print-none">
     <div class="container-xl">
@@ -190,7 +190,7 @@
   </div>
 
 {% if messages|length > 0 %}
-<!-- Error toast -->
+{% comment %} Error toast {% endcomment %}
 <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 11">
   {% for message in messages %}
   <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true"

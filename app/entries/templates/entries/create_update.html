@@ -226,7 +226,7 @@ Create new Entry
         </div>
         <div hidden class="delete">
           {% if entryrow_formset.can_delete %} {{ form.DELETE }}
-          {% else %} <input/> <!-- Placeholder to make the JS not error out in the create view -->
+          {% else %} <input/> {% comment %} Placeholder to make the JS not error out in the create view {% endcomment %}
           {% endif %}
         </div>
         <div class="card col-5 col-xl-2 date">
@@ -268,7 +268,7 @@ Create new Entry
     {% endif %}
     {% endfor %}
     <div class="row row-cards mb-1 justify-content-around">
-      <!-- Hidden rows for alignment -->
+      {% comment %} Hidden rows for alignment {% endcomment %}
       <div class="col-6"></div>
       <div class="col-1"></div>
       <div class="col-1"></div>
@@ -284,7 +284,7 @@ Create new Entry
       </div>
     </div>
 
-    <!-- Hidden hr so that we can copy it -->
+    {% comment %} Hidden hr so that we can copy it {% endcomment %}
     <hr class="divider d-none"/>
   </div>
 </form>
