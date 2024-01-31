@@ -116,9 +116,7 @@
 </head>
 
 <body hx-boost="true">
-<div class="page" style="
-  --bg-color: {% block bg-color %} var(--tblr-body-bg) {% endblock bg-color %};
-">
+<div class="page" style="--bg-color: {% block bg-color %} var(--tblr-body-bg) {% endblock bg-color %};">
   <header class="navbar navbar-expand navbar-dark d-print-none">
     <div class="container-xl justify-content-start">
       <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
@@ -166,32 +164,32 @@
   </header>
 
   {% comment %} Body {% endcomment %}
-  <div class="page-wrapper">
+  <div class="page-wrapper float-right">
     <div class="page-header d-print-none">
-    <div class="container-xl">
-      <div class="row g-2 align-items-center">
-      <div class="col">
-        <h2 class="page-title">
-          {% block page-title %}
-          Generic template page for Accountancpy
-          {% endblock page-title %}
-        </h2>
+      <div class="container-xl">
+        <div class="row g-2 align-items-center">
+          <div class="col">
+            <h2 class="page-title">
+              {% block page-title %}
+              Generic template page for Accountancpy
+              {% endblock page-title %}
+            </h2>
+          </div>
+        </div>
       </div>
-      </div>
-    </div>
     </div>
     <div class="page-body">
-    <div class="container-xl">
-      {% block content %}
-      {% endblock content %}
-    </div>
+      <div class="container-xl">
+        {% block content %}
+        {% endblock content %}
+      </div>
     </div>
   </div>
-  </div>
+</div>
 
 {% if messages|length > 0 %}
 {% comment %} Error toast {% endcomment %}
-<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 11">
+<div class="toast-container position-fixed top-0 end-0 p-3 z-index-fixed">
   {% for message in messages %}
   <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true"
   data-bs-autohide="false" data-bs-toggle="toast">
