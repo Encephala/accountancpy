@@ -1,7 +1,15 @@
 ---
 name: Test/Lint
 on:
-  [push, workflow_dispatch]
+  push:
+    paths:
+      - app/**.py
+
+  pull_request:
+    paths:
+      - app/**.py
+
+  workflow_dispatch:
 
 jobs:
   validate:
