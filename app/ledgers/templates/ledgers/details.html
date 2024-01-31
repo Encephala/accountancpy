@@ -24,26 +24,36 @@
 
 {% block content %}
 <div class="container">
-  <div class="row row-cards mb-1 justify-content-around strong">
-    <div class="card col-3">
-      <div class="card-body">Name</div>
+  <div class="row justify-content-around">
+    <div class="col-1">
+      <button class="btn">
+        Reconcile
+      </button>
     </div>
-    <div class="card col-2">
-      <div class="card-body">Type</div>
-    </div>
-    <div class="card col-6">
-      <div class="card-body">Notes</div>
-    </div>
-  </div>
-  <div class="row row-cards mb-1 justify-content-around">
-    <div class="card col-3">
-      <div class="card-body">{{ ledger.name }}</div>
-    </div>
-    <div class="card col-2">
-      <div class="card-body">{{ ledger.type }}</div>
-    </div>
-    <div class="card col-6">
-      <div class="card-body">{{ ledger.notes | default:'<em>No notes.</em>' }}</div>
+    <div class="vr" style="padding: 0px"></div>
+    <div class="col-10">
+      <div class="row row-cards mb-1 justify-content-around strong">
+        <div class="card col-3">
+          <div class="card-body">Name</div>
+        </div>
+        <div class="card col-2">
+          <div class="card-body">Type</div>
+        </div>
+        <div class="card col-6">
+          <div class="card-body">Notes</div>
+        </div>
+      </div>
+      <div class="row row-cards mb-1 justify-content-around">
+        <div class="card col-3">
+          <div class="card-body">{{ ledger.name }}</div>
+        </div>
+        <div class="card col-2">
+          <div class="card-body">{{ ledger.type }}</div>
+        </div>
+        <div class="card col-6">
+          <div class="card-body">{{ ledger.notes | default:'<em>No notes.</em>' }}</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
