@@ -1,5 +1,12 @@
 # Accountancpy
 
+---
+
+Archived because web dev wasn't fun.
+Second attempt in <https://github.com/Encephala/terminaccounting/>
+
+---
+
 [![Test/Lint](https://github.com/Encephala/accountancpy/actions/workflows/test.yml/badge.svg)](https://github.com/Encephala/accountancpy/actions/workflows/test.yml)
 ![Coverage](media/coverage.svg)
 
